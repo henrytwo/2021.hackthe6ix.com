@@ -1,35 +1,27 @@
 #!/bin/bash
 
-declare -A tags
-tags["development"]=ht6/dev-landing-2021:latest
-tags["production"]=ht6/landing-2021:latest
-
-
-function build() {
-    local target=${1:-development};
-    docker build --target $target -t ${tags[$target]} .;
-}
+TAG=hackthe6ix/landing-2021:latest
+NAME=owo
 
 function dev() {
-    build development;
-    docker run \
+    docker build --target development -t $TAG .;
+    docker run --name $NAME \
         -v ${PWD}/static:/usr/var/app/static \
-        -v ${PWD}/src:/usr/var/app/static \
+        -v ${PWD}/src:/usr/var/app/src \
         -p 8080:8080 \
-        -it \
-        ${tags[development]};
+        -it $TAG;
+    echo "" && docker rm $NAME;
 }
 
 function debug() {
-    docker exec -it $1 /bin/sh;
+    docker exec -it $NAME /bin/sh;
 }
 
 function prod() {
-    build production;
+    docker build --target production -t $TAG .;
     docker run \
         -v ${PWD}/dist:/usr/var/app/dist \
-        -it \
-        ${tags[production]};
+        -it $TAG;
 }
 
 eval "$@ && exit 0";

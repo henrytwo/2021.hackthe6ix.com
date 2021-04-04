@@ -16,7 +16,6 @@ RUN npm ci
 
 # Run as development server
 FROM base as development
-EXPOSE 8080
 CMD ["npm", "run", "docker:start"]
 
 
