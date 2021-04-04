@@ -1,5 +1,5 @@
 {
-  "name": "owo",
+  "name": "@ht6/landing-2021",
   "private": true,
   "scripts": {
     "start": "bash run dev",

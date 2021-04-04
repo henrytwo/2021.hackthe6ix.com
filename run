@@ -12,11 +12,24 @@ function build() {
 
 function dev() {
     build development;
-    docker run -it -p 8080:8080 ${tags[development]};
+    docker run \
+        -v ${PWD}/static:/usr/var/app/static \
+        -v ${PWD}/src:/usr/var/app/static \
+        -p 8080:8080 \
+        -it \
+        ${tags[development]};
+}
+
+function debug() {
+    docker exec -it $1 /bin/sh;
 }
 
 function prod() {
     build production;
+    docker run \
+        -v ${PWD}/dist:/usr/var/app/dist \
+        -it \
+        ${tags[production]};
 }
 
 eval "$@ && exit 0";
