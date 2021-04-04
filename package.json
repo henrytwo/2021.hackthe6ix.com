@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "start": "bash run dev",
-    "docker:start": "gridsome develop",
+    "start:npm": "gridsome develop",
     "build": "bash run prod",
-    "docker:build": "gridsome build",
+    "build:npm": "gridsome build",
     "explore": "gridsome explore",
     "clean": "rm -rf src/.temp .cache dist"
   },

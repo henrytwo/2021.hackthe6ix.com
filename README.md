@@ -1,14 +1,12 @@
-# Default starter for Gridsome
+# Hack the 6ix - 2021 Landing page
 
-This is the project you get when you run `gridsome create new-project`.
+## How to run
 
-### 1. Install Gridsome CLI tool if you don't have
+Running with docker is recommended to ensure compatibility with commands, node version, and environment
+### Running without docker
+ - `npm ci` to install packages (This does not affect docker (or other way around), hence can exist with docker)
+    - To run development server, use `npm run start:npm`
+    - To build application, use `npm run build:npm`
 
-`npm install --global @gridsome/cli`
-
-### 2. Create a Gridsome project
-
-1. `gridsome create my-gridsome-site` to install default starter
-2. `cd my-gridsome-site` to open the folder
-3. `gridsome develop` to start a local dev server at `http://localhost:8080`
-4. Happy coding 🎉🙌
+### Running with docker
+ - No installing required, node_modules exist only within the container itself. 
