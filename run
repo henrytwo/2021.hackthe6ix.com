@@ -1,0 +1,22 @@
+#!/bin/bash
+
+declare -A tags
+tags["development"]=ht6/dev-landing-2021:latest
+tags["production"]=ht6/landing-2021:latest
+
+
+function build() {
+    local target=${1:-development};
+    docker build --target $target -t ${tags[$target]} .;
+}
+
+function dev() {
+    build development;
+    docker run -it -p 8080:8080 ${tags[development]};
+}
+
+function prod() {
+    build production;
+}
+
+eval "$@ && exit 0";

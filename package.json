@@ -1,0 +1,18 @@
+{
+  "name": "owo",
+  "private": true,
+  "scripts": {
+    "start": "bash run dev",
+    "docker:start": "gridsome develop",
+    "build": "bash run prod",
+    "docker:build": "gridsome build",
+    "explore": "gridsome explore",
+    "clean": "rm -rf src/.temp .cache dist"
+  },
+  "dependencies": {
+    "gridsome": "^0.7.0",
+    "sass": "^1.32.8",
+    "sass-loader": "^10.1.1",
+    "vue-svg-loader": "^0.16.0"
+  }
+}
