@@ -1,0 +1,27 @@
+#!/bin/bash
+
+TAG=hackthe6ix/landing-2021:latest;
+DEFAULT_OUTPUT=${PWD}/dist;
+WORKING_DIR=/usr/var/app;
+NAME=owo;
+
+function dev() {
+    docker build --target development -t $TAG .;
+    docker run \
+        -v ${PWD}/static:$WORKING_DIR/static \
+        -v ${PWD}/src:$WORKING_DIR/src \
+        -p 8080:8080 \
+        -it $TAG;
+}
+
+function prod() {
+    local output=${1:-$DEFAULT_OUTPUT};
+    docker build --target production -t $TAG .;
+    docker run \
+        -v ${PWD}/static:$WORKING_DIR/static \
+        -v ${PWD}/src:$WORKING_DIR/src \
+        -v $output:/usr/var/app/dist \
+        -it $TAG;
+}
+
+eval "$@ && exit 0";

@@ -1,0 +1,107 @@
+
+$_colors: (
+//[color-alias]: (
+//  value: {hex} - color value,
+//  static: {bool} - Optional. Skip interactive colors generation
+//),
+  'navy': (
+    value: #1696B3,
+  ),
+  'teal': (
+    value: #23B5AF,
+  ),
+  'sky-blue': (
+    value: #6ED9E3,
+  ),
+  'yellow': (
+    value: #F8B655,
+  ),
+  'purple': (
+    value: #A09DF1,
+  ),
+  'bronze': (
+    value: #CC8535,
+  ),
+  'peach': (
+    value: #CE9489,
+  ),
+  'dark-navy': (
+    value: #08566B,
+  ),
+  'light-teal': (
+    value: #A9DED9,
+  ),
+  'light-sky-blue': (
+    value: #A4DAE3,
+  ),
+  'light-yellow': (
+    value: #FAE0A1,
+  ),
+  'light-purple': (
+    value: #C3C0E7,
+  ),
+  'light-bronze': (
+    value: #E8B984,
+  ),
+  'light-peach': (
+    value: #D8B4AB,
+  ),
+  'black': (
+    value: #0B2F39,
+    static: true,
+  ),
+  'white': (
+    value: #FFFFFF,
+    static: true,
+  ),
+);
+
+$_modifiers: (
+  hover: h,
+  active: a,
+);
+// For generating the tag itself
+@function css-var($color, $modifier: null) {
+  $var: --c_#{$color};
+  @if $modifier and map-has-key($_modifiers, $modifier) {
+    $var: $var + '-' + map-get($_modifiers, $modifier);
+  }
+  @return $var;
+}
+
+// Convert hex to raw
+@function _hex-to-raw($color) {
+  @return #{red($color)}, #{green($color)}, #{blue($color)};
+}
+
+// Getting css variable based on params
+@function css-color($color, $modifier: null, $alpha: 1, $raw: false) {
+  @if $raw {
+    @return rgba(var(#{$color}), $alpha);
+  } @else {
+    @return rgba(var(#{css-var($color, $modifier)}), $alpha);
+  }
+}
+
+// For creating core css color variables
+@mixin init {
+  :root {
+    @each $color, $config in $_colors {
+      $value: map-get($config, value);
+      #{css-var($color)}: _hex-to-raw($value);
+    }
+  }
+}
+
+// For creating deferred css
+@mixin deferInit {
+  :root {
+    @each $color, $config in $_colors {
+      @if not map-get($config, static) {
+        $value: map-get($config, value);
+        #{css-var($color, hover)}: _hex-to-raw(darken($value, 4%));
+        #{css-var($color, active)}: _hex-to-raw(darken($value, 8%));
+      }
+    }
+  }
+}
