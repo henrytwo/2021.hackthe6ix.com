@@ -13,3 +13,7 @@ $media: (
 );
 
 $font: "Open Sans", sans-serif;
+
+@function spacing($scale) {
+  @return $scale * 0.5rem;
+}

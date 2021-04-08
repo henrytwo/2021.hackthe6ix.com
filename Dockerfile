@@ -15,16 +15,43 @@ RUN chown -R owo:owo .
 USER owo
 
 # node stuff
+FROM base as node
 COPY package*.json gridsome*.js ./
 RUN npm ci
 
+FROM node as testing
+CMD ["npm", "run", "test:npm"]
 
 # Run as development server
-FROM base as development
+FROM node as development
 CMD ["npm", "run", "start:npm"]
 
 
 # Build and only get the built files
-FROM base as production
+FROM node as build
+COPY ./static ./static
+COPY ./src ./src
+USER root
 RUN npm run build:npm
-CMD ["echo", "owo"]
+RUN rm -rf ./src/.temp
+
+
+# For exporting from docker
+FROM scratch as export
+COPY --from=build /usr/var/app/dist ./
+
+
+# For serving production files from container
+FROM nginx:1.18 as deploy
+
+# Get build arguments & environment variables
+ENV ROOT /var/www
+ENV uri \$uri
+
+ARG SERVER_NAME="_"
+ARG PORT=80
+
+# Let's build this thing (https://manifold.co/blog/building-a-production-grade-container-for-your-static-javascript-application-b2b2eff83fbd)
+COPY --from=build /usr/var/app/dist ${ROOT}
+COPY ./template.conf ./
+CMD ["sh", "-c", "envsubst < ./template.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]

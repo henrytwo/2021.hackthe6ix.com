@@ -1,27 +1,105 @@
 #!/bin/bash
 
-TAG=hackthe6ix/landing-2021:latest;
-DEFAULT_OUTPUT=${PWD}/dist;
+DEFAULT_OUTPUT=${PWD}/build.tar;
+TAG=hackthe6ix/landing-2021;
 WORKING_DIR=/usr/var/app;
 NAME=owo;
 
 function dev() {
-    docker build --target development -t $TAG .;
+    while getopts r:s:v:p: flag
+    do
+        case "${flag}" in
+            # static folder
+            r) r=${OPTARG};;
+            # src folder
+            s) s=${OPTARG};;
+            # docker tag version
+            v) v=${OPTARG};;
+            # host port to run on
+            p) p=${OPTARG};;
+        esac
+    done
+
+    local tag=$TAG\:${v:-latest};
+
+    docker build --target development -t $tag .;
     docker run \
-        -v ${PWD}/static:$WORKING_DIR/static \
-        -v ${PWD}/src:$WORKING_DIR/src \
-        -p 8080:8080 \
-        -it $TAG;
+        -v ${PWD}/static:${r:-$WORKING_DIR/static} \
+        -v ${PWD}/src:${s:-$WORKING_DIR/src} \
+        -p 8080:${p:-8080} \
+        -it $tag;
 }
 
-function prod() {
-    local output=${1:-$DEFAULT_OUTPUT};
-    docker build --target production -t $TAG .;
+function test() {
+    while getopts r:s:v: flag
+    do
+        case "${flag}" in
+            # static folder
+            r) r=${OPTARG};;
+            # src folder
+            s) s=${OPTARG};;
+            # docker tag version
+            v) v=${OPTARG};;
+        esac
+    done
+
+    local tag=$TAG:${v:-latest};
+
+    docker build --target testing -t $tag .;
     docker run \
-        -v ${PWD}/static:$WORKING_DIR/static \
-        -v ${PWD}/src:$WORKING_DIR/src \
-        -v $output:/usr/var/app/dist \
-        -it $TAG;
+        -v ${PWD}/static:${r:-$WORKING_DIR/static} \
+        -v ${PWD}/src:${s:-$WORKING_DIR/src} \
+        -it $tag;
+}
+
+function export() {
+    while getopts r:s:v:o: flag
+    do
+        case "${flag}" in
+            # docker tag version
+            v) v=${OPTARG};;
+            # output file/dir
+            o) o=${OPTARG};;
+        esac
+    done
+
+    local output=${o:-$DEFAULT_OUTPUT};
+    if [[ $output == *.tar ]]
+    then
+        type=tar;
+    else
+        type=local;
+    fi
+
+    DOCKER_BUILDKIT=1 docker build \
+        --output type=$type,dest=$output \
+        --target 'export' \
+        -t tag=$TAG\:${v:-latest} .;
+}
+
+function serve() {
+    while getopts v:o:p: flag
+    do
+        case "${flag}" in
+            # docker tag version
+            t) v=${OPTARG};;
+            # Server name
+            o) o=${OPTARG};;
+            # Port to run from
+            p) p=${OPTARG};;
+        esac
+    done
+
+    local tag=$TAG\:${v:-latest};
+    local port=${p:-80};
+
+    docker build \
+        --build-arg SERVER_NAME=${o:-_} \
+        --build-arg PORT=$port \
+        --target deploy \
+        -t $tag .;
+    
+    docker run -p $port:$port -it $tag;
 }
 
 eval "$@ && exit 0";
