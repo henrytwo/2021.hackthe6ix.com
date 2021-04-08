@@ -49,3 +49,12 @@ For exporting production bundle as artifact
 | `-o` | `./build.tar` | Exports as a dir, or tar if -o ends with .tar |
 
 ### `bash run serve`
+
+For serving production bundle via nginx
+
+| Argument | Default | Description |
+| --- | --- | --- |
+| `-v` | `latest` | Docker image tag |
+| `-o` | `_` | Server name for nginx |
+| `-p` | `80` | Port to listen for nginx (Also the host port to run on) |
+
