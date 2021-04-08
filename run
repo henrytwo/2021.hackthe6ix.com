@@ -49,7 +49,7 @@ function test() {
     docker run \
         -v ${PWD}/static:${r:-$WORKING_DIR/static} \
         -v ${PWD}/src:${s:-$WORKING_DIR/src} \
-        -it $tag;
+        $tag;
 }
 
 function export() {
