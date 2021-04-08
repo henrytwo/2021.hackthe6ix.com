@@ -41,4 +41,11 @@ For running test cases
 
 ### `bash run export`
 
+For exporting production bundle as artifact
+
+| Argument | Default | Description |
+| --- | --- | --- |
+| `-v` | `latest` | Docker image tag |
+| `-o` | `./build.tar` | Exports as a dir, or tar if -o ends with .tar |
+
 ### `bash run serve`
