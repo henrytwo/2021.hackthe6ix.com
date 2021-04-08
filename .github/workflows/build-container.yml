@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-          repository: ${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
+          repository: hackthe6ix/${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
           cache-from: type=local,src=/tmp/.buildx-cache
           target: deploy
           tags: |
