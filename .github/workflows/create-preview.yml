@@ -34,5 +34,5 @@ jobs:
         with:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.SSH_HOST }}
           script: /scripts/create-preview.sh -t ${{ github.event.inputs.tag }} -e ${{ github.event.inputs.expire }}
