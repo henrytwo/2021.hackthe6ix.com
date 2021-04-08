@@ -33,6 +33,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           target: testing
           push: false
+          load: true
 
       - name: Run tests
         run: docker run -v ./static:/usr/var/app/static -v ./src:/usr/var/app/src hackthe6ix/${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}:testing .;
