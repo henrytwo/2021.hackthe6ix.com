@@ -52,10 +52,10 @@ jobs:
       
       # Trigger preview creation
       - uses: convictional/trigger-workflow-and-wait@v1.3.0
-  with:
-    github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
-    workflow_file_name: create-preview.yml
-    inputs: ${{ format('{ "tag": {0} }', github.sha) }}
-    repo: hackthe6ix-landing-2021
-    owner: hack-the-6ix
+        with:
+          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          workflow_file_name: create-preview.yml
+          inputs: '{ "tag": ${{ github.sha }} }'
+          repo: hackthe6ix-landing-2021
+          owner: hack-the-6ix
 
