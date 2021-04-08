@@ -18,4 +18,10 @@ Running with docker is recommended to ensure compatibility with commands, node v
 
 ## `run` commands
 
-TODO
+### `bash run dev`
+
+### `bash run test`
+
+### `bash run export`
+
+### `bash run serve`
