@@ -20,6 +20,8 @@ Running with docker is recommended to ensure compatibility with commands, node v
 
 ### `bash run dev`
 
+For running development server
+
 | Argument | Default | Description |
 | --- | --- | --- |
 | `-r` | `./static` | Static folder of application |
