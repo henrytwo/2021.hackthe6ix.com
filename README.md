@@ -31,6 +31,14 @@ For running development server
 
 ### `bash run test`
 
+For running test cases
+
+| Argument | Default | Description |
+| --- | --- | --- |
+| `-r` | `./static` | Static folder of application |
+| `-s` | `./src` | Src folder of application |
+| `-v` | `latest` | Docker image tag |
+
 ### `bash run export`
 
 ### `bash run serve`
