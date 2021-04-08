@@ -1,0 +1,37 @@
+name: Create Preview
+
+on:
+  workflow_dispatch:
+    tag:
+      description: 'Specific container tag from preview container repository'
+      required: true
+    expire:
+      description: 'When to kill the preview (Defaults to 1 week) (etc. yyyy-mm-dd)'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Check if image exists
+      - name: Check image tag
+        run: docker pull preview-landing-page:${TAG}
+        env:
+          TAG: ${{ github.event.inputs.tag }}
+
+      # Setup expiry date
+      - name: Get expiry date
+        run: |
+          if [ $EXPIRY_DATE ]; then OWO=$(date -d $EXPIRY_DATE) ; else OWO=$(date -d "+7 days") ; fi
+          echo "EXPIRY_DATE=$OWO" >> $GITHUB_ENV
+        env:
+          EXPIRY_DATE: ${{ github.event.inputs.expire }}
+
+      # Create build
+      - name: Run generate preview script
+        uses: appleboy/ssh-action@master
+        with:
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          script: /scripts/create-preview.sh -t ${{ github.event.inputs.tag }} -e ${{ github.event.inputs.expire }}

@@ -2,6 +2,7 @@ name: Build container
 
 on:
   pull_request:
+    types: [ opened, reopened, synchronize ]
     branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -32,19 +33,29 @@ jobs:
       # Do stuff with docker
       - name: Run testing
         run: npm run test
-      
+
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-          cache-from: type=local,src=/tmp/.buildx-cache
           repository: ${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
-          tag-with-ref: true
+          cache-from: type=local,src=/tmp/.buildx-cache
           target: deploy
-      
-      # Setup caching
+          tags: |
+            type=sha
+
+      # Clean up cache
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      
+      # Trigger preview creation
+      - uses: convictional/trigger-workflow-and-wait@v1.3.0
+  with:
+    github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+    workflow_file_name: create-preview.yml
+    inputs: ${{ format('{ "tag": {0} }', github.sha) }}
+    repo: hackthe6ix-landing-2021
+    owner: hack-the-6ix
 
