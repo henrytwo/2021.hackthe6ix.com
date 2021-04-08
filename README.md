@@ -20,6 +20,13 @@ Running with docker is recommended to ensure compatibility with commands, node v
 
 ### `bash run dev`
 
+| Argument | Default | Description |
+| --- | --- | --- |
+| `-r` | `./static` | Static folder of application |
+| `-s` | `./src` | Src folder of application |
+| `-v` | `latest` | Docker image tag |
+| `-p` | `8080` | Port development server would be using on host machine |
+
 ### `bash run test`
 
 ### `bash run export`
