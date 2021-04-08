@@ -15,8 +15,9 @@ jobs:
     steps:
       # Check if image exists
       - name: Check image tag
-        run: docker pull preview-landing-page:${TAG}
+        run: docker pull ${REPO}:${TAG}
         env:
+          REPO: ${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
           TAG: ${{ github.event.inputs.tag }}
 
       # Setup expiry date
