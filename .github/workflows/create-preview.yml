@@ -14,32 +14,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps: 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
-      - name: Cache Docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.event.inputs.tag }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-      
-      - name: Pull container (For checking)
-        uses: docker/build-push-action@v2
-        with:
-          tags: hackthe6ix/${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}:${{ github.sha }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          target: deploy
-          pull: true
-      
-
+      # Check if image exists
+      - name: Precheck
+        run: curl --silent -f -lSL https://hub.docker.com/v2/repositories/hackthe6ix/${REPO}/tags/${TAG} > /dev/null
+        env:
+          REPO: ${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
+          TAG: ${{ github.event.inputs.tag }}
+    
       # Setup expiry date
       - name: Get expiry date
         run: |
