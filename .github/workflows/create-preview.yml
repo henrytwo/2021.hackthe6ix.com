@@ -2,11 +2,12 @@ name: Create Preview
 
 on:
   workflow_dispatch:
-    tag:
-      description: 'Specific container tag from preview container repository'
-      required: true
-    expire:
-      description: 'When to kill the preview (Defaults to 1 week) (etc. yyyy-mm-dd)'
+    inputs:
+      tag:
+        description: 'Specific container tag from preview container repository'
+        required: true
+      expire:
+        description: 'When to kill the preview (Defaults to 1 week) (etc. yyyy-mm-dd)'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
