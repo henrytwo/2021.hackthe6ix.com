@@ -22,7 +22,7 @@ jobs:
     
       # Check if image exists
       - name: Check image tag
-        run: docker pull ${REPO}:${TAG}
+        run: /usr/bin/docker pull ${REPO}:${TAG}
         env:
           REPO: ${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
           TAG: ${{ github.event.inputs.tag }}
