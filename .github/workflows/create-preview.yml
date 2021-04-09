@@ -22,9 +22,13 @@ jobs:
     
       # Check if image exists
       - name: Check image tag
-        run: /usr/bin/docker pull ${REPO}:${TAG}
+        run: |
+          /usr/bin/docker login -u ${USERNAME} -p ${PASSWORD}
+          /usr/bin/docker pull ${REPO}:${TAG}
         env:
           REPO: ${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
+          USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
           TAG: ${{ github.event.inputs.tag }}
 
       # Setup expiry date
