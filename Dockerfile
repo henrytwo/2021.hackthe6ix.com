@@ -45,11 +45,9 @@ COPY --from=build /usr/var/app/dist ./
 FROM nginx:1.18 as deploy
 
 # Get build arguments & environment variables
+ENV SERVER_NAME "_"
 ENV ROOT /var/www
 ENV uri \$uri
-
-ARG SERVER_NAME="_"
-ARG PORT=80
 
 # Let's build this thing (https://manifold.co/blog/building-a-production-grade-container-for-your-static-javascript-application-b2b2eff83fbd)
 COPY --from=build /usr/var/app/dist ${ROOT}

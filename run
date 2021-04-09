@@ -26,7 +26,7 @@ function dev() {
     docker run \
         -v ${PWD}/static:${r:-$WORKING_DIR/static} \
         -v ${PWD}/src:${s:-$WORKING_DIR/src} \
-        -p 8080:${p:-8080} \
+        -p ${p:-8080}:8080 \
         -it $tag;
 }
 
@@ -93,13 +93,11 @@ function serve() {
     local tag=$TAG\:${v:-latest};
     local port=${p:-80};
 
-    docker build \
-        --build-arg SERVER_NAME=${o:-_} \
-        --build-arg PORT=$port \
-        --target deploy \
-        -t $tag .;
-    
-    docker run -p $port:$port -it $tag;
+    docker build --target deploy -t $tag .;
+    docker run \
+        -p ${port}:80 \
+        -e SERVER_NAME=${o:-_} \
+        $tag;
 }
 
 eval "$@ && exit 0";
