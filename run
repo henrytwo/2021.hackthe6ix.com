@@ -82,7 +82,7 @@ function serve() {
     do
         case "${flag}" in
             # docker tag version
-            t) v=${OPTARG};;
+            v) v=${OPTARG};;
             # Server name
             o) o=${OPTARG};;
             # Port to run from

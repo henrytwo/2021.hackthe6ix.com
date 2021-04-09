@@ -23,26 +23,36 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
+      
+      # Do testing
+      - name: Build testing container
+        uses: docker/build-push-action@v2
+        with:
+          tags: hackthe6ix/${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}:testing
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+          cache-from: type=local,src=/tmp/.buildx-cache
+          target: testing
+          push: false
+          load: true
+
+      - name: Run tests
+        run: /usr/bin/docker run -v ${{ github.workspace }}/static:/usr/var/app/static -v ${{ github.workspace }}/src:/usr/var/app/src hackthe6ix/${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}:testing;
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
-      # Do stuff with docker
-      - name: Run testing
-        run: npm run test
 
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
+          tags: hackthe6ix/${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}:${{ github.sha }}
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-          repository: hackthe6ix/${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
           cache-from: type=local,src=/tmp/.buildx-cache
           target: deploy
-          tags: |
-            type=sha
+          push: true
+          
 
       # Clean up cache
       - name: Move cache
@@ -53,9 +63,9 @@ jobs:
       # Trigger preview creation
       - uses: convictional/trigger-workflow-and-wait@v1.3.0
         with:
-          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           workflow_file_name: create-preview.yml
-          inputs: '{ "tag": ${{ github.sha }} }'
+          inputs: '{ "tag": "${{ github.sha }}" }'
           repo: hackthe6ix-landing-2021
           owner: hack-the-6ix
 
