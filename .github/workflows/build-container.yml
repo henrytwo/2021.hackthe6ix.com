@@ -68,4 +68,11 @@ jobs:
           inputs: '{ "tag": "${{ github.sha }}" }'
           repo: hackthe6ix-landing-2021
           owner: hack-the-6ix
+      
+      # Print preview link
+      - uses: mshick/add-pr-comment@v1
+        with:
+          message: |
+            **Preview link:** [https://${{ github.sha }}.hackthe6ix.com](https://${{ github.sha }}.hackthe6ix.com)
+          allow-repeats: true 
 
