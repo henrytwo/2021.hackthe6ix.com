@@ -74,5 +74,6 @@ jobs:
         with:
           message: |
             **Preview link:** [https://${{ github.sha }}.hackthe6ix.com](https://${{ github.sha }}.hackthe6ix.com)
-          allow-repeats: true 
+          allow-repeats: true
+          repo-token: ${{ github.token }}
 
