@@ -14,6 +14,9 @@ $media: (
 
 $font: "Open Sans", sans-serif;
 
+$page-width: 1280px;
+$nav-width: 1440px;
+
 @function spacing($scale) {
-  @return $scale * 0.5rem;
+  @return $scale * 0.25rem;
 }
