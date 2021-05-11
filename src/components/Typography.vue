@@ -1,5 +1,6 @@
 <template>
   <component
+    v-on='$listeners'
     :class='[
       transform && `text--transform--${transform}`,
       weight && `text--weight--${weight}`,
@@ -37,55 +38,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use '@/styles/colors';
 @use '@/styles/units';
-
-$_config: (
-  heading1: (
-    font-weight: 700,
-    font-size: units.spacing(17),
-    line-height: units.spacing(18),
-  ),
-  heading2: (
-    font-weight: 700,
-    font-size: units.spacing(10.5),
-    line-height: units.spacing(12),
-    letter-spacing: 2%,
-  ),
-  heading3: (
-    font-weight: 700,
-    font-size: units.spacing(6.5),
-    line-height: units.spacing(10),
-  ),
-  heading4: (
-    font-weight: 700,
-    font-size: units.spacing(4),
-    line-height: units.spacing(6),
-  ),
-  paragraph: (
-    font-weight: 400,
-    font-size: units.spacing(4),
-    line-height: units.spacing(6),
-  ),
-  small: (
-    font-weight: 400,
-    font-size: units.spacing(3.5),
-    line-height: units.spacing(6),
-  ),
-  xsmall: (
-    font-weight: 400,
-    font-size: units.spacing(3),
-    line-height: units.spacing(6),
-  ),
-);
 
 .text {
   font-family: units.$font;
   letter-spacing: units.spacing(0.25);
   margin: 0;
   
-  @each $type, $config in $_config {
+  @each $type, $config in units.$font-config {
     &--type--#{$type} {
       @each $tag, $val in $config {
         #{$tag}: $val;
