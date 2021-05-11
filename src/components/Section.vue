@@ -19,14 +19,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use '@/styles/units';
 
 .container {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  padding: 0 units.spacing(6);
+  padding-right: units.spacing(6);
+  padding-left: units.spacing(6);
 }
 
 .content {

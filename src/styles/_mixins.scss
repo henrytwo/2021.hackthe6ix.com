@@ -33,7 +33,7 @@
 
   // Return transition
   @media (prefers-reduced-motion: no-preference) {
-    :global(.animate) & {
+    .animate & {
       transition: $res;
     }
   }
