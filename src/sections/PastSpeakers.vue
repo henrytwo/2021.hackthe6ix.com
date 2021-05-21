@@ -1,9 +1,9 @@
 PastSponsors.vue<template>
   <Section id='past-speakers' as='section'>
-    <div>
+    <div class="past-speakers__content">
       <Typography class='past-speakers__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
         Past Speakers
-       <img class='past-speakers__bubble' src="../assets/past-speakers/megaphone-bubble.svg">
+       <Bubble class='past-speakers__bubble'/>
       </Typography>
     </div>
     <div class="past-speakers__speakers">
@@ -48,13 +48,15 @@ PastSponsors.vue<template>
 import Section from '@/components/Section';
 import Typography from '@/components/Typography';
 import Placeholder from '@/components/Placeholder';
+import Bubble from '@/assets/past-speakers/megaphone-bubble.svg';
 
 export default {
   name: 'PastSpeakers',
   components: {
     Section,
     Typography,
-    Placeholder
+    Placeholder,
+    Bubble
   },
 };
 </script>
@@ -64,65 +66,66 @@ export default {
 
   #past-speakers {
     margin-top: units.spacing(74);
+  }
 
-    & > div {
+  .past-speakers {
+
+    &__content {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     }
-  }
-</style>
 
-<style lang="scss" scoped>
-  @use '@/styles/units';
-
-  .past-speakers__heading {
-    margin-bottom: units.spacing(18);
-    display: flex;
-    align-items: center;
-
-    .past-speakers__bubble {
-      padding-left: units.spacing(7.5);
+    &__heading {
+      margin-bottom: units.spacing(18);
+      display: flex;
+      align-items: center;
     }
-  }
 
-  .past-speakers__speakers {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    &__bubble {
+      margin-bottom: units.spacing(-2);
+      margin-left: units.spacing(4);
+    }
 
-    .past-speakers__card {
+    &__speakers {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    &__card {
       position: relative;
 
-      .past-speakers__placeholder {
-        box-shadow: -8px -8px #23B5AF;
-        margin-bottom: units.spacing(12.5);
-      }
-
       &:not(:first-of-type) {
-        margin-left: units.spacing(12.5);
-      }
+          margin-left: units.spacing(12.5);
+        }
+    }
 
-      .past-speakers__label {
-        position: absolute;
-        bottom: 108px;
-        left: 40px;
-      }
+    &__placeholder {
+      box-shadow: -8px -8px #23B5AF;
+      margin-bottom: units.spacing(12.5);
+    }
 
-      .past-speakers__placeholder--Jonathan {
-        background-image: url("../assets/past-speakers/Jonathan-Javier.png");
-        background-repeat: no-repeat;
-      }
 
-      .past-speakers__placeholder--Cathy {
-        background-image: url("../assets/past-speakers/Cathy-Tie.png");
-        background-repeat: no-repeat;
-      }
-
-      .past-speakers__placeholder--Pei {
-        background-image: url("../assets/past-speakers/Pei-Li.png");
-        background-repeat: no-repeat;
-      }
+    &__label {
+      position: absolute;
+      bottom: 108px;
+      left: 40px;
+    }
+    
+    &__placeholder--Jonathan {
+      background-image: url("../assets/past-speakers/Jonathan-Javier.png");
+      background-repeat: no-repeat;
+    }
+    
+    &__placeholder--Cathy {
+      background-image: url("../assets/past-speakers/Cathy-Tie.png");
+      background-repeat: no-repeat;
+    }
+    
+    &__placeholder--Pei {
+      background-image: url("../assets/past-speakers/Pei-Li.png");
+      background-repeat: no-repeat;
     }
   }
 
