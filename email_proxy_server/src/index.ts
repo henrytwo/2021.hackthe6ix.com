@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(require('sanitize').middleware);
 
 // Subscribe to mailing list
-app.post('/subscribe', async (req: express.Request, res: express.Response) => {
+app.post('/api/subscribe', async (req: express.Request, res: express.Response) => {
   try {
     const email = req.body.email;
     const mailingListCID = process.env.MAILTRAIN_MAILING_LIST_ID;
@@ -64,7 +64,7 @@ app.post('/subscribe', async (req: express.Request, res: express.Response) => {
 });
 
 // Contact form
-app.post('/contact', async (req: express.Request, res: express.Response) => {
+app.post('/api/contact', async (req: express.Request, res: express.Response) => {
   try {
     const [name, email, message] = [req.body.name, req.body.email, req.body.message];
 
