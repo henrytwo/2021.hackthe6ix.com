@@ -15,12 +15,6 @@ Input body:
 }
 ```
 
-Response:
-```
-success
-```
-or error message on failure
-
 ### Contact form
 POST - `/contact`
 
@@ -33,9 +27,3 @@ Input body:
   "message": "<user message>"
 }
 ```
-
-Response:
-```
-success
-```
-or error message on failure
