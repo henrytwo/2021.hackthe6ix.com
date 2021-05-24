@@ -1,4 +1,4 @@
-PastSponsors.vue<template>
+merge andPastSponsors.vue<template>
   <Section id='past-speakers' as='section'>
     <div class="past-speakers__content">
       <Typography class='past-speakers__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
@@ -28,10 +28,10 @@ PastSponsors.vue<template>
               </Typography>
             </div>
             <Typography type='paragraph' color='black' as='p'>
-              Jonathan’s mission at Wonsulting is to “turn underdogs into winners”. 
-              He's also worked in the Strategy and 
+              Jonathan’s mission at Wonsulting is to “turn underdogs into winners”.
+              He's also worked in the Strategy and
               Operations team at Snap, Google, and Cisco coming from a non-target
-              school/non-traditional background. 
+              school/non-traditional background.
               He works on many initiatives,
               providing advice and words of
               wisdom on LinkedIn and through
@@ -194,17 +194,17 @@ export default {
       bottom: 108px;
       left: 40px;
     }
-    
+
     &__placeholder--Jonathan {
       background-image: url("../assets/past-speakers/Jonathan-Javier.png");
       background-repeat: no-repeat;
     }
-    
+
     &__placeholder--Cathy {
       background-image: url("../assets/past-speakers/Cathy-Tie.png");
       background-repeat: no-repeat;
     }
-    
+
     &__placeholder--Pei {
       background-image: url("../assets/past-speakers/Pei-Li.png");
       background-repeat: no-repeat;

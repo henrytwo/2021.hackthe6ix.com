@@ -9,6 +9,8 @@ import querystring from "querystring";
 import validator from "email-validator"
 import escape from 'escape-html';
 
+const port = 6969;
+
 const app = express();
 dotenv.config();
 
@@ -105,6 +107,6 @@ app.post('/api/contact', async (req: express.Request, res: express.Response) => 
   }
 });
 
-app.listen(6969, () => {
-  console.log(`Sewvew wunnying on powt owo ${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${ port }`);
 });
