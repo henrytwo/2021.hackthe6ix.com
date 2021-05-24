@@ -105,6 +105,6 @@ app.post('/api/contact', async (req: express.Request, res: express.Response) => 
   }
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(6969, () => {
   console.log(`Sewvew wunnying on powt owo ${process.env.PORT}`);
 });
