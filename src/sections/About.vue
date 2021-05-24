@@ -21,7 +21,7 @@
       </div>
       <div class='about__slides'>
         <button
-          @click='currentSlide = (currentSlide || 1) - 1'
+          @click='currentSlide = (currentSlide || testimonials.length) - 1'
           class='about__arrow'
         >
           <LeftArrow/>
@@ -89,7 +89,7 @@
           </div>
         </div>
         <button
-          @click='currentSlide = ((currentSlide + 1) % testimonials.length) || currentSlide'
+          @click='currentSlide = (currentSlide + 1) % testimonials.length'
           class='about__arrow'
         >
           <RightArrow/>
@@ -171,11 +171,6 @@ export default {
   methods: {
     setCardWidth() {
       this.width = this.$refs.testimonials.clientWidth;
-    },
-  },
-  watch: {
-    currentSlide(newVal) {
-      console.log(newVal);
     },
   },
   computed: {
@@ -276,6 +271,9 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     grid-template-columns: 1fr units.spacing(165);
     grid-gap: units.spacing(20);
     margin-bottom: units.spacing(28);
+    @include mixins.media(laptop) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__heading {
@@ -291,6 +289,8 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
   &__slides {
     grid-template-columns: units.spacing(6) auto units.spacing(6);
     grid-gap: units.spacing(6);
+    max-width: units.spacing(170);
+    margin: 0 auto;
     display: grid;
   }
 
@@ -337,6 +337,15 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     display: grid;
     padding: 0;
     margin: units.spacing(6) 0 0;
+
+    @include mixins.media(laptop) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: units.spacing(12);
+    }
+
+    @include mixins.media(tablet) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__stat {

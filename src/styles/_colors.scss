@@ -77,7 +77,11 @@ $colors: (
   'footer': (
     value: #143B46,
     static: true,
-  )
+  ),
+  'error': (
+    value: #CA500B,
+    static: true,
+  ),
 );
 
 $_modifiers: (
