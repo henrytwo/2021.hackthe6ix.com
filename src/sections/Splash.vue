@@ -1,5 +1,5 @@
 <template>
-  <Section id='top' class='splash' as='section'>
+  <Section class='splash' as='section'>
     <div class='splash__content'>
       <Typography type='heading3' as='p'>
         {{ $static.metadata.startDate }}-{{ $static.metadata.endDate }} | Virtual Event
@@ -7,8 +7,25 @@
       <Typography class='splash__heading' type='heading1' as='h1' color='teal' transform='uppercase'>
         Hack The 6ix
       </Typography>
-      <Typography type='heading3' as='p'>
-        We hack to <Typography type='heading3' color='yellow'>network.</Typography>
+      <Typography class='splash__hack' type='heading3' as='p'>
+        We hack to <span class='splash__scroll-frame'>
+          <Typography
+            :style='{ "--offset": `${-100 / text.length * textIndex}%` }'
+            :class='[
+              animateText && "splash__scroll--animate",
+              "splash__scroll",
+            ]'
+            type='heading3'
+            color='yellow'
+          >
+            <span
+              v-for='(line, index) in text'
+              :key='index'
+            >
+              {{line}}.
+            </span>
+          </Typography>
+        </span>
       </Typography>
       <form class='splash__form'>
         <Typography type='paragraph' as='p'>
@@ -86,8 +103,17 @@ export default {
   },
   data() {
     return {
+      animateText: true,
+      textIndex: 0,
       email: '',
     };
+  },
+  mounted() {
+    window.setTimeout(() => {
+      window.requestAnimationFrame(() => {
+        this.textIndex = (this.textIndex + 1) % this.text.length;
+      });
+    }, 2000);
   },
   methods: {
     scrollToAbout() {
@@ -95,6 +121,16 @@ export default {
     },
   },
   computed: {
+    text() {
+      return [
+        'network',
+        'learn',
+        'win',
+        'create a project',
+        'collaborate',
+        'network',
+      ];
+    },
     icons() {
       return [
         {
@@ -123,35 +159,64 @@ export default {
   watch: {
     email(newVal) {
       console.log(newVal);
+    },
+    textIndex(newVal) {
+      this.animateText = newVal !== 0;
+      window.setTimeout(() => {
+        window.requestAnimationFrame(() => {
+          this.textIndex = (this.textIndex + 1) % this.text.length;
+        });
+      }, newVal && 2000);
     }
   }
 };
 </script>
 
 <style lang="scss">
+  @use '@/styles/mixins';
   @use '@/styles/units';
 
   .splash {
     padding-top: units.spacing(37.5);
-
-    & > div {
-      grid-template-columns: minmax(auto, units.spacing(130)) auto;
-      grid-gap: units.spacing(15);
-      display: grid;
+    @include mixins.media(laptop) {
+      padding-top: units.spacing(16);
     }
-  }
-
-  .splash {
-    padding-top: units.spacing(37.5);
 
      & > div {
       grid-template-columns: minmax(auto, units.spacing(130)) auto;
       grid-gap: units.spacing(15);
       display: grid;
+      @include mixins.media(laptop) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__hack {
+      grid-template-columns: auto 1fr;
+      grid-gap: units.spacing(2);
+      display: grid;
+      overflow: hidden;
+    }
+
+    &__scroll {
+      &--animate {
+        @include mixins.transition(transform, slow);
+      }
+      transform: translateY(var(--offset));
+      flex-direction: column;
+      display: flex;
+
+      &-frame {
+        height: 1px;
+      }
     }
   
     &__image {
       width: 100%;
+      @include mixins.media(laptop) {
+        max-width: units.spacing(120);
+        grid-row: 1;
+      }
     }
 
     &__heading {
@@ -167,6 +232,7 @@ export default {
       grid-template-columns: 55% max-content;
       grid-gap: units.spacing(1.5);
       margin: units.spacing(2) 0 units.spacing(4.5);
+      max-width: units.spacing(120);
     }
 
     &__icons {

@@ -53,7 +53,7 @@ function test() {
 }
 
 function export() {
-    while getopts r:s:v:o: flag
+    while getopts v:o: flag
     do
         case "${flag}" in
             # docker tag version
@@ -74,7 +74,7 @@ function export() {
     DOCKER_BUILDKIT=1 docker build \
         --output type=$type,dest=$output \
         --target 'export' \
-        -t tag=$TAG\:${v:-latest} .;
+        -t $TAG\:${v:-latest} .;
 }
 
 function serve() {

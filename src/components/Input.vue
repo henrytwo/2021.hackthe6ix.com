@@ -11,14 +11,14 @@
     >
       {{ label + (required ? '*' : '') }}
     </label>
-    <input
+    <component
+      :is='as'
       :class='[
         success && "input__el--success",
         error && "input__el--error",
         "input__el",
       ]'
       @change='event => {
-        console.log(event.target.value);
         $emit("input", event.target.value);
       }'
       :placeholder='placeholder'
@@ -30,6 +30,9 @@
       :type='type'
       :id='id'
     />
+    <span class='input__error' v-if='typeof error === "string"'>
+      {{ error }}
+    </span>
   </div>
 </template>
 
@@ -65,7 +68,11 @@ export default {
     disabled: Boolean,
     readOnly: Boolean,
     success: Boolean,
-    error: Boolean,
+    error: [Boolean, String],
+    as: {
+      type: String,
+      default: () => 'input',
+    },
   }
 }
 </script>
@@ -91,6 +98,10 @@ export default {
       #{$tag}: $val;
     }
 
+    &--error {
+      background-color: colors.css-color(error, $alpha: 0.3);
+    }
+
     &::placeholder {
       color: colors.css-color(placeholder);
     }
@@ -103,6 +114,15 @@ export default {
     box-sizing: border-box;
     border: none;
     width: 100%;
+  }
+
+  &__error {
+    @each $t, $v in map-get(units.$font-config, small) {
+      #{$t}: $v;
+    }
+    font-weight: 700;
+    margin-top: units.spacing(1);
+    color: colors.css-color(error);
   }
 }
 </style>
