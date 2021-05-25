@@ -2,34 +2,44 @@
  * Handles API requests to the proxy server for contact form + subscriptions
  */
 
-export const subscribe = (email) => {
+const axios = require("axios");
 
-  fetch("/api/subscribe", {
-    method: "POST",
-    body: JSON.stringify({
-      email: email
-    })
+const apiBase = process.env.GRIDSOME_LANDING_API_HOST || (process.env.NODE_ENV === 'production' ? "https://landingapi.hackthe6ix.com" : "http://localhost:6970");
+
+export const subscribe = (email, callback) => {
+
+  axios.post(apiBase + "/api/subscribe", {
+    email: email
   }).then(res => {
-    console.log("Request complete! response:", res);
+    if (callback) {
+      callback(null, res);
+    }
+  }).catch(err => {
+    if (callback) {
+      callback(err);
+    }
   });
 
 };
 
-export const contactMessage = (name, email, message) => {
+export const contactMessage = (name, email, message, callback) => {
 
   /**
    * TODO: Don't even let them submit the form if they don't have a name, email, and message
    */
 
-  fetch("/api/contact", {
-    method: "POST",
-    body: JSON.stringify({
-      name: name,
-      email: email,
-      message: message
-    })
+  axios.post(apiBase + "/api/contact", {
+    name: name,
+    email: email,
+    message: message
   }).then(res => {
-    console.log("Request complete! response:", res);
+    if (callback) {
+      callback(null, res);
+    }
+  }).catch(err => {
+    if (callback) {
+      callback(err);
+    }
   });
 
 };

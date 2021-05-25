@@ -37,8 +37,9 @@
             label='Join our mailing list'
             v-model='email'
             name='email'
+            :error="emailError"
           />
-          <Button :disabled='!!email' onclick="triggerSubscribe">Notify Me</Button>
+          <Button :disabled='!email' @click="triggerSubscribe">Notify Me</Button>
         </div>
       </div>
       <ul class='splash__icons'>
@@ -107,6 +108,7 @@ export default {
       animateText: true,
       textIndex: 0,
       email: '',
+      emailError: undefined
     };
   },
   mounted() {
@@ -121,7 +123,20 @@ export default {
       document.getElementById("about").scrollIntoView();
     },
     triggerSubscribe() {
-      subscribe(this.email);
+      subscribe(this.email, (err, message) => {
+
+        console.log(err.response, message)
+
+        if (err) {
+          // Error
+          this.emailError = err.response.data || "An error occurred - please try again later";
+
+        } else {
+          // Success
+
+        }
+
+      });
     }
   },
   computed: {
