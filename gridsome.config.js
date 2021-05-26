@@ -20,12 +20,6 @@ module.exports = {
         attachProps: true, // defaults to true
         logErrors: true //process.env.NODE_ENV === 'development' // defaults to false, see below for further info
       }
-    },
-    {
-      use: '@gridsome/plugin-google-analytics',
-      options: {
-        id: 'G-P4G1YY4XT6'
-      }
     }
   ]
 }

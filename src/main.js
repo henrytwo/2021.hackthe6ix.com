@@ -3,10 +3,16 @@
 
 import DefaultLayout from '~/layouts/Default';
 import './icons';
+import VueGTag from 'vue-gtag';
 
 export default function (Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout);
+
+  Vue.use(VueGTag, {
+    config: { id: "G-P4G1YY4XT6" }
+  });
+
 
   head.link.push({
     rel: `preconnect`,
