@@ -13,7 +13,7 @@ PastSponsors.vue<template>
           <Typography type='heading3' color='black' as='h3'>
             Jonathan Javier
           </Typography>
-          <Typography type='heading4' color='black' as='h4'>
+          <Typography type='heading4' color='dark-navy' as='h4'>
             CEO/Founder @Wonsulting
           </Typography>
         </div>
@@ -23,7 +23,7 @@ PastSponsors.vue<template>
               <Typography type='heading3' color='black' as='h3'>
                 Jonathan Javier
               </Typography>
-              <Typography type='heading4' color='black' as='h4'>
+              <Typography type='heading4' color='dark-navy' as='h4'>
                 CEO/Founder @Wonsulting
               </Typography>
             </div>
@@ -54,7 +54,7 @@ PastSponsors.vue<template>
           <Typography type='heading3' color='black' as='h3'>
             Cathy Tie
           </Typography>
-          <Typography type='heading4' color='black' as='h4'>
+          <Typography type='heading4' color='dark-navy' as='h4'>
             Serial Entreprenuer & VC
           </Typography>
         </div>
@@ -64,7 +64,7 @@ PastSponsors.vue<template>
               <Typography type='heading3' color='black' as='h3'>
                 Cathy Tie
               </Typography>
-              <Typography type='heading4' color='black' as='h4'>
+              <Typography type='heading4' color='dark-navy' as='h4'>
                 Serial Entreprenuer & VC
               </Typography>
             </div>
@@ -91,7 +91,7 @@ PastSponsors.vue<template>
           <Typography type='heading3' color='black' as='h3'>
             Pei Li
           </Typography>
-          <Typography type='heading4' color='black' as='h4'>
+          <Typography type='heading4' color='dark-navy' as='h4'>
             Founder @Hack the 6ix
           </Typography>
         </div>
@@ -101,7 +101,7 @@ PastSponsors.vue<template>
               <Typography type='heading3' color='black' as='h3'>
                 Pei Li
               </Typography>
-              <Typography type='heading4' color='black' as='h4'>
+              <Typography type='heading4' color='dark-navy' as='h4'>
                 Founder @Hack the 6ix
               </Typography>
             </div>
@@ -143,6 +143,7 @@ export default {
 </script>
 
 <style lang="scss">
+  @use '@/styles/mixins';
   @use '@/styles/units';
   @use '@/styles/colors';
 
@@ -179,8 +180,12 @@ export default {
       position: relative;
 
       &:not(:first-of-type) {
-          margin-left: units.spacing(12.5);
+        margin-left: units.spacing(12.5);
+
+        @include mixins.media(tablet) {
+          margin-left: units.spacing(0);
         }
+      }
     }
 
     &__placeholder {
