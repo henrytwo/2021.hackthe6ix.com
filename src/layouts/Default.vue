@@ -19,12 +19,9 @@ query {
 </static-query>
 
 <script>
-import smoothscroll from 'smoothscroll-polyfill';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import Mail from './Mail';
-
-smoothscroll.polyfill();
 
 export default {
   name: 'Layout',
