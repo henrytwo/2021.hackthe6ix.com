@@ -74,7 +74,7 @@
           </a>
         </Typography>
         <Typography type='paragraph' as='li'>
-          <a class='footer__meta-link' href='https://2020.hackthe6ix.com/privacy-policy.pdf' target='_blank' rel='noreferrer noopenner'>
+          <a class='footer__meta-link' href='http://cdn.hackthe6ix.com/privacy-policy.pdf' target='_blank' rel='noreferrer noopenner'>
             Privacy Policy
           </a>
         </Typography>

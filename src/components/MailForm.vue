@@ -41,9 +41,6 @@
       },
       triggerSubscribe() {
         subscribe(this.email, (err, message) => {
-
-          console.log(err, message);
-
           if (err) {
             // Error
             this.emailError = err?.response?.data || "An error occurred - please try again later";
@@ -63,10 +60,9 @@
     },
     watch: {
       email(newVal) {
-        this.emailError = undefined;
-        this.emailSuccess = undefined;
-
         this.emailInvalid = !validator.validate(newVal);
+        this.emailSuccess = undefined;
+        this.emailError = this.emailInvalid ? "Please enter a valid email" : undefined;
       },
     }
   }
@@ -86,6 +82,7 @@
       grid-gap: units.spacing(1.5);
       margin: units.spacing(2) 0 units.spacing(4.5);
       max-width: units.spacing(120);
+      text-align: left !important;
     }
 
     &__button {
