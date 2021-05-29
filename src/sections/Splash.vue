@@ -31,16 +31,19 @@
         <Typography type='paragraph' as='p'>
           Applications aren't open yet. Subscribe to know when it does!
         </Typography>
-        <div class='splash__input'>
+        <form class='splash__input' v-on:submit.prevent="formTriggerSubmit">
           <Input
             placeholder='Enter your email'
             label='Join our mailing list'
             v-model='email'
             name='email'
             :error="emailError"
+            :success="emailSuccess"
+            :disabled="emailDisabled"
+            email
           />
-          <Button class='splash__button' @click="triggerSubscribe" :disabled='!email'>Notify Me</Button>
-        </div>
+          <Button class='splash__button' @click="triggerSubscribe" :disabled='emailInvalid || emailDisabled'>Notify Me</Button>
+        </form>
       </div>
       <ul class='splash__icons'>
         <li
@@ -94,6 +97,7 @@ import Typography from '@/components/Typography';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import validator from 'email-validator';
 
 export default {
   name: 'Splash',
@@ -113,7 +117,10 @@ export default {
       animateText: true,
       textIndex: 0,
       email: '',
-      emailError: undefined
+      emailError: undefined,
+      emailSuccess: undefined,
+      emailDisabled: false,
+      emailInvalid: true
     };
   },
   mounted() {
@@ -124,23 +131,29 @@ export default {
     }, 2000);
   },
   methods: {
+    formTriggerSubmit() {
+        if (!this.emailInvalid && !this.emailDisabled) {
+          this.triggerSubscribe();
+        }
+    },
     scrollToAbout() {
       document.getElementById("about").scrollIntoView();
     },
     triggerSubscribe() {
       subscribe(this.email, (err, message) => {
 
-        console.log(err.response, message)
+        console.log(err, message);
 
         if (err) {
           // Error
           this.emailError = err.response.data || "An error occurred - please try again later";
-
+          this.emailSuccess = undefined;
         } else {
           // Success
-
+          this.emailSuccess = message.data || "You have successfully subscribed!";
+          this.emailError = undefined;
+          this.emailDisabled = true;
         }
-
       });
     }
   },
@@ -182,7 +195,10 @@ export default {
   },
   watch: {
     email(newVal) {
-      console.log(newVal);
+      this.emailError = undefined;
+      this.emailSuccess = undefined;
+
+      this.emailInvalid = !validator.validate(newVal);
     },
     textIndex(newVal) {
       this.animateText = newVal !== 0;
