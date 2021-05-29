@@ -1,5 +1,5 @@
 <template>
-  <Section id='past-speakers' as='section'>
+  <Section class='past-speakers' id='past-speakers' as='section'>
     <div class="past-speakers__content">
       <Typography class='past-speakers__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
         Past Speakers
@@ -147,11 +147,9 @@ export default {
   @use '@/styles/units';
   @use '@/styles/colors';
 
-  #past-speakers {
-    margin-top: units.spacing(74);
-  }
-
   .past-speakers {
+    margin-top: units.spacing(44);
+    padding-top: units.spacing(30);
 
     &__content {
       display: flex;

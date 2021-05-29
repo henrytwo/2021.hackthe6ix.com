@@ -1,5 +1,5 @@
 <template>
-  <Section id='about' as='section'>
+  <Section id='about' class='about' as='section'>
     <div class='about__main'>
       <div class='about__content'>
         <Typography class='about__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
@@ -15,7 +15,7 @@
           help us become a key player in the Toronto tech ecosystem. We
           provide an outlet for students to present their ideas of the future. 
         </Typography>
-        <Button>
+        <Button @click='openGallery'>
           View Past Projects
         </Button>
       </div>
@@ -172,6 +172,12 @@ export default {
     setCardWidth() {
       this.width = this.$refs.testimonials.clientWidth;
     },
+    openGallery() {
+      window.open(
+        'https://hackthe6ix2020.devpost.com',
+        '_blank',
+      );
+    }
   },
   computed: {
     cardPlacement() {
@@ -186,17 +192,17 @@ export default {
     testimonials() {
       return [
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          image: require('@/assets/about/wilson.png'),
           content: marked(`***Inspiring, challenging, and exciting.***
 
 Just a few words I would use to describe the past weekend I had at Hack the 6ix,
           all from the comfort of my own home! Working on our hackathon project remotely
           was definitely a unique experience and had its own set of challenges, but it was
           super rewarding and was an incredible learning opportunity.`),
-          title: 'Samson Hua, Hacker',
+          title: 'Wilson Wang, Hacker',
         },
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          image: require('@/assets/about/aiman.png'),
           content: marked(`So honoured to chat about diversity & inclusion at @HackThe6ix today.
           It's the most organized hackathon I've ever been to (from what feels like millions),
           and it's all virtual! Well-moderated, great questions, diverse backgrounds+views of
@@ -204,21 +210,21 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
           title: 'Aiman Aamir, Speaker',
         },
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          image: require('@/assets/about/samson.png'),
           content: marked(`Thank you so much for this amazing opportunity, I had such an amazing
           time this weekend. I really enjoyed my first hackathon and stepping out of my comfort
           zone and I am definitely looking to participate in more in the future. 😊`),
           title: 'Samson Hua, Hacker',
         },
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          image: require('@/assets/about/sam.png'),
           content: marked(`It was so nice to guide students through their projects, whether it
           was simply providing feedback on project ideas, or helping hackers deploy apps, connect
           their React apps to backends, and build API's for their projects, I had a great time.`),
           title: 'Sam Eskandar, Mentor',
         },
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          image: require('@/assets/about/aadar.png'),
           content: marked(`It was great experience attending a virtual hackathon this weekend.
           Made new friends with my team. I’d like to thank Hack the 6ix for giving people the
           opportunity to learn new skills and develop something unique, even with the
@@ -256,11 +262,10 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
 @use '@/styles/colors';
 @use '@/styles/units';
 
-#about {
-  margin-top: units.spacing(74);
-}
-
 .about {
+  margin-top: units.spacing(44);
+  padding-top: units.spacing(30);
+
   &__bubble {
     margin-bottom: units.spacing(-2);
     margin-left: units.spacing(4);
@@ -371,6 +376,10 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     box-sizing: border-box;
     flex-grow: 1;
     display: grid;
+
+    @include mixins.media(tablet) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__card-image {
@@ -378,6 +387,11 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     margin: units.spacing(3) 0 auto;
     aspect-ratio: 1/1;
     width: 100%;
+
+    @include mixins.media(tablet) {
+      max-width: units.spacing(40);
+      margin: units.spacing(3) auto 0;
+    }
   }
 
   &__card-body {

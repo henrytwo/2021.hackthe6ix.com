@@ -43,6 +43,7 @@
           :error="emailError"
           label='Email'
           v-model='email'
+          success='owo wats dis?'
           showLabel
           required
         />

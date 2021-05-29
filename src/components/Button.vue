@@ -59,10 +59,12 @@ export default {
 </script>
 
 <style lang="scss">
+  @use '@/styles/mixins';
   @use '@/styles/colors';
   @use '@/styles/units';
 
   .button {
+    @include mixins.transition(background-color);
     padding: calc(#{units.spacing(2)} - 1px) calc(#{units.spacing(4)} - 1px);
     letter-spacing: units.spacing(0.5);
     border-radius: units.spacing(0.5);

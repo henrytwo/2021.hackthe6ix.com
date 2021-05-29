@@ -18,7 +18,7 @@
         error && "input__el--error",
         "input__el",
       ]'
-      @change='event => {
+      @input='event => {
         $emit("input", event.target.value);
       }'
       :placeholder='placeholder'
@@ -30,8 +30,11 @@
       :type='type'
       :id='id'
     />
-    <span class='input__error' v-if='typeof error === "string"'>
+    <span class='input__status input__status--error' v-if='typeof error === "string"'>
       {{ error }}
+    </span>
+    <span class='input__status input__status--success' v-else-if='typeof success === "string"'>
+      {{ success }}
     </span>
   </div>
 </template>
@@ -67,7 +70,7 @@ export default {
     required: Boolean,
     disabled: Boolean,
     readOnly: Boolean,
-    success: Boolean,
+    success: [Boolean, String],
     error: [Boolean, String],
     as: {
       type: String,
@@ -78,6 +81,7 @@ export default {
 </script>
 
 <style lang="scss">
+@use '@/styles/mixins';
 @use '@/styles/colors';
 @use '@/styles/units';
 
@@ -94,12 +98,18 @@ export default {
   }
 
   &__el {
+    @include mixins.transition(background-color);
+
     @each $tag, $val in map-get(units.$font-config, paragraph) {
       #{$tag}: $val;
     }
 
     &--error {
       background-color: colors.css-color(error, $alpha: 0.3);
+    }
+
+    &--success {
+      background-color: colors.css-color(success, $alpha: 0.3);
     }
 
     &::placeholder {
@@ -112,17 +122,25 @@ export default {
     color: colors.css-color(white);
     font-family: units.$font;
     box-sizing: border-box;
+    resize: vertical;
     border: none;
     width: 100%;
   }
 
-  &__error {
+  &__status {
     @each $t, $v in map-get(units.$font-config, small) {
       #{$t}: $v;
     }
     font-weight: 700;
     margin-top: units.spacing(1);
-    color: colors.css-color(error);
+
+    &--error {
+      color: colors.css-color(error);
+    }
+
+    &--success {
+      color: colors.css-color(success);
+    }
   }
 }
 </style>

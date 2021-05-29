@@ -44,7 +44,7 @@
           <FontAwesomeIcon icon='times'/>
         </Button>
       </li>
-      <li @click='showMobile = false' v-for='(link, index) in links' :key='index'>
+      <li @click='onNavigate' v-for='(link, index) in links' :key='index'>
         <g-link
           exact-active-class='nav__link--active'
           class='nav__link'
@@ -91,6 +91,15 @@ export default {
     scrollHandler() {
       this.isTop = window.pageYOffset < 10;
     },
+    onNavigate() {
+      window.clearTimeout(this.timer);
+      localStorage.setItem('ignore-observer', true);
+
+      this.showMobile = false;
+      this.timer = window.setTimeout(() => {
+        localStorage.removeItem('ignore-observer');
+      }, 1000);
+    }
   },
   computed: {
     links() {
@@ -112,8 +121,8 @@ export default {
           to: '/#past-sponsors',
         },
         {
-          label: 'Past Keynotes',
-          to: '/#past-keynotes',
+          label: 'Past Speakers',
+          to: '/#past-speakers',
         },
         {
           label: 'FAQ',
@@ -197,6 +206,8 @@ export default {
   }
 
   &__link {
+    @include mixins.transition(border-color color);
+
     @each $t, $v in map-get(units.$font-config, heading4) {
       #{$t}: $v;
     }

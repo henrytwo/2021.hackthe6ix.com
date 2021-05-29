@@ -1,5 +1,5 @@
 <template>
-  <Section id='highlight' as='section'>
+  <Section id='spotlight' class='highlight' as='section'>
     <div class="highlight__content">
       <Typography class='highlight__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
         Sponsor Spotlight
@@ -213,11 +213,10 @@ export default {
 @use '@/styles/colors';
 @use '@/styles/units';
 
-#highlight {
-  margin: units.spacing(74) 0;
-}
-
 .highlight {
+  margin: units.spacing(44) 0 units.spacing(74);
+  padding-top: units.spacing(30);
+
   &__heading {
     display: flex;
     align-items: flex-end;

@@ -19,7 +19,14 @@ module.exports = {
         dsn: "https://893ae32af2f346cfb25a430f857c3cd3@o418830.ingest.sentry.io/5782997",
         attachProps: true, // defaults to true
         logErrors: true //process.env.NODE_ENV === 'development' // defaults to false, see below for further info
-      }
-    }
-  ]
-}
+      },
+    },
+    {
+      use: '@gridsome/source-contentful',
+      options: {
+        space: 'k39srzl7t1l0',
+        accessToken: 'z26y8JKBMFiKK5YHJ7XcwptGrINVd9D0gLvUx1hcX1s', // required
+      },
+    },
+  ],
+};

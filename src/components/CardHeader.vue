@@ -70,7 +70,7 @@ export default {
 @use '@/styles/units';
 
 $_sizes: (
-  small: units.spacing(2),
+  small: units.spacing(2.25),
   normal: units.spacing(3),
   large: units.spacing(4.5),
 );
@@ -103,7 +103,7 @@ $_sizes: (
 
     @each $tag, $size in $_sizes {
       &--#{$tag} {
-        margin-left: $size * 0.8;
+        margin-left: $size * 0.9;
         height: $size;
         width: $size;
       }

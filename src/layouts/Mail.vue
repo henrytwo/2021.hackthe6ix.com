@@ -11,7 +11,7 @@
         name='email'
         :error="emailError"
       />
-      <Button :disabled='!email' @click="triggerSubscribe">
+      <Button class='mail__button' :disabled='!email' @click="triggerSubscribe">
         Notify Me
       </Button>
     </div>
@@ -88,6 +88,10 @@ export default {
     margin-top: units.spacing(11);
     max-width: units.spacing(95);
     display: grid;
+  }
+
+  &__button {
+    margin-bottom: auto;
   }
 
   &__top {

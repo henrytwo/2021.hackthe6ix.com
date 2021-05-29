@@ -19,6 +19,7 @@
     "@types/axios": "^0.14.0",
     "axios": "^0.21.1",
     "@gridsome/plugin-google-analytics": "^0.1.2",
+    "@gridsome/source-contentful": "^0.6.0",
     "@sentry/tracing": "^6.4.1",
     "@sentry/vue": "^6.4.1",
     "dotenv": "^10.0.0",
@@ -27,6 +28,7 @@
     "marked": "^2.0.3",
     "sass": "^1.32.12",
     "sass-loader": "^10.1.1",
+    "smoothscroll-polyfill": "^0.4.4",
     "uuid": "^8.3.2",
     "vue-gtag": "^1.16.1",
     "vue-svg-loader": "^0.16.0"

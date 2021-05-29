@@ -39,7 +39,7 @@
             name='email'
             :error="emailError"
           />
-          <Button :disabled='!email' @click="triggerSubscribe">Notify Me</Button>
+          <Button class='splash__button' @click="triggerSubscribe" :disabled='!email'>Notify Me</Button>
         </div>
       </div>
       <ul class='splash__icons'>
@@ -67,7 +67,10 @@
         Learn more
       </Button>
     </div>
-    <img class='splash__image' src='https://www.icegif.com/wp-content/uploads/icegif-10.gif'/>
+    <div class='splash__image'>
+      <Table class='splash__image-table' />
+      <img :src='require("@/assets/window.gif")' class='splash__image-window' />
+    </div>
   </Section>
 </template>
 
@@ -86,6 +89,7 @@ import FacebookIcon from '@/assets/facebook.svg';
 import InstagramIcon from '@/assets/instagram.svg';
 import LinkedInIcon from '@/assets/linkedin.svg';
 import TwitterIcon from '@/assets/twitter.svg';
+import Table from '@/assets/table.svg';
 import Typography from '@/components/Typography';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
@@ -98,6 +102,7 @@ export default {
     InstagramIcon,
     LinkedInIcon,
     TwitterIcon,
+    Table,
     Typography,
     Section,
     Button,
@@ -206,8 +211,12 @@ export default {
       grid-gap: units.spacing(15);
       display: grid;
       @include mixins.media(laptop) {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(1px, 1fr);
       }
+    }
+
+    &__button {
+      margin-bottom: auto;
     }
 
     &__hack {
@@ -232,9 +241,30 @@ export default {
 
     &__image {
       width: 100%;
+      display: flex;
+      margin-top: 20%;
+      margin-bottom: -20%;
+      height: fit-content;
+
       @include mixins.media(laptop) {
-        max-width: units.spacing(120);
         grid-row: 1;
+      }
+
+      &-window {
+        box-sizing: border-box;
+        position: relative;
+        margin-left: auto;
+        flex-grow: 4;
+        flex-basis: 1px;
+        transform: translate(-10%, -24%);
+        min-width: 1px;
+      }
+
+      &-table {
+        flex-grow: 3;
+        flex-basis: 1px;
+        min-width: 1px;
+        transform: translate(10%);
       }
     }
 

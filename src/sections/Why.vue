@@ -1,5 +1,5 @@
 <template>
-  <Section id='why' as='section'>
+  <Section id='why' class='why' as='section'>
     <div class="why__content">
       <Typography class='why__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
         Why get involved
@@ -7,80 +7,29 @@
       </Typography>
     </div>
       <div class='why__card-wrapper'>
-        <button class='why__arrow why__arrow--left' @click='changeSlide(-1)'>
+        <button class='why__arrow' @click='prevSlide'>
           <LeftArrow/>
         </button>
-        <div class='why__cards'>
-          <div class="why__card">
-            <Placeholder class='why__placeholder' width='385px' height='385px'/>
-              <Typography class='why__card-heading' type='heading3' color='white' as='h3'>
-                Want to land your
-                next internship?
-              </Typography>
-              <Typography class='why__card-body' type='xsmall' color='white' as='p'>
-                Hackathons are an amazing place to meet
-                mentors and industry professionals in the
-                tech community. A pandemic won't stop us
-                from fostering important conversations.
-              </Typography>
-              <Laptops class="why__laptops"/>
-          </div>
-          <div class="why__card">
-            <Placeholder class='why__placeholder' width='385px' height='385px'/>
-              <Typography class='why__card-heading' type='heading3' color='white' as='h3'>
-                Looking to learn from
-                experts?
-              </Typography>
-              <Typography class='why__card-body' type='xsmall' color='white' as='p'>
-                We value sharing knowledge and applying the
-                things we learned. We'll host live workshops
-                all weekend to give you the inspiration you
-                need to get your project off the ground.
-              </Typography>
-              <Gears class="why__gears"/>
-          </div>
-          <div class="why__card">
-            <Placeholder class='why__placeholder' width='385px' height='385px'/>
-              <Typography class='why__card-heading' type='heading3' color='white' as='h3'>
-                Want to be rewarded
-                for your hard work?
-              </Typography>
-              <Typography class='why__card-body' type='xsmall' color='white' as='p'>
-                With $38,000 worth of prizes, there’s
-                something for everyone.
-              </Typography>
-              <Prize class="why__prize"/>
-          </div>
-          <div class="why__card">
-            <Placeholder class='why__placeholder' width='385px' height='385px'/>
-              <Typography class='why__card-heading' type='heading3' color='white' as='h3'>
-                Need projects on your
-                portfolio? 
-              </Typography>
-              <Typography class='why__card-body' type='xsmall' color='white' as='p'>
-                Complete a project worth showcasing within
-                48 hours from scratch and land your next job.
-                Check out what our hackers created last year!
-              </Typography>
-              <Button class='why__projects'>
-                2020 project gallery
-              </Button>
-          </div>
-          <div class="why__card">
-            <Placeholder class='why__placeholder' width='385px' height='385px'/>
-              <Typography class='why__card-heading' type='heading3' color='white' as='h3'>
-                Feeling stuck at home?
-              </Typography>
-              <Typography class='why__card-body' type='xsmall' color='white' as='p'>
-                Physical distancing is serious, but meeting
-                new people doesn't have to stop. Get geared
-                up in your pajamas and make tons of virtual
-                memories. 
-              </Typography>
-              <Camera class="why__memories"/>
+        <div ref='frame' class="why__cards-frame">
+          <div ref='cards' class='why__cards'>
+            <Card class='why__card' v-for='(card, index) in cards' color='off-navy' :key='index'>
+              <CardHeader class='why__card-header' backgroundColor='dark-navy' size='small' />
+              <div class='why__card-body'>
+                <Typography type='heading3' as='h3'>
+                  {{ card.title }}
+                </Typography>
+                <Typography class='why__card-text' type='small' as='p'>
+                  {{ card.body }}
+                </Typography>
+                <component class='why__card-asset' v-if='card.asset' :is='card.asset' />
+                <Button class='why__card-action' v-else-if='card.action' @click='toGallery(card.action.to)'>
+                  {{ card.action.text }}
+                </Button>
+              </div>
+            </Card>
           </div>
         </div>
-        <button class='why__arrow why__arrow--right' @click='changeSlide(1)'>
+        <button class='why__arrow' @click='nextSlide'>
           <RightArrow/>
         </button>
       </div>
@@ -119,25 +68,101 @@ export default {
     Bubble,
     Button
   },
+  mounted() {
+    window.addEventListener('resize', this.resize, { passive: true });
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resize, { passive: true });
+  },
+  data() {
+    return {
+      curr: 0,
+      limit: 3,
+    };
+  },
+  computed: {
+    cards() {
+      return [
+        {
+          title: 'Want to land your next internship?',
+          body: 'Hackathons are an amazing place to meet mentors and industry professionals in the tech community. A pandemic won\'t stop us from fostering important conversations.',
+          asset: 'Laptops',
+        },
+        {
+          title: 'Looking to learn from experts?',
+          body: 'We value sharing knowledge and applying the things we learned. We\'ll host live workshops all weekend to give you the inspiration you need to get your project off the ground.',
+          asset: 'Gears',
+        },
+        {
+          title: 'Want to be rewarded for your hard work?',
+          body: 'With $38,000 worth of prizes, there’s something for everyone.',
+          asset: 'Prize',
+        },
+        {
+          title: 'Need projects on your portfolio?',
+          body: 'Complete a project worth showcasing within 48 hours from scratch and land your next job. Check out what our hackers created last year!',
+          action: {
+            text: '2020 Project Gallery',
+            to: 'https://hackthe6ix2020.devpost.com',
+          },
+        },
+        {
+          title: 'Feeling stuck at home?',
+          body: 'Physical distancing is serious, but meeting new people doesn\'t have to stop. Get geared up in your pajamas and make tons of virtual memories.',
+          asset: 'Camera',
+        },
+      ];
+    },
+  },
   methods: {
-    changeSlide(value) {
-      const carousel = this.$el.querySelector(".why__cards");
-      const width = carousel.offsetWidth;
-      carousel.scrollTo(carousel.scrollLeft + width * value, 0);
-    }
+    toGallery(to) {
+      window.open(to, "_blank");
+    },
+    handleLimit() {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        this.limit = 4;
+      } else if (window.matchMedia('(max-width: 1080px)').matches) {
+        this.limit = 3;
+      } else {
+        this.limit = 2;
+      }
+    },
+    prevSlide() {
+      this.curr = (Math.min(this.curr, this.limit) || 1) - 1;
+    },
+    nextSlide() {
+      this.curr = Math.min(this.curr + 1, this.limit);
+    },
+    resize() {
+      this.handleLimit();
+      this.setScroll(this.curr, true);
+    },
+    setScroll(index, hard) {
+      const el = this.$refs.cards;
+      const target = el.children[index];
+      this.$refs.frame.scrollTo({
+        behavior: hard ? 'auto' : 'smooth',
+        left: target.offsetLeft - el.offsetLeft,
+      });
+    },
+  },
+  watch: {
+    curr(newVal) {
+      this.setScroll(newVal);
+    },
   }
 };
 </script>
  
 <style lang="scss">
+@use '@/styles/mixins';
 @use '@/styles/units';
 @use '@/styles/colors';
 
-#why {
-    margin-top: units.spacing(74);
-}
-
 .why {
+  margin-top: units.spacing(44);
+  padding-top: units.spacing(30);
+
   &__content {
     display: block;
   }
@@ -153,83 +178,64 @@ export default {
     margin-left: units.spacing(4);
   }
 
-    &__card-wrapper {
-      display: flex;
+  &__card {
+    border-bottom-right-radius: units.spacing(1);
+    border-bottom-left-radius: units.spacing(1);
+    flex-direction: column;
+    display: flex;
 
-
-      .why__cards {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-gap: units.spacing(3.5);
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-
-        .why__placeholder {
-          scroll-snap-align: center;
-          background-color: #006A82;
-          padding: 0;
-          margin: 0;
-        }
-
-        .why__card {
-          position: relative;
-
-          .why__card-heading {
-            position: absolute;
-            padding: 0 25px 5px 25px;
-            top: 45px;
-            left: 10px;
-
-            &:first-of-type {
-              padding-right: 30px;
-              padding-left: 30px;
-            }
-
-            &:last-of-type {
-              padding-right: 25px;
-            }
-          }
-
-          .why__card-body {
-            position: absolute;
-            padding: 5px 30px 10px 30px;
-            top: 140px;
-            left: 10px;
-          }
-
-          .why__laptops {
-            position: absolute;
-            bottom: 20px;
-            left: 100px;
-          }
-
-          .why__gears {
-            position: absolute;
-            bottom: 15px;
-            left: 95px;
-          }
-
-          .why__prize {
-            position: absolute;
-            bottom: 20px;
-            left: 115px;
-          }
-
-          .why__projects {
-            position: absolute;
-            bottom: 85px;
-            left: 66px;
-          }
-
-          .why__memories {
-            position: absolute;
-            bottom: 20px;
-            left: 135px;
-          }
-        }
-      }
+    &-header {
+      padding-bottom: units.spacing(3);
+      padding-top: units.spacing(3);
     }
+
+    &-body {
+      padding: units.spacing(5.5) units.spacing(9) units.spacing(3);
+      box-sizing: border-box;
+      flex-direction: column;
+      align-items: center;
+      display: flex;
+      flex-grow: 1;
+    }
+
+    &-text {
+      margin-top: units.spacing(5);
+    }
+
+    &-asset {
+      padding-top: units.spacing(4);
+      height: units.spacing(31.5);
+      margin-top: auto;
+    }
+
+    &-action {
+      margin: auto;
+    }
+  }
+
+  &__card-wrapper {
+    grid-template-columns: units.spacing(10) auto units.spacing(10);
+    grid-gap: units.spacing(5);
+    display: grid;
+  }
+
+  &__cards-frame {
+    overflow-x: hidden;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(5, 32%);
+    grid-gap: 2%;
+
+    @include mixins.media(laptop) {
+      grid-template-columns: repeat(5, 49%);
+    }
+
+    @include mixins.media(tablet) {
+      grid-template-columns: repeat(5, 100%);
+    }
+  }
 
   &__arrow {
     color: colors.css-color('light-teal');
@@ -237,15 +243,6 @@ export default {
     cursor: pointer;
     margin: auto 0;
     border: none;
-    width: 65px;
-  }
-
-  &__arrow--left {
-    padding-right: 20px;
-  }
-
-  &__arrow--right {
-    padding-left: 20px;
   }
 }  
 </style>
