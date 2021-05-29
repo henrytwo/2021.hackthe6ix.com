@@ -22,7 +22,7 @@
           </li>
         </ul>
       </div>
-      <div class='footer__main-form'>
+      <form class='footer__main-form' v-on:submit.prevent="formTriggerSubmit">
         <Typography class='footer__main-form--header' type='heading3' as='h3' color='light-yellow' transform='uppercase'>
           More questions?
         </Typography>
@@ -31,6 +31,8 @@
           name='name'
           placeholder='Enter your name'
           :error="nameError"
+          :success="nameSuccess"
+          :disabled="this.submissionDisabled"
           label='Name'
           v-model='name'
           showLabel
@@ -41,9 +43,10 @@
           name='email'
           placeholder='Enter your email'
           :error="emailError"
+          :success="emailSuccess"
+          :disabled="this.submissionDisabled"
           label='Email'
           v-model='email'
-          success='owo wats dis?'
           showLabel
           required
         />
@@ -53,15 +56,17 @@
           name='question'
           placeholder='Send us your questions here!'
           :error="textError"
+          :success="textSuccess"
+          :disabled="this.submissionDisabled"
           label='Enter your question here'
           v-model='text'
           showLabel
           required
         />
         <div class='footer__main-form--footer'>
-          <Button :disabled="!this.text || !this.name || !this.email" @click="triggerContactMessage">Send</Button>
+          <Button :disabled="this.submissionDisabled">Send</Button>
         </div>
-      </div>
+      </form>
     </div>
     <div class='footer__meta'>
       <Typography class='footer__meta-copyright' type='paragraph'>
@@ -74,7 +79,7 @@
           </a>
         </Typography>
         <Typography type='paragraph' as='li'>
-          <a class='footer__meta-link' href='https://2020.hackthe6ix.com/privacy-policy.pdf' target='_blank' rel='noreferrer noopenner'>
+          <a class='footer__meta-link' href='http://cdn.hackthe6ix.com/privacy-policy.pdf' target='_blank' rel='noreferrer noopenner'>
             Privacy Policy
           </a>
         </Typography>
@@ -99,6 +104,7 @@ import Typography from '@/components/Typography';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import validator from 'email-validator';
 
 export default {
   name: 'Footer',
@@ -119,26 +125,73 @@ export default {
       text: '',
       nameError: undefined,
       emailError: undefined,
-      textError: undefined
+      textError: undefined,
+      nameSuccess: undefined,
+      emailSuccess: undefined,
+      textSuccess: undefined,
+      submissionDisabled: false
     };
   },
   methods: {
+    formTriggerSubmit() {
+      if (this.validateForm() && !this.submissionDisabled) {
+        this.triggerContactMessage();
+      }
+    },
     triggerContactMessage() {
-      contactMessage(this.name, this.email, this.text, (err, message) => {
+      if (this.validateForm()) {
+        contactMessage(this.name.trim(), this.email.trim(), this.text.trim(), (err, message) => {
 
-        console.log(err.response, message);
+          if (err) {
+            // Error
+            this.nameError = "";
+            this.emailError = "";
+            this.textError = err?.response?.data || "An error occurred - please try again later";
 
-        if (err) {
-          // Error
-          this.textError = err.response.data || "An error occurred - please try again later";
+          } else {
+            // Success
+            this.nameSuccess = "";
+            this.emailSuccess = "";
+            this.textSuccess = message.data || "Your message has been sent!";
 
-        } else {
-          // Success
+            this.submissionDisabled = true;
+          }
 
-        }
+        });
+      }
+    },
+    validateForm() {
+      let error = false;
 
-      });
+      error = this.validateEmail(this.email) || error;
+      error = this.validateName(this.name) || error;
+      error = this.validateText(this.text) || error;
+
+      return !error;
+    },
+    validateEmail(email) {
+      this.emailSuccess = undefined;
+      return this.emailError = validator.validate(email) ? undefined : "Please enter a valid email";
+    },
+    validateName(name) {
+      this.nameSuccess = undefined;
+      return this.nameError = name.trim().length > 0 ? undefined : "Please enter your name";
+    },
+    validateText(text) {
+      this.textSuccess = undefined;
+      return this.textError = text.trim().length > 0 ? undefined : "Please enter your message";
     }
+  },
+  watch: {
+    email(newVal) {
+      this.validateEmail(newVal);
+    },
+    name(newVal) {
+      this.validateName(newVal);
+    },
+    text(newVal) {
+      this.validateText(newVal);
+    },
   },
   computed: {
     socials() {

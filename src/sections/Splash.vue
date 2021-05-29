@@ -31,16 +31,7 @@
         <Typography type='paragraph' as='p'>
           Applications aren't open yet. Subscribe to know when it does!
         </Typography>
-        <div class='splash__input'>
-          <Input
-            placeholder='Enter your email'
-            label='Join our mailing list'
-            v-model='email'
-            name='email'
-            :error="emailError"
-          />
-          <Button class='splash__button' @click="triggerSubscribe" :disabled='!email'>Notify Me</Button>
-        </div>
+        <MailForm />
       </div>
       <ul class='splash__icons'>
         <li
@@ -84,13 +75,13 @@
 </static-query>
 
 <script>
-import {subscribe} from "../util/email_controller";
 import FacebookIcon from '@/assets/facebook.svg';
 import InstagramIcon from '@/assets/instagram.svg';
 import LinkedInIcon from '@/assets/linkedin.svg';
 import TwitterIcon from '@/assets/twitter.svg';
 import Table from '@/assets/table.svg';
 import Typography from '@/components/Typography';
+import MailForm from '@/components/MailForm';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -107,13 +98,12 @@ export default {
     Section,
     Button,
     Input,
+    MailForm,
   },
   data() {
     return {
       animateText: true,
-      textIndex: 0,
-      email: '',
-      emailError: undefined
+      textIndex: 0
     };
   },
   mounted() {
@@ -126,22 +116,6 @@ export default {
   methods: {
     scrollToAbout() {
       document.getElementById("about").scrollIntoView();
-    },
-    triggerSubscribe() {
-      subscribe(this.email, (err, message) => {
-
-        console.log(err.response, message)
-
-        if (err) {
-          // Error
-          this.emailError = err.response.data || "An error occurred - please try again later";
-
-        } else {
-          // Success
-
-        }
-
-      });
     }
   },
   computed: {
@@ -181,9 +155,6 @@ export default {
     }
   },
   watch: {
-    email(newVal) {
-      console.log(newVal);
-    },
     textIndex(newVal) {
       this.animateText = newVal !== 0;
       window.setTimeout(() => {
@@ -274,14 +245,6 @@ export default {
 
     &__form {
       margin-top: units.spacing(9.5);
-    }
-
-    &__input {
-      display: grid;
-      grid-template-columns: 55% max-content;
-      grid-gap: units.spacing(1.5);
-      margin: units.spacing(2) 0 units.spacing(4.5);
-      max-width: units.spacing(120);
     }
 
     &__icons {
