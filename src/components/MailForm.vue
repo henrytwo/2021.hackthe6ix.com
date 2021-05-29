@@ -10,8 +10,7 @@
         :disabled="emailDisabled"
         email
     />
-    <Button class='splash__button' @click="triggerSubscribe"
-            :disabled='emailInvalid || emailDisabled'>Notify Me
+    <Button class='splash__button' :disabled='this.emailInvalid || this.emailDisabled'>Notify Me
     </Button>
   </form>
 </template>
