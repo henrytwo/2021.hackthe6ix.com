@@ -42,6 +42,7 @@ export default {
 .mail {
   background: colors.css-color(darker-teal);
   padding-top: units.spacing(12);
+  text-align: center;
 
   & .content {
     flex-direction: column;
@@ -60,6 +61,8 @@ export default {
     margin-top: units.spacing(11);
     max-width: units.spacing(95);
     display: grid;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &__top {

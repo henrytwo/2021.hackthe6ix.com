@@ -46,7 +46,7 @@
 
           if (err) {
             // Error
-            this.emailError = err.response.data || "An error occurred - please try again later";
+            this.emailError = err?.response?.data || "An error occurred - please try again later";
             this.emailSuccess = undefined;
           } else {
             // Success
