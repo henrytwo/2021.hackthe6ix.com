@@ -3,18 +3,7 @@
     <Typography type='heading3' color='light-yellow' as='h2'>
       Interested? Get the latest updates in your inbox!
     </Typography>
-    <div class='mail__form'>
-      <Input
-        placeholder='Enter your email'
-        label='Subscribe to inbox'
-        v-model='email'
-        name='email'
-        :error="emailError"
-      />
-      <Button class='mail__button' :disabled='!email' @click="triggerSubscribe">
-        Notify Me
-      </Button>
-    </div>
+    <MailForm class="mail__form"/>
     <div class='mail__top'>
       <Button @click='toTop' leftIcon='arrow-up' type='ghost'>Back to Top</Button>
     </div>
@@ -22,40 +11,18 @@
 </template>
 
 <script>
-  import {subscribe} from "../util/email_controller";
 import Typography from '@/components/Typography';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import MailForm from '@/components/MailForm';
 
 export default {
   name: 'Mail',
-  data() {
-    return {
-      email: '',
-      emailError: undefined
-    };
-  },
   methods: {
     toTop() {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
-    },
-    triggerSubscribe() {
-      subscribe(this.email, (err, message) => {
-
-        console.log(err.response, message)
-
-        if (err) {
-          // Error
-          this.emailError = err.response.data || "An error occurred - please try again later";
-
-        } else {
-          // Success
-
-        }
-
-      });
     }
   },
   components: {
@@ -63,6 +30,7 @@ export default {
     Section,
     Button,
     Input,
+    MailForm
   },
 }
 </script>
@@ -81,6 +49,10 @@ export default {
     display: flex;
   }
 
+  &__button {
+    margin-bottom: auto;
+  }
+
   &__form {
     grid-template-columns: 5fr 3fr;
     grid-gap: units.spacing(1.5);
@@ -88,10 +60,6 @@ export default {
     margin-top: units.spacing(11);
     max-width: units.spacing(95);
     display: grid;
-  }
-
-  &__button {
-    margin-bottom: auto;
   }
 
   &__top {

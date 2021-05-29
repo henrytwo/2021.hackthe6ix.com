@@ -31,19 +31,7 @@
         <Typography type='paragraph' as='p'>
           Applications aren't open yet. Subscribe to know when it does!
         </Typography>
-        <form class='splash__input' v-on:submit.prevent="formTriggerSubmit">
-          <Input
-            placeholder='Enter your email'
-            label='Join our mailing list'
-            v-model='email'
-            name='email'
-            :error="emailError"
-            :success="emailSuccess"
-            :disabled="emailDisabled"
-            email
-          />
-          <Button class='splash__button' @click="triggerSubscribe" :disabled='emailInvalid || emailDisabled'>Notify Me</Button>
-        </form>
+        <MailForm />
       </div>
       <ul class='splash__icons'>
         <li
@@ -87,17 +75,16 @@
 </static-query>
 
 <script>
-import {subscribe} from "../util/email_controller";
 import FacebookIcon from '@/assets/facebook.svg';
 import InstagramIcon from '@/assets/instagram.svg';
 import LinkedInIcon from '@/assets/linkedin.svg';
 import TwitterIcon from '@/assets/twitter.svg';
 import Table from '@/assets/table.svg';
 import Typography from '@/components/Typography';
+import MailForm from '@/components/MailForm';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
-import validator from 'email-validator';
 
 export default {
   name: 'Splash',
@@ -111,16 +98,12 @@ export default {
     Section,
     Button,
     Input,
+    MailForm,
   },
   data() {
     return {
       animateText: true,
-      textIndex: 0,
-      email: '',
-      emailError: undefined,
-      emailSuccess: undefined,
-      emailDisabled: false,
-      emailInvalid: true
+      textIndex: 0
     };
   },
   mounted() {
@@ -131,30 +114,8 @@ export default {
     }, 2000);
   },
   methods: {
-    formTriggerSubmit() {
-        if (!this.emailInvalid && !this.emailDisabled) {
-          this.triggerSubscribe();
-        }
-    },
     scrollToAbout() {
       document.getElementById("about").scrollIntoView();
-    },
-    triggerSubscribe() {
-      subscribe(this.email, (err, message) => {
-
-        console.log(err, message);
-
-        if (err) {
-          // Error
-          this.emailError = err.response.data || "An error occurred - please try again later";
-          this.emailSuccess = undefined;
-        } else {
-          // Success
-          this.emailSuccess = message.data || "You have successfully subscribed!";
-          this.emailError = undefined;
-          this.emailDisabled = true;
-        }
-      });
     }
   },
   computed: {
@@ -194,12 +155,6 @@ export default {
     }
   },
   watch: {
-    email(newVal) {
-      this.emailError = undefined;
-      this.emailSuccess = undefined;
-
-      this.emailInvalid = !validator.validate(newVal);
-    },
     textIndex(newVal) {
       this.animateText = newVal !== 0;
       window.setTimeout(() => {
@@ -290,14 +245,6 @@ export default {
 
     &__form {
       margin-top: units.spacing(9.5);
-    }
-
-    &__input {
-      display: grid;
-      grid-template-columns: 55% max-content;
-      grid-gap: units.spacing(1.5);
-      margin: units.spacing(2) 0 units.spacing(4.5);
-      max-width: units.spacing(120);
     }
 
     &__icons {
