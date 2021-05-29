@@ -140,6 +140,8 @@ export default {
     },
     triggerContactMessage() {
       if (this.validateForm()) {
+        this.submissionDisabled = true;
+
         contactMessage(this.name.trim(), this.email.trim(), this.text.trim(), (err, message) => {
 
           if (err) {
@@ -148,6 +150,7 @@ export default {
             this.emailError = "";
             this.textError = err?.response?.data || "An error occurred - please try again later";
 
+            this.submissionDisabled = false;
           } else {
             // Success
             this.nameSuccess = "";

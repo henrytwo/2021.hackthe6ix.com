@@ -38,11 +38,14 @@
         }
       },
       triggerSubscribe() {
+        this.emailDisabled = true;
+
         subscribe(this.email, (err, message) => {
           if (err) {
             // Error
             this.emailError = err?.response?.data || "An error occurred - please try again later";
             this.emailSuccess = undefined;
+            this.emailDisabled = false;
           } else {
             // Success
             this.emailSuccess = message.data || "You have successfully subscribed!";
