@@ -1,6 +1,6 @@
 <template>
   <component
-    :style='`--offset: ${offset * 0.25}rem`'
+    :style='offset !== undefined ? `--offset: ${offset * 0.25}rem` : undefined'
     :class='[
       boxed && `card--${vertical}-${horizontal}`,
       color && `card--${color}`,

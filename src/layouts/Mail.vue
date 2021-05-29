@@ -10,7 +10,7 @@
         v-model='email'
         name='email'
       />
-      <Button>
+      <Button class='mail__button'>
         Notify Me
       </Button>
     </form>
@@ -69,6 +69,10 @@ export default {
     margin-top: units.spacing(11);
     max-width: units.spacing(95);
     display: grid;
+  }
+
+  &__button {
+    margin-bottom: auto;
   }
 
   &__top {

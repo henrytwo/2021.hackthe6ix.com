@@ -1,16 +1,153 @@
 <template>
-  <Section id='faq' as='section'>
-    owo
+  <Section id='faq' class='faq' as='section'>
+      <Typography class='faq__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
+        Frequently Asked Questions
+        <Bubble class='faq__bubble'/>
+      </Typography>
+    <ul class='faq__items'>
+      <li class='faq__item' v-for='(question, index) in questions' :key='index'>
+        <button class='faq__item-header'>
+          <Typography type='heading3' as='h3'>
+            {{ question.label }}
+          </Typography>
+        </button>
+        <Typography class='faq__item-body' type='paragraph' v-html='question.body' as='div'/>
+      </li>
+    </ul>
   </Section>
 </template>
 
 <script>
+import Typography from '@/components/Typography';
 import Section from '@/components/Section';
+import Bubble from '@/assets/question-bubble.svg';
+import marked from 'marked';
 
 export default {
   name: 'Faq',
   components: {
+    Typography,
     Section,
+    Bubble,
+  },
+  computed: {
+    questions() {
+      return [
+        {
+          label: 'What is Hack the 6ix?',
+          body: marked(`Hack the 6ix held on August 20-22, 2021 is a live event
+          where “hackers” (participants) design, develop, and pitch a software
+          or hardware project built from scratch over the course of 36 hours.
+          We will provide you with the resources and mentorship needed in
+          order to make this happen!`),
+        },
+        {
+          label: 'Will this hackathon happen in person or virtually?',
+          body: marked(`Hack the 6ix will be hosting their second virtual
+          hackathon this year! All events will be held and accessed on online
+          communication platforms, so you can hack from the comfort of your
+          home, no matter where you are!`),
+        },
+        {
+          label: 'When do hacker applications open?',
+          body: marked(`Hack the 6ix applications for the 2021 year are going
+          to be opening soon. Subscribe here if you’d like us to notify
+          you when applications are out!`),
+        },
+        {
+          label: 'Am I eligible to participate?',
+          body: marked(`Any post-secondary students or recent graduates are
+          eligible to participate in our event, regardless of school,
+          country, or time zone.`),
+        },
+        {
+          label: 'Do I need to know how to code?',
+          body: marked(`Nope! Our mentors and workshops make sure that even if
+          you’re new to coding, you’ll definitely pick up enough skills at the
+          event to make a project. In addition, if you’re a designer or business
+          student, your design and pitching skills are also very valuable!`),
+        },
+        {
+          label: 'What do I need?',
+          body: marked(`Make sure you have a device you can develop your project
+          on, access to internet, and video/audio capabilities for chatting
+          with your teammates, mentors, and sponsors!`),
+        },
+        {
+          label: 'What if I don’t have a team or idea?',
+          body: marked(`Don’t worry, you will have a chance to form or join a 
+          eam of up to 4 people before or during the hackathon. We’re going
+          virtual this year so you can team up with hackers regardless of their
+          school, country, or timezone.
+          
+For ideas, check out our submissions from last year here!`),
+        },
+        {
+          label: 'What kind of workshops, talks, and activities will there be?',
+          body: marked(`We’ll be hosting a variety of workshops ranging from
+          introductory to advanced topics facilitated by our amazing sponsors
+          and mentors. In addition, there will also be interesting tech talks
+          by industry leaders from different companies. For breaks, we’ll have
+          a ton of fun activities planned for you, such as games, contests, and
+          more! Hack the 6ix is much more than just a hackathon – we want it to
+          be an event that you’ll thoroughly enjoy while expanding your
+          skillset and network.`),
+        },
+        {
+          label: 'How much does it cost to attend?',
+          body: marked(`Absolutely nothing! Hack the 6ix is a completely free
+          event run by a non-profit organization. All resources and support
+          for hacking for the entire event will be provided free of charge.`),
+        },
+      ];
+    },
   },
 };
 </script>
+
+<style lang="scss">
+@use '@/styles/mixins';
+@use '@/styles/units';
+
+.faq {
+  margin-top: units.spacing(44);
+  padding-top: units.spacing(30);
+
+  &__items {
+    grid-gap: units.spacing(15) units.spacing(10);
+    margin: units.spacing(16.5) 0 0;
+    grid-template-columns: 1fr 1fr;
+    list-style-type: none;
+    display: grid;
+    padding: 0;
+
+    @include mixins.media(tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__heading {
+    margin-bottom: units.spacing(18);
+    display: flex;
+    align-items: center;
+  }
+
+  &__bubble {
+    margin-bottom: units.spacing(-2);
+    margin-left: units.spacing(4);
+  }
+
+  &__item {
+    &-header {
+      text-align: start;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    &-body {
+
+    }
+  }
+}
+</style>

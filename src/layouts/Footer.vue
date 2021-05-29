@@ -41,6 +41,7 @@
           placeholder='Enter your email'
           label='Email'
           v-model='email'
+          success='owo wats dis?'
           showLabel
           required
         />
