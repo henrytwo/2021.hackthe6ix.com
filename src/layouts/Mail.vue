@@ -3,17 +3,18 @@
     <Typography type='heading3' color='light-yellow' as='h2'>
       Interested? Get the latest updates in your inbox!
     </Typography>
-    <form class='mail__form'>
+    <div class='mail__form'>
       <Input
         placeholder='Enter your email'
         label='Subscribe to inbox'
         v-model='email'
         name='email'
+        :error="emailError"
       />
-      <Button class='mail__button'>
+      <Button class='mail__button' :disabled='!email' @click="triggerSubscribe">
         Notify Me
       </Button>
-    </form>
+    </div>
     <div class='mail__top'>
       <Button @click='toTop' leftIcon='arrow-up' type='ghost'>Back to Top</Button>
     </div>
@@ -21,6 +22,7 @@
 </template>
 
 <script>
+  import {subscribe} from "../util/email_controller";
 import Typography from '@/components/Typography';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
@@ -31,6 +33,7 @@ export default {
   data() {
     return {
       email: '',
+      emailError: undefined
     };
   },
   methods: {
@@ -38,6 +41,22 @@ export default {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     },
+    triggerSubscribe() {
+      subscribe(this.email, (err, message) => {
+
+        console.log(err.response, message)
+
+        if (err) {
+          // Error
+          this.emailError = err.response.data || "An error occurred - please try again later";
+
+        } else {
+          // Success
+
+        }
+
+      });
+    }
   },
   components: {
     Typography,

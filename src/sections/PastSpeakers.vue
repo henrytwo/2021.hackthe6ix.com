@@ -1,4 +1,4 @@
-PastSponsors.vue<template>
+<template>
   <Section class='past-speakers' id='past-speakers' as='section'>
     <div class="past-speakers__content">
       <Typography class='past-speakers__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
@@ -13,7 +13,7 @@ PastSponsors.vue<template>
           <Typography type='heading3' color='black' as='h3'>
             Jonathan Javier
           </Typography>
-          <Typography type='heading4' color='black' as='h4'>
+          <Typography type='heading4' color='dark-navy' as='h4'>
             CEO/Founder @Wonsulting
           </Typography>
         </div>
@@ -23,15 +23,15 @@ PastSponsors.vue<template>
               <Typography type='heading3' color='black' as='h3'>
                 Jonathan Javier
               </Typography>
-              <Typography type='heading4' color='black' as='h4'>
+              <Typography type='heading4' color='dark-navy' as='h4'>
                 CEO/Founder @Wonsulting
               </Typography>
             </div>
             <Typography type='paragraph' color='black' as='p'>
-              Jonathan’s mission at Wonsulting is to “turn underdogs into winners”. 
-              He's also worked in the Strategy and 
+              Jonathan’s mission at Wonsulting is to “turn underdogs into winners”.
+              He's also worked in the Strategy and
               Operations team at Snap, Google, and Cisco coming from a non-target
-              school/non-traditional background. 
+              school/non-traditional background.
               He works on many initiatives,
               providing advice and words of
               wisdom on LinkedIn and through
@@ -54,7 +54,7 @@ PastSponsors.vue<template>
           <Typography type='heading3' color='black' as='h3'>
             Cathy Tie
           </Typography>
-          <Typography type='heading4' color='black' as='h4'>
+          <Typography type='heading4' color='dark-navy' as='h4'>
             Serial Entreprenuer & VC
           </Typography>
         </div>
@@ -64,7 +64,7 @@ PastSponsors.vue<template>
               <Typography type='heading3' color='black' as='h3'>
                 Cathy Tie
               </Typography>
-              <Typography type='heading4' color='black' as='h4'>
+              <Typography type='heading4' color='dark-navy' as='h4'>
                 Serial Entreprenuer & VC
               </Typography>
             </div>
@@ -91,7 +91,7 @@ PastSponsors.vue<template>
           <Typography type='heading3' color='black' as='h3'>
             Pei Li
           </Typography>
-          <Typography type='heading4' color='black' as='h4'>
+          <Typography type='heading4' color='dark-navy' as='h4'>
             Founder @Hack the 6ix
           </Typography>
         </div>
@@ -101,7 +101,7 @@ PastSponsors.vue<template>
               <Typography type='heading3' color='black' as='h3'>
                 Pei Li
               </Typography>
-              <Typography type='heading4' color='black' as='h4'>
+              <Typography type='heading4' color='dark-navy' as='h4'>
                 Founder @Hack the 6ix
               </Typography>
             </div>
@@ -143,6 +143,7 @@ export default {
 </script>
 
 <style lang="scss">
+  @use '@/styles/mixins';
   @use '@/styles/units';
   @use '@/styles/colors';
 
@@ -177,8 +178,12 @@ export default {
       position: relative;
 
       &:not(:first-of-type) {
-          margin-left: units.spacing(12.5);
+        margin-left: units.spacing(12.5);
+
+        @include mixins.media(tablet) {
+          margin-left: units.spacing(0);
         }
+      }
     }
 
     &__placeholder {
@@ -192,17 +197,17 @@ export default {
       bottom: 108px;
       left: 40px;
     }
-    
+
     &__placeholder--Jonathan {
       background-image: url("../assets/past-speakers/Jonathan-Javier.png");
       background-repeat: no-repeat;
     }
-    
+
     &__placeholder--Cathy {
       background-image: url("../assets/past-speakers/Cathy-Tie.png");
       background-repeat: no-repeat;
     }
-    
+
     &__placeholder--Pei {
       background-image: url("../assets/past-speakers/Pei-Li.png");
       background-repeat: no-repeat;

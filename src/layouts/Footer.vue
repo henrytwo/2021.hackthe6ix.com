@@ -22,7 +22,7 @@
           </li>
         </ul>
       </div>
-      <form class='footer__main-form'>
+      <div class='footer__main-form'>
         <Typography class='footer__main-form--header' type='heading3' as='h3' color='light-yellow' transform='uppercase'>
           More questions?
         </Typography>
@@ -30,15 +30,17 @@
           class='footer__main-form--name'
           name='name'
           placeholder='Enter your name'
-          error='NANI???'
+          :error="nameError"
           label='Name'
           v-model='name'
           showLabel
+          required
         />
         <Input
           class='footer__main-form--email'
           name='email'
           placeholder='Enter your email'
+          :error="emailError"
           label='Email'
           v-model='email'
           success='owo wats dis?'
@@ -50,13 +52,16 @@
           class='footer__main-form--question'
           name='question'
           placeholder='Send us your questions here!'
+          :error="textError"
           label='Enter your question here'
           v-model='text'
+          showLabel
+          required
         />
         <div class='footer__main-form--footer'>
-          <Button>Send</Button>
+          <Button :disabled="!this.text || !this.name || !this.email" @click="triggerContactMessage">Send</Button>
         </div>
-      </form>
+      </div>
     </div>
     <div class='footer__meta'>
       <Typography class='footer__meta-copyright' type='paragraph'>
@@ -84,6 +89,7 @@
 </template>
 
 <script>
+import {contactMessage} from "../util/email_controller";
 import FacebookIcon from '@/assets/facebook.svg';
 import InstagramIcon from '@/assets/instagram.svg';
 import LinkedInIcon from '@/assets/linkedin.svg';
@@ -111,7 +117,28 @@ export default {
       name: '',
       email: '',
       text: '',
+      nameError: undefined,
+      emailError: undefined,
+      textError: undefined
     };
+  },
+  methods: {
+    triggerContactMessage() {
+      contactMessage(this.name, this.email, this.text, (err, message) => {
+
+        console.log(err.response, message);
+
+        if (err) {
+          // Error
+          this.textError = err.response.data || "An error occurred - please try again later";
+
+        } else {
+          // Success
+
+        }
+
+      });
+    }
   },
   computed: {
     socials() {
