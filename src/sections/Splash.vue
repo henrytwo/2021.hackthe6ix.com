@@ -27,7 +27,7 @@
           </Typography>
         </span>
       </Typography>
-      <form class='splash__form'>
+      <div class='splash__form'>
         <Typography type='paragraph' as='p'>
           Applications aren't open yet. Subscribe to know when it does!
         </Typography>
@@ -37,10 +37,11 @@
             label='Join our mailing list'
             v-model='email'
             name='email'
+            :error="emailError"
           />
-          <Button :disabled='!!email'>Notify Me</Button>
+          <Button :disabled='!email' @click="triggerSubscribe">Notify Me</Button>
         </div>
-      </form>
+      </div>
       <ul class='splash__icons'>
         <li
           v-for='(icon, index) in icons'
@@ -80,6 +81,7 @@
 </static-query>
 
 <script>
+import {subscribe} from "../util/email_controller";
 import FacebookIcon from '@/assets/facebook.svg';
 import InstagramIcon from '@/assets/instagram.svg';
 import LinkedInIcon from '@/assets/linkedin.svg';
@@ -106,6 +108,7 @@ export default {
       animateText: true,
       textIndex: 0,
       email: '',
+      emailError: undefined
     };
   },
   mounted() {
@@ -119,6 +122,22 @@ export default {
     scrollToAbout() {
       document.getElementById("about").scrollIntoView();
     },
+    triggerSubscribe() {
+      subscribe(this.email, (err, message) => {
+
+        console.log(err.response, message)
+
+        if (err) {
+          // Error
+          this.emailError = err.response.data || "An error occurred - please try again later";
+
+        } else {
+          // Success
+
+        }
+
+      });
+    }
   },
   computed: {
     text() {
@@ -210,7 +229,7 @@ export default {
         height: 1px;
       }
     }
-  
+
     &__image {
       width: 100%;
       @include mixins.media(laptop) {
