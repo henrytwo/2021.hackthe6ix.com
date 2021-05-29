@@ -8,9 +8,9 @@
         :error="emailError"
         :success="emailSuccess"
         :disabled="emailDisabled"
-        email
+        required
     />
-    <Button class='splash__button' :disabled='this.emailInvalid || this.emailDisabled'>Notify Me
+    <Button class='splash__button' :disabled='this.emailDisabled'>Notify Me
     </Button>
   </form>
 </template>
@@ -28,8 +28,7 @@
         email: '',
         emailError: undefined,
         emailSuccess: undefined,
-        emailDisabled: false,
-        emailInvalid: true
+        emailDisabled: false
       };
     },
     methods: {
