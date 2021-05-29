@@ -1,4 +1,4 @@
-merge andPastSponsors.vue<template>
+<template>
   <Section id='past-speakers' as='section'>
     <div class="past-speakers__content">
       <Typography class='past-speakers__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
