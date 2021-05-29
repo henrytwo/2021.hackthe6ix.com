@@ -2,11 +2,8 @@
 // The Client API can be used here. Learn more: gridsome.org/docs/client-api
 
 import DefaultLayout from '~/layouts/Default';
-import smoothscroll from 'smoothscroll-polyfill';
 import './icons';
 import VueGTag from 'vue-gtag';
-
-smoothscroll.polyfill();
 
 export default function (Vue, { head }) {
   // Set default layout as a global component
