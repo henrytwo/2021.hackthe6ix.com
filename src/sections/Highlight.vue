@@ -47,6 +47,7 @@
                   />
                   <div class='highlight__card'>
                     <div class='highlight__card-body'>
+                      <component class='highlight__card-asset' v-if='data.asset' :is='data.asset' />
                       <img class='highlight__card-image' :src='data.image'/>
                       <StartQuote class='highlight__quotation--start' />
                       <Typography
@@ -105,6 +106,8 @@ import marked from 'marked';
 import Remo from '@/assets/highlight/remo/remo-logo.svg';
 import StartQuote from '@/assets/quotation-start.svg';
 import EndQuote from '@/assets/quotation-end.svg';
+import RBC from '@/assets/highlight/RBC/rbc-logo.svg';
+import CapitalOne from '@/assets/highlight/capital-one/capital-one-logo.svg';
 
 export default {
   name: 'Highlight',
@@ -119,7 +122,9 @@ export default {
     RightArrow,
     Remo,
     StartQuote,
-    EndQuote
+    EndQuote,
+    RBC,
+    CapitalOne,
   },
   data() {
     return {
@@ -154,7 +159,7 @@ export default {
     sponsors() {
       return [
         {
-          image:'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          image:'https://images.ctfassets.net/k39srzl7t1l0/4ljhortezD4srVjwgj8bmE/4f21ac743d37aa80c05a90a39333a5cd/1f2cafdce7418699587e3467d045c455.png',
           content: marked(`At Microsoft, our mission is to empower every person and every
           organization on the planet to achieve more. With Microsoft Azure you can build, deploy,
           and manage applications with a comprehensive set of cloud services designed for you.
@@ -165,17 +170,19 @@ export default {
           link: `Microsoft's career page!`
         },
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          asset: 'RBC',
           content: marked(`We know that the transition from student to professional can be a
           challenge. At RBC, we provide you with the tools, support and flexibility to transform
           from a student into a future leader. Turn exciting possibilities into a reality for our
           clients, our communities and you. With access to leading technologies, we are always
           looking for diverse talent ranging from areas in data and analytics, application
           development, cybersecurity, cloud engineers, tech architects and more. If you’re interested
-          in learning more about co-op internship opportunities and programs at RBC, **check out RBC's career page!**`),
+          in learning more about co-op internship opportunities and programs at RBC,`),
+          page: `Check out `,
+          link: `RBC's career page!`
         },
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          image: 'https://images.ctfassets.net/k39srzl7t1l0/57TfWtaxbIzGpM6V4K7IEh/ea919a688fef82fb518bf01b6439443f/Sponsor_Autocode.svg',
           content: marked(`Autocode allows you to build webhooks, scripts and APIs instantly. It's
           an online code editor with API autocomplete, instant hosting, and a Standard Library anybody
           can contribute to. Sync data, build bots and customize workflows. When AWS is overkill,
@@ -184,7 +191,7 @@ export default {
           link: `Autocode's career page!`
         },
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          asset: 'CapitalOne',
           content: marked(`Still founder-led by Chairman and Chief Executive Officer Richard Fairbank,
           Capital One is on a mission to help our customers succeed by bringing ingenuity, simplicity,
           and humanity to banking. We measure our efforts by the success our customers enjoy and the
@@ -192,10 +199,12 @@ export default {
           we thrive in an environment where collaboration and openness are valued. We believe that
           innovation is powered by perspective and that teamwork and respect for each other lead to superior
           results. We elevate each other and obsess about doing the right thing. Together, we are on a quest
-          to change banking for good. To learn more, **check out Capital One’s career page!**`),
+          to change banking for good. To learn more,`),
+          page: `Check out `,
+          link: `Capital One's career page!`
         },
         {
-          image: 'https://i.pinimg.com/originals/11/0e/7c/110e7c1e1c8c8953e787b56fdff866ed.gif',
+          image: 'https://images.ctfassets.net/k39srzl7t1l0/3gxfhfumgQR1yn4GipWzm1/684d8f822614a81dba60a7e990affb64/remo_logo.png',
           content: marked(`Remo Conference is a live online events platform that allows people to host
           virtual conferences and online events with the main aim of building authentic conversations
           that drive meaningful relationships!  With the help of different tables, floors & buildings,
@@ -323,8 +332,14 @@ export default {
   }
 
   &__card-image {
-    width: 20%;
+    width: 70%;
     padding: units.spacing(4) 0;
+  }
+
+  &__card-asset {
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   &__card-body {
