@@ -7,28 +7,72 @@
       </Typography>
     </div>
     <div class="past-speakers__speakers">
-      <div class="past-speakers__card">
-        <Placeholder class='past-speakers__placeholder past-speakers__placeholder--Jonathan' width='365px' height='640px' color='light-teal'/>
-        <div class="past-speakers__label">
-          <Typography type='heading3' color='black' as='h3'>
-            Jonathan Javier
-          </Typography>
-          <Typography type='heading4' color='dark-navy' as='h4'>
-            CEO/Founder @Wonsulting
-          </Typography>
+      <Card
+        class="past-speakers__speaker"
+        v-for='(speaker, index) in speakers' 
+        :key='index'
+        :placement='cardPlacement'
+        backdropColor='teal'
+        offset='1.5'
+        color='light-teal'
+      >
+        <img class='past-speakers__image' :src='speaker.image'/>
+        <div class='past-speakers__overlay'>
+          <div class="past-speakers__label">
+          <Typography 
+            v-html='speaker.name'
+            type='heading3' 
+            color='black' 
+            as='h3'
+          />
+          <Typography
+            class='past-speakers__label--who'
+            v-html='speaker.who'
+            type='heading4'
+            color='dark-navy'
+            as='h4'
+          />
+          <Typography
+            v-html='speaker.content'
+            type='paragraph'
+            color='black'
+            as='p'
+          />
+          </div>
         </div>
-        <div class="past-speakers__overlay">
-          <div class='past-speakers__text'>
-            <div class="past-speakers__text--label">
-              <Typography type='heading3' color='black' as='h3'>
-                Jonathan Javier
-              </Typography>
-              <Typography type='heading4' color='dark-navy' as='h4'>
-                CEO/Founder @Wonsulting
-              </Typography>
-            </div>
-            <Typography type='paragraph' color='black' as='p'>
-              Jonathan’s mission at Wonsulting is to “turn underdogs into winners”.
+      </Card>
+    </div>
+  </Section>
+</template>
+
+<script>
+import marked from 'marked';
+import Section from '@/components/Section';
+import Typography from '@/components/Typography';
+import Placeholder from '@/components/Placeholder';
+import Card, { placements } from '@/components/Card';
+import Bubble from '@/assets/past-speakers/megaphone-bubble.svg';
+
+export default {
+  name: 'PastSpeakers',
+  components: {
+    Section,
+    Typography,
+    Placeholder,
+    Bubble,
+    Card
+  },
+  computed: {
+    cardPlacement() {
+      return placements.TOP_LEFT;
+    },
+    speakers () {
+      return [
+        {
+          image: require('@/assets/past-speakers/Jonathan-Javier.png'),
+          name: 'Jonathan Javier',
+          who: 'CEO/Founder @ Wonsulting',
+          content: `Jonathan’s mission at Wonsulting is to “turn underdogs into winners”.
               He's also worked in the Strategy and
               Operations team at Snap, Google, and Cisco coming from a non-target
               school/non-traditional background.
@@ -43,33 +87,13 @@
               Offsite, Great Place To Work, Talks at Google,
               TEDx, and more. He's amassed 52,000+ followers
               on LinkedIn as well as 15+ million
-              views yearly on his content.
-            </Typography>
-          </div>
-        </div>
-      </div>
-      <div class="past-speakers__card">
-        <Placeholder class='past-speakers__placeholder past-speakers__placeholder--Cathy' width='365px' height='640px' color='light-teal'/>
-        <div class="past-speakers__label">
-          <Typography type='heading3' color='black' as='h3'>
-            Cathy Tie
-          </Typography>
-          <Typography type='heading4' color='dark-navy' as='h4'>
-            Serial Entreprenuer & VC
-          </Typography>
-        </div>
-        <div class="past-speakers__overlay">
-          <div class='past-speakers__text'>
-            <div class="past-speakers__text--label">
-              <Typography type='heading3' color='black' as='h3'>
-                Cathy Tie
-              </Typography>
-              <Typography type='heading4' color='dark-navy' as='h4'>
-                Serial Entreprenuer & VC
-              </Typography>
-            </div>
-            <Typography type='paragraph' color='black' as='p'>
-              Cathy is a serial entrepreneur and VC working on a
+              views yearly on his content.`
+        },
+        {
+          image: require('@/assets/past-speakers/Cathy-Tie.png'),
+          name: 'Cathy Tie',
+          who: 'CEO/Founder @ Wonsulting',
+          content: `Cathy is a serial entrepreneur and VC working on a
               new stealth company. She was most recently a Partner at
               Cervin Ventures, a $200M technology investment fund based in
               San Francisco. Prior to Cervin Ventures, Cathy was the CEO
@@ -80,33 +104,13 @@
               the age of 18, and was the youngest person to raise venture capital
               in biotechnology. Cathy was also named a Thiel Fellow in
               2015 and a recipient of the Forbes 30 Under 30
-              list award in 2018.
-            </Typography>
-          </div>
-        </div>
-      </div>
-      <div class="past-speakers__card">
-        <Placeholder class='past-speakers__placeholder past-speakers__placeholder--Pei' width='365px' height='640px' color='light-teal'/>
-        <div class="past-speakers__label">
-          <Typography type='heading3' color='black' as='h3'>
-            Pei Li
-          </Typography>
-          <Typography type='heading4' color='dark-navy' as='h4'>
-            Founder @Hack the 6ix
-          </Typography>
-        </div>
-        <div class="past-speakers__overlay">
-          <div class='past-speakers__text'>
-            <div class="past-speakers__text--label">
-              <Typography type='heading3' color='black' as='h3'>
-                Pei Li
-              </Typography>
-              <Typography type='heading4' color='dark-navy' as='h4'>
-                Founder @Hack the 6ix
-              </Typography>
-            </div>
-            <Typography type='paragraph' color='black' as='p'>
-              Pei founded Hack The 6ix during his time in the EngSci
+              list award in 2018.`
+        },
+        {
+          image: require('@/assets/past-speakers/Pei-Li.png'),
+          name: 'Pei Li',
+          who: 'Founder @ Hack The 6ix',
+          content: `Pei founded Hack The 6ix during his time in the EngSci
               program at  University of Toronto. He dropped out in 2016
               to join Wealthsimple in its early stages and to pursue
               entrepreneurship. In 2017, Pei founded Beatcamp, a music
@@ -116,28 +120,10 @@
               Pei is now working on Venue, an all-in-one live online events
               streaming platform. They are working closely with early customers
               such as TechTO to deliver a unique and engaging
-              experience to event attendees.
-            </Typography>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Section>
-</template>
-
-<script>
-import Section from '@/components/Section';
-import Typography from '@/components/Typography';
-import Placeholder from '@/components/Placeholder';
-import Bubble from '@/assets/past-speakers/megaphone-bubble.svg';
-
-export default {
-  name: 'PastSpeakers',
-  components: {
-    Section,
-    Typography,
-    Placeholder,
-    Bubble
+              experience to event attendees.`
+        }
+      ];
+    }
   },
 };
 </script>
@@ -174,71 +160,73 @@ export default {
       justify-content: center;
     }
 
-    &__card {
+    &__speaker {
       position: relative;
-
+      margin-bottom: units.spacing(8);
+      padding-bottom: units.spacing(35);
+      overflow-y: hidden;
+      box-shadow: units.spacing(-2) units.spacing(-2) colors.css-color('teal');
+      
       &:not(:first-of-type) {
         margin-left: units.spacing(12.5);
 
+        @include mixins.media(laptop) {
+          margin-left: units.spacing(6);
+        }
+
         @include mixins.media(tablet) {
-          margin-left: units.spacing(0);
+          margin-left: 0;
+        }
+      }
+
+      &:hover {
+        ~ .past-speakers__overlay {
+          transform: translate3d(0, 0, 0);
         }
       }
     }
 
-    &__placeholder {
-      box-shadow: -8px -8px #23B5AF;
-      margin-bottom: units.spacing(12.5);
+    &__image {
+      &:hover {
+        ~ .past-speakers__overlay {
+          transform: translate3d(0, 0, 0);
+        }
+      }
     }
-
 
     &__label {
-      position: absolute;
-      bottom: 108px;
-      left: 40px;
+      padding: units.spacing(8) units.spacing(8) units.spacing(8) units.spacing(8);
+      margin: 0;
+      display: block;
+
+      @include mixins.media(phone) {
+        padding-top: units.spacing(6);
+      }
     }
 
-    &__placeholder--Jonathan {
-      background-image: url("../assets/past-speakers/Jonathan-Javier.png");
-      background-repeat: no-repeat;
-    }
+    &__label--who {
+      padding-bottom: units.spacing(8);
 
-    &__placeholder--Cathy {
-      background-image: url("../assets/past-speakers/Cathy-Tie.png");
-      background-repeat: no-repeat;
-    }
-
-    &__placeholder--Pei {
-      background-image: url("../assets/past-speakers/Pei-Li.png");
-      background-repeat: no-repeat;
+      @include mixins.media(tablet) {
+        padding-bottom: units.spacing(12);
+      }
     }
 
     &__overlay {
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      height: 100%;
       position: absolute;
-      bottom: 55px;
-      left: 0;
-      right: 0;
-      background-color: colors.css-color('light-teal');
-      overflow: hidden;
       width: 100%;
-      height: 0;
-      transition: .5s ease;
-    }
+      top: 0;
+      background-color: colors.css-color('light-teal');
+      transition: transform 300ms;
+      transform: translate3d(0, 79%, 0);
 
-    &__card:hover &__overlay {
-      height: 640px;
-    }
-
-    &__text--label {
-      margin-bottom: 30px;
-    }
-
-    &__text {
-      position: absolute;
-      top: 50%;
-      left: 40%;
-      transform: translate(-38%, -50%);
-      width: 85%;
+      @include mixins.media(phone) {
+        transform: translate3d(0, 83%, 0);
+      }
     }
   }
 
