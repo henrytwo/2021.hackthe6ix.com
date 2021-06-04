@@ -16,6 +16,7 @@
         offset='1.5'
         color='light-teal'
       >
+        <div class='past-speakers__body'></div>
         <img class='past-speakers__image' :src='speaker.image'/>
         <div class='past-speakers__overlay'>
           <div class="past-speakers__label">
@@ -46,7 +47,6 @@
 </template>
 
 <script>
-import marked from 'marked';
 import Section from '@/components/Section';
 import Typography from '@/components/Typography';
 import Placeholder from '@/components/Placeholder';
@@ -178,15 +178,16 @@ export default {
           margin-left: 0;
         }
       }
-
-      &:hover {
-        ~ .past-speakers__overlay {
-          transform: translate3d(0, 0, 0);
-        }
-      }
     }
 
-    &__image {
+    &__body {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      
       &:hover {
         ~ .past-speakers__overlay {
           transform: translate3d(0, 0, 0);
