@@ -5,7 +5,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Hack The 6ix',
+  siteName: 'Hack the 6ix',
   siteDescription: 'Hack the 6ix is the largest summer student run, not for profit hackathon located in the heart of Toronto.',
   chainWebpack: config => {
     const svgRule = config.module.rule('svg');
