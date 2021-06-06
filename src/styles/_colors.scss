@@ -1,57 +1,57 @@
-
 $colors: (
-//[color-alias]: (
-//  value: {hex} - color value,
-//  static: {bool} - Optional. Skip interactive colors generation
-//),
-  'navy': (
-    value: #1696B3,
-  ),
+  //[color-alias]: (
+  //  value: {hex} - color value,
+  //  static: {bool} - Optional. Skip interactive colors generation
+  //),
+  'navy':
+    (
+      value: #1696b3,
+    ),
   'teal': (
-    value: #23B5AF,
+    value: #23b5af,
   ),
   'sky-blue': (
-    value: #6ED9E3,
+    value: #6ed9e3,
   ),
   'yellow': (
-    value: #F8B655,
+    value: #f8b655,
   ),
   'purple': (
-    value: #A09DF1,
+    value: #a09df1,
   ),
   'bronze': (
-    value: #CC8535,
+    value: #cc8535,
   ),
   'peach': (
-    value: #CE9489,
+    value: #ce9489,
   ),
   'dark-navy': (
-    value: #08566B,
+    value: #08566b,
   ),
   'light-teal': (
-    value: #A9DED9,
+    value: #a9ded9,
   ),
   'light-sky-blue': (
-    value: #A4DAE3,
+    value: #a4dae3,
   ),
   'light-yellow': (
-    value: #FAE0A1,
+    value: #fae0a1,
   ),
   'light-purple': (
-    value: #C3C0E7,
+    value: #c3c0e7,
   ),
   'light-bronze': (
-    value: #E8B984,
+    value: #e8b984,
   ),
   'light-peach': (
-    value: #D8B4AB,
+    value: #d8b4ab,
   ),
   'black': (
-    value: #0B2F39,
+    value: #0b2f39,
     static: true,
   ),
   'white': (
-    value: #FFFFFF,
+    value: #ffffff,
     static: true,
   ),
   'dark-grey': (
@@ -59,37 +59,37 @@ $colors: (
     static: true,
   ),
   'grey': (
-    value: #DBDBDB,
+    value: #dbdbdb,
     static: true,
   ),
   'placeholder': (
-    value: #83ABB5,
+    value: #83abb5,
     static: true,
   ),
   'darker-navy': (
-    value: #053D4D,
+    value: #053d4d,
     static: true,
   ),
   'darker-teal': (
-    value: #032D39,
+    value: #032d39,
     static: true,
   ),
   'off-navy': (
-    value: #006A82,
+    value: #006a82,
     static: true,
   ),
   'footer': (
-    value: #143B46,
+    value: #143b46,
     static: true,
   ),
   'error': (
-    value: #CA500B,
+    value: #ca500b,
     static: true,
   ),
   'success': (
-    value: #4BB543,
+    value: #4bb543,
     static: true,
-  ),
+  )
 );
 
 $_modifiers: (

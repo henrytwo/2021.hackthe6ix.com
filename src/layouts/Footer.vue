@@ -1,90 +1,108 @@
 <template>
   <Section no_scrollspy>
-    <div class='footer__main'>
-      <div class='footer__main-logo'>
-        <Typography type='heading2' as='h2' color='teal' transform='uppercase'>
+    <div class="footer__main">
+      <div class="footer__main-logo">
+        <Typography type="heading2" as="h2" color="teal" transform="uppercase">
           Hack the 6ix
         </Typography>
-        <ul class='footer__socials'>
-          <li
-            v-for='(icon, index) in socials'
-            :key='index'
-          >
+        <ul class="footer__socials">
+          <li v-for="(icon, index) in socials" :key="index">
             <a
-              rel='noreferrer noopener'
-              :aria-label='icon.label'
-              class='footer__social'
-              target='_blank'
-              :href='icon.to'
+              rel="noreferrer noopener"
+              :aria-label="icon.label"
+              class="footer__social"
+              target="_blank"
+              :href="icon.to"
             >
-              <component :is='icon.icon'/>
+              <component :is="icon.icon" />
             </a>
           </li>
         </ul>
       </div>
-      <form class='footer__main-form' v-on:submit.prevent="formTriggerSubmit">
-        <Typography class='footer__main-form--header' type='heading3' as='h3' color='light-yellow' transform='uppercase'>
+      <form class="footer__main-form" v-on:submit.prevent="formTriggerSubmit">
+        <Typography
+          class="footer__main-form--header"
+          type="heading3"
+          as="h3"
+          color="light-yellow"
+          transform="uppercase"
+        >
           More questions?
         </Typography>
         <Input
-          class='footer__main-form--name'
-          name='name'
-          placeholder='Enter your name'
+          class="footer__main-form--name"
+          name="name"
+          placeholder="Enter your name"
           :error="nameError"
           :success="nameSuccess"
           :disabled="this.submissionDisabled"
-          label='Name'
-          v-model='name'
+          label="Name"
+          v-model="name"
           showLabel
           required
         />
         <Input
-          class='footer__main-form--email'
-          name='email'
-          placeholder='Enter your email'
+          class="footer__main-form--email"
+          name="email"
+          placeholder="Enter your email"
           :error="emailError"
           :success="emailSuccess"
           :disabled="this.submissionDisabled"
-          label='Email'
-          v-model='email'
+          label="Email"
+          v-model="email"
           showLabel
           required
         />
         <Input
-          as='textarea'
-          class='footer__main-form--question'
-          name='question'
-          placeholder='Send us your questions here!'
+          as="textarea"
+          class="footer__main-form--question"
+          name="question"
+          placeholder="Send us your questions here!"
           :error="textError"
           :success="textSuccess"
           :disabled="this.submissionDisabled"
-          label='Enter your question here'
-          v-model='text'
+          label="Enter your question here"
+          v-model="text"
           showLabel
           required
         />
-        <div class='footer__main-form--footer'>
+        <div class="footer__main-form--footer">
           <Button :disabled="this.submissionDisabled">Send</Button>
         </div>
       </form>
     </div>
-    <div class='footer__meta'>
-      <Typography class='footer__meta-copyright' type='paragraph'>
+    <div class="footer__meta">
+      <Typography class="footer__meta-copyright" type="paragraph">
         Copyright © 2021 <strong>Hack the 6ix</strong> | Made with ♡ in Toronto
       </Typography>
-      <ul class='footer__meta-links'>
-        <Typography type='paragraph' as='li'>
-          <a class='footer__meta-link' href='https://2020.hackthe6ix.com/' target='_blank' rel='noreferrer noopenner'>
+      <ul class="footer__meta-links">
+        <Typography type="paragraph" as="li">
+          <a
+            class="footer__meta-link"
+            href="https://2020.hackthe6ix.com/"
+            target="_blank"
+            rel="noreferrer noopenner"
+          >
             2020 Website
           </a>
         </Typography>
-        <Typography type='paragraph' as='li'>
-          <a class='footer__meta-link' href='http://cdn.hackthe6ix.com/privacy-policy.pdf' target='_blank' rel='noreferrer noopenner'>
+        <Typography type="paragraph" as="li">
+          <a
+            class="footer__meta-link"
+            href="http://cdn.hackthe6ix.com/privacy-policy.pdf"
+            target="_blank"
+            rel="noreferrer noopenner"
+          >
             Privacy Policy
           </a>
         </Typography>
-        <Typography type='paragraph' as='li'>
-          <a class='footer__meta-link' href='https://static.mlh.io/docs/mlh-code-of-conduct.pdf' target='_blank' rel='noreferrer noopenner'>
+        <Typography type="paragraph" as="li">
+          <a
+            class="footer__meta-link"
+            href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+            target="_blank"
+            rel="noreferrer noopenner"
+          >
             Code of Conduct
           </a>
         </Typography>
@@ -94,7 +112,7 @@
 </template>
 
 <script>
-import {contactMessage} from "../util/email_controller";
+import { contactMessage } from '../util/email_controller';
 import FacebookIcon from '@/assets/facebook.svg';
 import InstagramIcon from '@/assets/instagram.svg';
 import LinkedInIcon from '@/assets/linkedin.svg';
@@ -129,7 +147,7 @@ export default {
       nameSuccess: undefined,
       emailSuccess: undefined,
       textSuccess: undefined,
-      submissionDisabled: false
+      submissionDisabled: false,
     };
   },
   methods: {
@@ -142,25 +160,30 @@ export default {
       if (this.validateForm()) {
         this.submissionDisabled = true;
 
-        contactMessage(this.name.trim(), this.email.trim(), this.text.trim(), (err, message) => {
+        contactMessage(
+          this.name.trim(),
+          this.email.trim(),
+          this.text.trim(),
+          (err, message) => {
+            if (err) {
+              // Error
+              this.nameError = '';
+              this.emailError = '';
+              this.textError =
+                err?.response?.data ||
+                'An error occurred - please try again later';
 
-          if (err) {
-            // Error
-            this.nameError = "";
-            this.emailError = "";
-            this.textError = err?.response?.data || "An error occurred - please try again later";
+              this.submissionDisabled = false;
+            } else {
+              // Success
+              this.nameSuccess = '';
+              this.emailSuccess = '';
+              this.textSuccess = message.data || 'Your message has been sent!';
 
-            this.submissionDisabled = false;
-          } else {
-            // Success
-            this.nameSuccess = "";
-            this.emailSuccess = "";
-            this.textSuccess = message.data || "Your message has been sent!";
-
-            this.submissionDisabled = true;
-          }
-
-        });
+              this.submissionDisabled = true;
+            }
+          },
+        );
       }
     },
     validateForm() {
@@ -174,16 +197,20 @@ export default {
     },
     validateEmail(email) {
       this.emailSuccess = undefined;
-      return this.emailError = validator.validate(email) ? undefined : "Please enter a valid email";
+      return (this.emailError = validator.validate(email)
+        ? undefined
+        : 'Please enter a valid email');
     },
     validateName(name) {
       this.nameSuccess = undefined;
-      return this.nameError = name.trim().length > 0 ? undefined : "Please enter your name";
+      return (this.nameError =
+        name.trim().length > 0 ? undefined : 'Please enter your name');
     },
     validateText(text) {
       this.textSuccess = undefined;
-      return this.textError = text.trim().length > 0 ? undefined : "Please enter your message";
-    }
+      return (this.textError =
+        text.trim().length > 0 ? undefined : 'Please enter your message');
+    },
   },
   watch: {
     email(newVal) {
@@ -222,7 +249,7 @@ export default {
       ];
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

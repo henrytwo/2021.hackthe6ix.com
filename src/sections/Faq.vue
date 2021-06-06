@@ -1,17 +1,28 @@
 <template>
-  <Section id='faq' class='faq' as='section'>
-      <Typography class='faq__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
-        Frequently Asked Questions
-        <Bubble class='faq__bubble'/>
-      </Typography>
-    <ul class='faq__items'>
-      <li class='faq__item' v-for='(question, index) in questions' :key='index'>
-        <button class='faq__item-header'>
-          <Typography type='heading3' as='h3'>
+  <Section id="faq" class="faq" as="section">
+    <Typography
+      class="faq__heading"
+      type="heading2"
+      color="light-yellow"
+      transform="uppercase"
+      as="h2"
+    >
+      Frequently Asked Questions
+      <Bubble class="faq__bubble" />
+    </Typography>
+    <ul class="faq__items">
+      <li class="faq__item" v-for="(question, index) in questions" :key="index">
+        <button class="faq__item-header">
+          <Typography type="heading3" as="h3">
             {{ question.label }}
           </Typography>
         </button>
-        <Typography class='faq__item-body' type='paragraph' v-html='question.body' as='div'/>
+        <Typography
+          class="faq__item-body"
+          type="paragraph"
+          v-html="question.body"
+          as="div"
+        />
       </li>
     </ul>
   </Section>
@@ -29,6 +40,11 @@ export default {
     Typography,
     Section,
     Bubble,
+  },
+  data() {
+    return {
+      selected: {},
+    };
   },
   computed: {
     questions() {
@@ -146,7 +162,6 @@ For ideas, check out our submissions from last year here!`),
     }
 
     &-body {
-
     }
   }
 }

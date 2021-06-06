@@ -6,6 +6,7 @@
     "start:npm": "gridsome develop",
     "test": "bash run test",
     "test:npm": "echo 'lol, testing can never be me' && exit 0",
+    "lint": "prettier --write \"**/*.(js|vue|scss)\"",
     "build": "bash run export",
     "build:npm": "gridsome build",
     "explore": "gridsome explore",
@@ -33,5 +34,8 @@
     "uuid": "^8.3.2",
     "vue-gtag": "^1.16.1",
     "vue-svg-loader": "^0.16.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.1"
   }
 }

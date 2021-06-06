@@ -16,7 +16,7 @@ $media: (
   laptop: 1080px,
 );
 
-$font: "Open Sans", sans-serif;
+$font: 'Open Sans', sans-serif;
 
 $font-config: (
   heading1: (
@@ -46,7 +46,10 @@ $font-config: (
     line-height: spacing(6),
   ),
   monospace: (
-    font-family: ('Courier New', monospace),
+    font-family: (
+      'Courier New',
+      monospace,
+    ),
     font-weight: 700,
     font-size: spacing(3.25),
     line-height: spacing(10),

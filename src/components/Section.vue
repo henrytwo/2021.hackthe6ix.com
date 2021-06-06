@@ -1,13 +1,8 @@
 <template>
-  <component :is='as' class='section'>
-    <a class='section__anchor' ref='anchor' :id='id'/>
-    <div
-      :class='[
-        as && `section__content--${as}`,
-        "section__content",
-      ]'
-    >
-      <slot/>
+  <component :is="as" class="section">
+    <a class="section__anchor" ref="anchor" :id="id" />
+    <div :class="[as && `section__content--${as}`, 'section__content']">
+      <slot />
     </div>
   </component>
 </template>
@@ -15,26 +10,21 @@
 <script>
 export default {
   name: 'Section',
-  inject: [
-    'register_scrollspy',
-  ],
+  inject: ['register_scrollspy'],
   props: {
-    contentClass: [ String, Object, Array ],
+    contentClass: [String, Object, Array],
     no_scrollspy: Boolean,
     id: String,
     as: {
       default: () => 'div',
       type: String,
-    }
+    },
   },
   mounted() {
     if (!this.no_scrollspy) {
-      this.register_scrollspy(
-        this.$refs.anchor,
-        () => {
-          history.replaceState(null, null, `#${this.id || ''}`);
-        },
-      );
+      this.register_scrollspy(this.$refs.anchor, () => {
+        history.replaceState(null, null, `#${this.id || ''}`);
+      });
     }
   },
 };

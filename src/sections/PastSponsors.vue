@@ -1,27 +1,31 @@
 <template>
-  <Section class='past-sponsors' id='past-sponsors' as='section'>
-    <Typography class='past-sponsors__heading' transform='uppercase' color='black' type='heading2' as='h2'>
+  <Section class="past-sponsors" id="past-sponsors" as="section">
+    <Typography
+      class="past-sponsors__heading"
+      transform="uppercase"
+      color="black"
+      type="heading2"
+      as="h2"
+    >
       Past Sponsors
-      <Bubble width='50' heigh='80' class='past-sponsors__bubble'/>
+      <Bubble width="50" heigh="80" class="past-sponsors__bubble" />
     </Typography>
-    <div class='past-sponsors__groups'>
+    <div class="past-sponsors__groups">
       <ul
-        v-for='([key, group]) in Object.entries($static)'
-        :class='[
-          `past-sponsors__group--${key}`,
-          "past-sponsors__group",
-        ]'
-        :key='key'
+        v-for="[key, group] in Object.entries($static)"
+        :class="[`past-sponsors__group--${key}`, 'past-sponsors__group']"
+        :key="key"
       >
-        <li v-for='(sponsor, index) in group.edges[0].node.logos' :key='index'>
-          <a :href='sponsor.description' target='_blank' class='past-sponsors__item'>
+        <li v-for="(sponsor, index) in group.edges[0].node.logos" :key="index">
+          <a
+            :href="sponsor.description"
+            target="_blank"
+            class="past-sponsors__item"
+          >
             <img
-              :class='[
-                `past-sponsors__image--${key}`,
-                "past-sponsors__image",
-              ]'
-              :src='`https:${sponsor.file.url}`'
-              :alt='sponsor.title'
+              :class="[`past-sponsors__image--${key}`, 'past-sponsors__image']"
+              :src="`https:${sponsor.file.url}`"
+              :alt="sponsor.title"
             />
           </a>
         </li>
@@ -49,7 +53,7 @@ export default {
 {
   gold: allContentfulSponsorCategory(filter:{
     slug:{
-      eq: "gold"
+      eq: "gold-2021"
     }
   }) {
     edges {
@@ -58,7 +62,7 @@ export default {
           title
           description
           file {
-            url(height: 60, fit: inside)
+            url
           }
         }
       }
@@ -66,7 +70,7 @@ export default {
   }
   silver: allContentfulSponsorCategory(filter:{
     slug:{
-      eq: "silver"
+      eq: "silver-2021"
     }
   }) {
     edges {
@@ -75,7 +79,7 @@ export default {
           title
           description
           file {
-            url(height: 50, fit: inside)
+            url
           }
         }
       }
@@ -83,7 +87,7 @@ export default {
   }
   bronze: allContentfulSponsorCategory(filter:{
     slug:{
-      eq: "bronze"
+      eq: "bronze-2021"
     }
   }) {
     edges {
@@ -92,7 +96,7 @@ export default {
           title
           description
           file {
-            url(height: 30, fit: inside)
+            url
           }
         }
       }

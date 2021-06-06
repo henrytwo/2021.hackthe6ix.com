@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div id='top'/>
-    <Navigation/>
-    <slot/>
-    <footer class='footer'>
-      <Mail/>
-      <Footer/>
+    <div id="top" />
+    <Navigation />
+    <slot />
+    <footer class="footer">
+      <Mail />
+      <Footer />
     </footer>
   </div>
 </template>
@@ -66,8 +66,11 @@ export default {
         return;
       }
 
-      const aboveWindow = this.sortedScrollspy.filter(item => {
-        return (item.target.offsetParent.offsetTop - (window.outerHeight * 0.8)) <= window.pageYOffset;
+      const aboveWindow = this.sortedScrollspy.filter((item) => {
+        return (
+          item.target.offsetParent.offsetTop - window.outerHeight * 0.8 <=
+          window.pageYOffset
+        );
       });
       this.scrollspy_current = aboveWindow[aboveWindow.length - 1].target.id;
     },
@@ -86,24 +89,22 @@ export default {
       document.body.classList.add('animate');
     }, 100);
     window.addEventListener('scroll', this.onscroll, { passive: true });
-    this.onscroll();
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onscroll, { passive: true });
-  }
+  },
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @use '~/styles/mixins';
 @use '~/styles/colors';
 @use '~/styles/units';
 @include colors.init();
 
 :root {
-  --background:
-    linear-gradient(180deg, #012c3800 40%, #032D39 60%),
-    linear-gradient(90deg, #002C37 2%, #004D57 96%);
+  --background: linear-gradient(180deg, #012c3800 40%, #032d39 60%),
+    linear-gradient(90deg, #002c37 2%, #004d57 96%);
 }
 
 html {

@@ -1,27 +1,23 @@
 <template>
   <div
-    :class='[
+    :class="[
       `card-header--${backgroundColor}`,
       `card-header--${size}`,
-      "card-header",
-    ]'
+      'card-header',
+    ]"
   >
-    <div class='card-header__icons'>
+    <div class="card-header__icons">
       <div
-        :class='[
+        :class="[
           `card-header__icon--${color}`,
           `card-header__icon--${size}`,
-          "card-header__icon",
-        ]'
-        v-for='color in iconColors'
-        :key='color'
+          'card-header__icon',
+        ]"
+        v-for="color in iconColors"
+        :key="color"
       />
     </div>
-    <Typography
-      :color='color'
-      v-if='title'
-      type='monospace'
-    >
+    <Typography :color="color" v-if="title" type="monospace">
       {{ title }}
     </Typography>
   </div>
@@ -55,13 +51,9 @@ export default {
   },
   computed: {
     iconColors() {
-      return [
-        'light-peach',
-        'light-yellow',
-        'light-purple',
-      ];
-    }
-  }
+      return ['light-peach', 'light-yellow', 'light-purple'];
+    },
+  },
 };
 </script>
 

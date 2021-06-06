@@ -1,53 +1,61 @@
 <template>
-  <Section id='spotlight' class='highlight' as='section'>
+  <Section id="spotlight" class="highlight" as="section">
     <div class="highlight__content">
-      <Typography class='highlight__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
+      <Typography
+        class="highlight__heading"
+        type="heading2"
+        color="light-yellow"
+        transform="uppercase"
+        as="h2"
+      >
         Sponsor Spotlight
-       <Bubble class='highlight__bubble'/>
+        <Bubble class="highlight__bubble" />
       </Typography>
-      <div class='highlight__slides'>
+      <div class="highlight__slides">
         <button
-          @click='currentSlide = (currentSlide || sponsors.length) - 1'
-          class='highlight__arrow'
+          @click="currentSlide = (currentSlide || sponsors.length) - 1"
+          class="highlight__arrow"
         >
-          <LeftArrow/>
+          <LeftArrow />
         </button>
-        <div class='highlight__sponsors' ref='sponsors'>
-          <div
-            v-for='(data, index) in sponsors'
-            :key='index'
-            ref='card'
-          >
+        <div class="highlight__sponsors" ref="sponsors">
+          <div v-for="(data, index) in sponsors" :key="index" ref="card">
             <Card
-              backdropColor='light-peach'
-              :placement='cardPlacement'
-              class='highlight__card'
-              color='light-teal'
-              offset='4'
+              backdropColor="light-peach"
+              :placement="cardPlacement"
+              class="highlight__card"
+              color="light-teal"
+              offset="4"
               boxed
             >
               <CardHeader
-                backgroundColor='teal'
-                title='past_sponsors.ppt'
-                :size='headerSize'
-                color='dark-navy'
+                backgroundColor="teal"
+                title="past_sponsors.ppt"
+                :size="headerSize"
+                color="dark-navy"
               />
-              <div class='highlight__body'>
-                <g-image class='highlight__image' :src='data.image'/>
-                <div class='highlight__text'>
+              <div class="highlight__body">
+                <g-image class="highlight__image" :src="data.image" />
+                <div class="highlight__text">
+                  <Quotation class="highlight__quote highlight__quote--top" />
                   <Typography
-                    v-html='data.content'
-                    color='black'
-                    type='xsmall'
-                    as='div'
+                    class="highlight__data"
+                    v-html="data.content"
+                    color="black"
+                    type="xsmall"
+                    as="div"
+                  />
+                  <Quotation
+                    class="highlight__quote highlight__quote--bottom"
                   />
                 </div>
-                <Typography color='black' type='xsmall' weight='700'>
-                  To learn more. Check out <a
-                    ref='noreferrer noopener'
-                    class='highlight__link'
-                    :href='data.link'
-                    target='_blank'
+                <Typography color="black" type="xsmall" weight="700">
+                  To learn more. Check out
+                  <a
+                    ref="noreferrer noopener"
+                    class="highlight__link"
+                    :href="data.link"
+                    target="_blank"
                   >
                     {{ data.name }}'s career page!
                   </a>
@@ -57,10 +65,10 @@
           </div>
         </div>
         <button
-          @click='currentSlide = (currentSlide + 1) % sponsors.length'
-          class='highlight__arrow'
+          @click="currentSlide = (currentSlide + 1) % sponsors.length"
+          class="highlight__arrow"
         >
-          <RightArrow/>
+          <RightArrow />
         </button>
       </div>
     </div>
@@ -73,8 +81,9 @@ import Typography from '@/components/Typography';
 import Card, { placements } from '@/components/Card';
 import CardHeader, { sizes } from '@/components/CardHeader';
 import Bubble from '@/assets/highlight/star-bubble.svg';
-import LeftArrow from '@/assets/left-arrow.svg';
 import RightArrow from '@/assets/right-arrow.svg';
+import LeftArrow from '@/assets/left-arrow.svg';
+import Quotation from '@/assets/quotation.svg';
 import marked from 'marked';
 
 export default {
@@ -87,6 +96,7 @@ export default {
     Bubble,
     LeftArrow,
     RightArrow,
+    Quotation,
   },
   mounted() {
     window.addEventListener('resize', this.setScroll, { passive: true });
@@ -125,7 +135,8 @@ export default {
       return [
         {
           image: require('@/assets/highlight/microsoft.png'),
-          content: marked(`At Microsoft, our mission is to empower every person and every
+          content:
+            marked(`At Microsoft, our mission is to empower every person and every
           organization on the planet to achieve more. With Microsoft Azure you can build, deploy,
           and manage applications with a comprehensive set of cloud services designed for you.
           We can't wait to see you at Hack the 6ix—where we'll be celebrating innovative tech
@@ -136,7 +147,8 @@ export default {
         },
         {
           image: require('@/assets/highlight/rbc.png'),
-          content: marked(`We know that the transition from student to professional can be a
+          content:
+            marked(`We know that the transition from student to professional can be a
           challenge. At RBC, we provide you with the tools, support and flexibility to transform
           from a student into a future leader. Turn exciting possibilities into a reality for our
           clients, our communities and you. With access to leading technologies, we are always
@@ -147,7 +159,8 @@ export default {
         },
         {
           image: require('@/assets/highlight/autocode.png'),
-          content: marked(`Autocode allows you to build webhooks, scripts and APIs instantly. It's
+          content:
+            marked(`Autocode allows you to build webhooks, scripts and APIs instantly. It's
           an online code editor with API autocomplete, instant hosting, and a Standard Library anybody
           can contribute to. Sync data, build bots and customize workflows. When AWS is overkill,
           use Autocode.`),
@@ -155,7 +168,8 @@ export default {
         },
         {
           image: require('@/assets/highlight/capital-one.png'),
-          content: marked(`Still founder-led by Chairman and Chief Executive Officer Richard Fairbank,
+          content:
+            marked(`Still founder-led by Chairman and Chief Executive Officer Richard Fairbank,
           Capital One is on a mission to help our customers succeed by bringing ingenuity, simplicity,
           and humanity to banking. We measure our efforts by the success our customers enjoy and the
           advocacy they exhibit. We are succeeding because they are succeeding. Guided by our shared values,
@@ -168,7 +182,8 @@ export default {
         },
         {
           image: require('@/assets/highlight/remo.png'),
-          content: marked(`Remo Conference is a live online events platform that allows people to host
+          content:
+            marked(`Remo Conference is a live online events platform that allows people to host
           virtual conferences and online events with the main aim of building authentic conversations
           that drive meaningful relationships!  With the help of different tables, floors & buildings,
           Remo provides an immersive virtual space that empowers people to freely move around and connect,
@@ -178,7 +193,7 @@ export default {
         },
       ];
     },
-  }
+  },
 };
 </script>
 
@@ -227,7 +242,7 @@ export default {
     grid-template-columns: repeat(5, 100%);
     max-width: units.spacing(180);
     grid-gap: units.spacing(16);
-    overflow: hidden ;
+    overflow: hidden;
     display: grid;
   }
 
@@ -251,6 +266,8 @@ export default {
 
   &__text {
     margin-top: units.spacing(6);
+    position: relative;
+    display: flex;
   }
 
   &__link {
@@ -258,6 +275,25 @@ export default {
     display: inline-block;
     color: inherit;
   }
-}
 
+  &__data {
+    z-index: 1;
+  }
+
+  &__quote {
+    width: units.spacing(9);
+    position: absolute;
+    height: auto;
+    margin: auto;
+
+    &--top {
+      inset: 0 auto auto units.spacing(-4);
+    }
+
+    &--bottom {
+      inset: auto 0 0 auto;
+      transform: rotate(180deg);
+    }
+  }
+}
 </style>

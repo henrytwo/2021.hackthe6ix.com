@@ -1,39 +1,57 @@
 <template>
-  <Section class='past-speakers' id='past-speakers' as='section'>
+  <Section class="past-speakers" id="past-speakers" as="section">
     <div class="past-speakers__content">
-      <Typography class='past-speakers__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
+      <Typography
+        class="past-speakers__heading"
+        type="heading2"
+        color="light-yellow"
+        transform="uppercase"
+        as="h2"
+      >
         Past Speakers
-       <Bubble class='past-speakers__bubble'/>
+        <Bubble class="past-speakers__bubble" />
       </Typography>
     </div>
-    <div class="past-speakers__speakers" :style='{ "--card-offset": `-${offset}px` }'>
+    <div
+      class="past-speakers__speakers"
+      :style="{ '--card-offset': `-${offset}px` }"
+    >
       <Card
-        v-for='(speaker, index) in speakers'
-        class='past-speakers__speaker'
-        :placement='cardPlacement'
-        backdropColor='navy'
-        color='light-teal'
-        :key='index'
-        offset='2'
+        v-for="(speaker, index) in speakers"
+        class="past-speakers__speaker"
+        :placement="cardPlacement"
+        backdropColor="navy"
+        color="light-teal"
+        :key="index"
+        offset="2"
         boxed
       >
-        <div class='past-speakers__frame'>
-          <g-image class='past-speakers__image' :src='speaker.image' width='200'/>
-          <div class='past-speakers__card'>
-            <div class='past-speakers__label' ref='label'>
-              <Typography type='heading3' as='h3' color='black'>
+        <div tabindex="0" class="past-speakers__frame">
+          <g-image
+            class="past-speakers__image"
+            :src="speaker.image"
+            width="200"
+          />
+          <div class="past-speakers__card">
+            <div class="past-speakers__label" ref="label">
+              <Typography type="heading3" as="h3" color="black">
                 {{ speaker.title }}
               </Typography>
-              <Typography class='past-speakers__subtitle' type='heading4' as='p' color='dark-navy'>
+              <Typography
+                class="past-speakers__subtitle"
+                type="heading4"
+                as="p"
+                color="dark-navy"
+              >
                 {{ speaker.subtitle }}
               </Typography>
             </div>
             <Typography
-              class='past-speakers__text'
-              type='body1'
-              color='black'
-              as='div'
-              v-html='speaker.description'
+              class="past-speakers__text"
+              type="body1"
+              color="black"
+              as="div"
+              v-html="speaker.description"
             />
           </div>
         </div>
@@ -71,9 +89,7 @@ export default {
   },
   methods: {
     setOffset() {
-      this.offset = Math.min(
-        ...this.$refs.label.map(el => el.offsetHeight)
-      );
+      this.offset = Math.min(...this.$refs.label.map((el) => el.offsetHeight));
     },
   },
   watch: {
@@ -137,16 +153,16 @@ platform. They are working closely with early customers such as TechTO
 to deliver a unique and engaging experience to event attendees.
           `),
         },
-      ]
-    }
-  }
+      ];
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-  @use '@/styles/mixins';
-  @use '@/styles/units';
-  @use '@/styles/colors';
+@use '@/styles/mixins';
+@use '@/styles/units';
+@use '@/styles/colors';
 
 .past-speakers {
   margin-top: units.spacing(44);
@@ -199,7 +215,8 @@ to deliver a unique and engaging experience to event attendees.
     display: flex;
     height: 100%;
 
-    &:hover > #{$self}__card {
+    &:hover > #{$self}__card,
+    &:focus > #{$self}__card {
       transform: translateY(0);
     }
   }
@@ -241,5 +258,4 @@ to deliver a unique and engaging experience to event attendees.
     }
   }
 }
-
 </style>
