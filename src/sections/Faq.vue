@@ -12,13 +12,22 @@
     </Typography>
     <ul class="faq__items">
       <li class="faq__item" v-for="(question, index) in questions" :key="index">
-        <button class="faq__item-header">
+        <button
+          @click="$set(selected, index, !selected[index])"
+          class="faq__item-header"
+        >
           <Typography type="heading3" as="h3">
             {{ question.label }}
+            <Caret
+              :class="[selected[index] && 'faq__caret--active', 'faq__caret']"
+            />
           </Typography>
         </button>
         <Typography
-          class="faq__item-body"
+          :class="[
+            selected[index] && 'faq__item-body--active',
+            'faq__item-body',
+          ]"
           type="paragraph"
           v-html="question.body"
           as="div"
@@ -32,6 +41,7 @@
 import Typography from '@/components/Typography';
 import Section from '@/components/Section';
 import Bubble from '@/assets/question-bubble.svg';
+import Caret from '@/assets/caret.svg';
 import marked from 'marked';
 
 export default {
@@ -40,6 +50,7 @@ export default {
     Typography,
     Section,
     Bubble,
+    Caret,
   },
   data() {
     return {
@@ -162,6 +173,24 @@ For ideas, check out our submissions from last year here!`),
     }
 
     &-body {
+      @include mixins.transition(max-height);
+      overflow: hidden;
+      max-height: 0px;
+
+      &--active {
+        max-height: units.spacing(40);
+      }
+    }
+  }
+
+  &__caret {
+    @include mixins.transition(transform);
+    margin-left: units.spacing(2);
+    margin-bottom: units.spacing(1);
+    display: inline;
+
+    &--active {
+      transform: rotate(180deg);
     }
   }
 }
