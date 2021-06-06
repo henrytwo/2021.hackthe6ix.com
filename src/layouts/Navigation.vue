@@ -46,8 +46,10 @@
       </li>
       <li @click='onNavigate' v-for='(link, index) in links' :key='index'>
         <g-link
-          exact-active-class='nav__link--active'
-          class='nav__link'
+          :class='[
+            link.to.slice(2) === current && "nav__link--active",
+            "nav__link"
+          ]'
           :to='link.to'
           exact
         >
@@ -67,6 +69,9 @@ import Icon from '@/assets/icon.svg';
 
 export default {
   name: 'Navigation',
+  inject: [
+    'current_scrollspy',
+  ],
   components: {
     FontAwesomeIcon,
     Typography,
@@ -91,17 +96,14 @@ export default {
     scrollHandler() {
       this.isTop = window.pageYOffset < 10;
     },
-    onNavigate() {
-      window.clearTimeout(this.timer);
-      localStorage.setItem('ignore-observer', true);
-
+    onNavigate(e) {
       this.showMobile = false;
-      this.timer = window.setTimeout(() => {
-        localStorage.removeItem('ignore-observer');
-      }, 1000);
-    }
+    },
   },
   computed: {
+    current() {
+      return this.current_scrollspy();
+    },
     links() {
       return [
         {

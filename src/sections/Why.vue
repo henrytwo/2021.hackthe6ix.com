@@ -128,10 +128,11 @@ export default {
       }
     },
     prevSlide() {
-      this.curr = (Math.min(this.curr, this.limit) || 1) - 1;
+      this.curr = (Math.min(this.curr, this.limit) || this.limit) - 1;
     },
     nextSlide() {
-      this.curr = Math.min(this.curr + 1, this.limit);
+      const next = this.curr + 1;
+      this.curr = next >= this.limit ? 0 : next;
     },
     resize() {
       this.handleLimit();

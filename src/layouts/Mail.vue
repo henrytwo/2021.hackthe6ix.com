@@ -1,5 +1,5 @@
 <template>
-  <Section class='mail'>
+  <Section class='mail' no_scrollspy>
     <Typography type='heading3' color='light-yellow' as='h2'>
       Interested? Get the latest updates in your inbox!
     </Typography>
@@ -21,8 +21,10 @@ export default {
   name: 'Mail',
   methods: {
     toTop() {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
   },
   components: {

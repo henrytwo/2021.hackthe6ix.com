@@ -1,5 +1,5 @@
 <template>
-  <Section>
+  <Section no_scrollspy>
     <div class='footer__main'>
       <div class='footer__main-logo'>
         <Typography type='heading2' as='h2' color='teal' transform='uppercase'>
