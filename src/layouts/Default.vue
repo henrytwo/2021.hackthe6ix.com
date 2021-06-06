@@ -57,6 +57,9 @@ export default {
     set_scrollspy(state = !this.scrollspy) {
       this.scrollspy = state;
     },
+    get_scrollspy(id) {
+      return this.scrollspy_listeners[id];
+    },
     onscroll() {
       if (window.pageYOffset < 100) {
         this.scrollspy_current = '';
@@ -74,6 +77,7 @@ export default {
       current_scrollspy: () => this.scrollspy_current,
       unregister_scrollspy: this.unregister_scrollspy,
       register_scrollspy: this.register_scrollspy,
+      get_scrollspy: this.get_scrollspy,
       set_scrollspy: this.set_scrollspy,
     };
   },
@@ -82,6 +86,7 @@ export default {
       document.body.classList.add('animate');
     }, 100);
     window.addEventListener('scroll', this.onscroll, { passive: true });
+    this.onscroll();
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onscroll, { passive: true });

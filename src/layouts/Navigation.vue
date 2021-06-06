@@ -44,17 +44,17 @@
           <FontAwesomeIcon icon='times'/>
         </Button>
       </li>
-      <li @click='onNavigate' v-for='(link, index) in links' :key='index'>
-        <g-link
+      <li v-for='(link, index) in links' :key='index'>
+        <a
           :class='[
             link.to.slice(2) === current && "nav__link--active",
             "nav__link"
           ]'
-          :to='link.to'
-          exact
+          @click='onNavigate'
+          :href='link.to'
         >
           {{ link.label }}
-        </g-link>
+        </a>
       </li>
     </ul>
   </Section>
@@ -71,6 +71,7 @@ export default {
   name: 'Navigation',
   inject: [
     'current_scrollspy',
+    'get_scrollspy',
   ],
   components: {
     FontAwesomeIcon,
@@ -97,6 +98,9 @@ export default {
       this.isTop = window.pageYOffset < 10;
     },
     onNavigate(e) {
+      e.preventDefault();
+      const target = document.getElementById(e.target.href.split('#')[1]);
+      target.scrollIntoView({ behavior: 'smooth' });
       this.showMobile = false;
     },
   },
