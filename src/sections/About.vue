@@ -30,64 +30,57 @@
         >
           <LeftArrow />
         </button>
-        <div class="about__window" ref="testimonials">
+        <div class="about__testimonials" ref="items">
           <div
-            class="about__testimonals"
-            :style="{
-              '--card-offset': currentSlide,
-              '--card-width': `${width}px`,
-            }"
+            v-for="(data, index) in testimonials"
+            ref='card'
+            :class="[
+              index === currentSlide && 'about__testimonial--active',
+              `about__testimonial--${index}`,
+              'about__testimonial',
+            ]"
+            :key="index"
           >
-            <div
-              v-for="(data, index) in testimonials"
-              :class="[
-                index === currentSlide &&
-                  'about__slide-card-container--selected',
-                'about__slide-card-container',
-              ]"
-              :key="index"
+            <Card
+              backdropColor="light-peach"
+              :placement="cardPlacement"
+              class="about__slide-card"
+              color="light-teal"
+              offset="4"
+              boxed
             >
-              <Card
-                backdropColor="light-peach"
-                :placement="cardPlacement"
-                :class="[`about__slide-card--${index}`, 'about__slide-card']"
-                color="light-teal"
-                offset="4"
-                boxed
-              >
-                <CardHeader
-                  backgroundColor="teal"
-                  title="testimonials.ppt"
-                  :size="headerSize"
-                  color="dark-navy"
-                />
-                <div class="about__card">
-                  <img class="about__card-image" :src="data.image" />
-                  <div class="about__card-body">
-                    <div class="about__card-content-frame">
-                      <Quotation class="about__quote" />
-                      <Typography
-                        class="about__card-content"
-                        v-html="data.content"
-                        color="black"
-                        type="small"
-                        as="div"
-                      />
-                    </div>
-                    <Typography type="heading4" color="black">
-                      {{ data.title }}
-                    </Typography>
+              <CardHeader
+                backgroundColor="teal"
+                title="testimonials.ppt"
+                :size="headerSize"
+                color="dark-navy"
+              />
+              <div class="about__card">
+                <img class="about__card-image" :src="data.image" />
+                <div class="about__card-body">
+                  <div class="about__card-content-frame">
+                    <Quotation class="about__quote" />
+                    <Typography
+                      class="about__card-content"
+                      v-html="data.content"
+                      color="black"
+                      type="small"
+                      as="div"
+                    />
                   </div>
+                  <Typography type="heading4" color="black">
+                    {{ data.title }}
+                  </Typography>
                 </div>
-                <div class="about__dots">
-                  <div
-                    v-for="(_, i) in testimonials"
-                    :class="[i === index && 'about__dot--filled', 'about__dot']"
-                    :key="i"
-                  />
-                </div>
-              </Card>
-            </div>
+              </div>
+              <div class="about__dots">
+                <div
+                  v-for="(_, i) in testimonials"
+                  :class="[i === index && 'about__dot--filled', 'about__dot']"
+                  :key="i"
+                />
+              </div>
+            </Card>
           </div>
         </div>
         <button
@@ -162,19 +155,27 @@ export default {
   data() {
     return {
       currentSlide: 0,
-      width: 0,
     };
   },
   mounted() {
-    window.addEventListener('resize', this.setCardWidth, { passive: true });
-    this.setCardWidth();
+    window.addEventListener('resize', this.setScroll, { passive: true });
   },
-  destroyed() {
-    window.removeEventListener('resize', this.setCardWidth, { passive: true });
+  beforeDestroy() {
+    window.removeEventListener('resize', this.setScroll, { passive: true });
+  },
+  watch: {
+    currentSlide() {
+      this.setScroll(true);
+    },
   },
   methods: {
-    setCardWidth() {
-      this.width = this.$refs.testimonials.clientWidth;
+    setScroll(smooth) {
+      const target = this.$refs.card[this.currentSlide];
+      const parent = this.$refs.items;
+      parent.scrollTo({
+        left: target.offsetLeft - parent.offsetLeft,
+        behavior: smooth === true ? 'smooth' : undefined,
+      });
     },
     openGallery() {
       window.open('https://hackthe6ix2020.devpost.com', '_blank');
@@ -200,7 +201,7 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
           all from the comfort of my own home! Working on our hackathon project remotely
           was definitely a unique experience and had its own set of challenges, but it was
           super rewarding and was an incredible learning opportunity.`),
-          title: 'Wilson Wang, Hacker',
+          title: 'Willson Wang, Hacker',
         },
         {
           image: require('@/assets/about/aiman.png'),
@@ -209,7 +210,7 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
           It's the most organized hackathon I've ever been to (from what feels like millions),
           and it's all virtual! Well-moderated, great questions, diverse backgrounds+views of
           the panelists. Kudos to the HT6 team 👏🏻`),
-          title: 'Aiman Aamir, Speaker',
+          title: 'Aaiman Aamir, Speaker',
         },
         {
           image: require('@/assets/about/samson.png'),
@@ -300,32 +301,30 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     grid-template-columns: units.spacing(6) auto units.spacing(6);
     grid-gap: units.spacing(6);
     max-width: units.spacing(170);
-    margin: 0 auto;
+    margin: 0 auto auto;
     display: grid;
   }
 
-  &__window {
+  &__testimonials {
+    grid-template-columns: repeat(5, 100%);
+    max-width: units.spacing(180);
+    grid-gap: units.spacing(16);
     overflow: hidden;
+    display: grid;
   }
 
-  &__testimonals {
-    @include mixins.transition(transform, slow);
-    align-items: stretch;
-    display: flex;
-    transform: translateX(
-        calc(var(--card-width, 0) * var(--card-offset, 0) * -1)
-      )
-      translateX(calc(#{units.spacing(20)} * var(--card-offset, 0) * -1));
-  }
-
-  &__slide-card-container {
-    @include mixins.transition(opacity, slow);
-    margin-right: units.spacing(20);
-    min-width: var(--card-width, 0);
+  &__testimonial {
+    @include mixins.transition(opacity, snail);
     opacity: 0;
 
-    &--selected {
+    &--active {
       opacity: 1;
+    }
+
+    &--0 {
+      & .about__card-content {
+        font-size: units.spacing(3);
+      }
     }
   }
 
@@ -333,12 +332,6 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     height: calc(100% - #{units.spacing(4)});
     flex-direction: column;
     display: flex;
-
-    &--0 {
-      & .about__card-content {
-        font-size: units.spacing(3);
-      }
-    }
   }
 
   &__stats-list {

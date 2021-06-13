@@ -107,7 +107,9 @@ export default {
           virtual this year so you can team up with hackers regardless of their
           school, country, or timezone.
           
-For ideas, check out our submissions from last year here!`),
+For ideas, check out our submissions from last year
+<a href='https://hackthe6ix2020.devpost.com/project-gallery' target='_blank' rel='noopener noreferrer'>here</a>!
+`),
         },
         {
           label: 'What kind of workshops, talks, and activities will there be?',
@@ -170,6 +172,7 @@ For ideas, check out our submissions from last year here!`),
       background: none;
       border: none;
       padding: 0;
+      cursor: pointer;
     }
 
     &-body {
@@ -177,8 +180,12 @@ For ideas, check out our submissions from last year here!`),
       overflow: hidden;
       max-height: 0px;
 
+      & a {
+        color: inherit;
+      }
+
       &--active {
-        max-height: units.spacing(40);
+        max-height: 80vh;
       }
     }
   }

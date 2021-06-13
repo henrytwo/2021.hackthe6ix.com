@@ -60,10 +60,7 @@
         Learn more
       </Button>
     </div>
-    <div class="splash__image">
-      <Table class="splash__image-table" />
-      <img :src="require('@/assets/window.gif')" class="splash__image-window" />
-    </div>
+    <img :src="require('@/assets/splash-hd.gif')" class="splash__image" />
   </Section>
 </template>
 
@@ -214,30 +211,13 @@ export default {
 
   &__image {
     width: 100%;
-    display: flex;
-    margin-top: 20%;
-    margin-bottom: -20%;
-    height: fit-content;
+    height: auto;
+    max-width: units.spacing(160);
+    margin: 0 auto;
 
     @include mixins.media(laptop) {
       grid-row: 1;
-    }
-
-    &-window {
-      box-sizing: border-box;
-      position: relative;
-      margin-left: auto;
-      flex-grow: 4;
-      flex-basis: 1px;
-      transform: translate(-10%, -24%);
-      min-width: 1px;
-    }
-
-    &-table {
-      flex-grow: 3;
-      flex-basis: 1px;
-      min-width: 1px;
-      transform: translate(10%);
+      margin: 0;
     }
   }
 

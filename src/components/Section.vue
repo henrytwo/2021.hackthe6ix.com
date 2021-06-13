@@ -33,12 +33,14 @@ export default {
 <style lang="scss">
 @use '@/styles/units';
 
+$_spacing: 10;
+
 .section {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  padding-right: units.spacing(6);
-  padding-left: units.spacing(6);
+  padding-right: units.spacing($_spacing);
+  padding-left: units.spacing($_spacing);
   position: relative;
 
   &__anchor {

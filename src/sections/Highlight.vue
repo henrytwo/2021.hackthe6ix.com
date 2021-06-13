@@ -19,7 +19,10 @@
           <LeftArrow />
         </button>
         <div class="highlight__sponsors" ref="sponsors">
-          <div v-for="(data, index) in sponsors" :key="index" ref="card">
+          <div :class="[
+            'highlight__sponsor',
+            index === currentSlide && 'highlight__sponsor--active',
+          ]" v-for="(data, index) in sponsors" :key="index" ref="card">
             <Card
               backdropColor="light-peach"
               :placement="cardPlacement"
@@ -50,7 +53,7 @@
                   />
                 </div>
                 <Typography color="black" type="xsmall" weight="700">
-                  To learn more. Check out
+                  To learn more: Check out
                   <a
                     ref="noreferrer noopener"
                     class="highlight__link"
@@ -165,6 +168,7 @@ export default {
           can contribute to. Sync data, build bots and customize workflows. When AWS is overkill,
           use Autocode.`),
           link: `https://autocode.com/careers`,
+          name: 'Autocode'
         },
         {
           image: require('@/assets/highlight/capital-one.png'),
@@ -248,6 +252,15 @@ export default {
 
   &__card {
     height: calc(100% - #{units.spacing(4)});
+  }
+
+  &__sponsor {
+    @include mixins.transition(opacity, snail);
+    opacity: 0;
+
+    &--active {
+      opacity: 1;
+    }
   }
 
   &__body {
