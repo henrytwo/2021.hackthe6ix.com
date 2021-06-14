@@ -1,5 +1,5 @@
 
-$_colors: (
+$colors: (
 //[color-alias]: (
 //  value: {hex} - color value,
 //  static: {bool} - Optional. Skip interactive colors generation
@@ -54,6 +54,42 @@ $_colors: (
     value: #FFFFFF,
     static: true,
   ),
+  'dark-grey': (
+    value: #717171,
+    static: true,
+  ),
+  'grey': (
+    value: #DBDBDB,
+    static: true,
+  ),
+  'placeholder': (
+    value: #83ABB5,
+    static: true,
+  ),
+  'darker-navy': (
+    value: #053D4D,
+    static: true,
+  ),
+  'darker-teal': (
+    value: #032D39,
+    static: true,
+  ),
+  'off-navy': (
+    value: #006A82,
+    static: true,
+  ),
+  'footer': (
+    value: #143B46,
+    static: true,
+  ),
+  'error': (
+    value: #CA500B,
+    static: true,
+  ),
+  'success': (
+    value: #4BB543,
+    static: true,
+  ),
 );
 
 $_modifiers: (
@@ -86,7 +122,7 @@ $_modifiers: (
 // For creating core css color variables
 @mixin init {
   :root {
-    @each $color, $config in $_colors {
+    @each $color, $config in $colors {
       $value: map-get($config, value);
       #{css-var($color)}: _hex-to-raw($value);
     }
@@ -96,7 +132,7 @@ $_modifiers: (
 // For creating deferred css
 @mixin deferInit {
   :root {
-    @each $color, $config in $_colors {
+    @each $color, $config in $colors {
       @if not map-get($config, static) {
         $value: map-get($config, value);
         #{css-var($color, hover)}: _hex-to-raw(darken($value, 4%));

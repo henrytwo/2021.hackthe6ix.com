@@ -6,8 +6,9 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = function (api) {
-  api.loadSource(({ addCollection }) => {
-    // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
+  api.loadSource(({ addMetadata }) => {
+    addMetadata('startDate', new Date(2021, 7, 20));
+    addMetadata('endDate', new Date(2021, 7, 22));
   })
 
   api.createPages(({ createPage }) => {
