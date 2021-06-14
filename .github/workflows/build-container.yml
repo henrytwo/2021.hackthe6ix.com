@@ -4,11 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Specific container tag from preview container repository'
+        description: 'Specific container tag from container repository'
         required: true
       subdomain:
         description: 'Subdomain to deploy to'
         required: true
+      expire:
+        description: 'When to kill the image (Defaults to 1 week) (etc. yyyy-mm-dd)'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -69,7 +71,7 @@ jobs:
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           workflow_file_name: deploy-container.yml
-          inputs: '{ "tag": "${{ github.event.inputs.tag }}", "subdomain": "${{ github.event.inputs.subdomain }}"}'
+          inputs: '{ "tag": "${{ github.event.inputs.tag }}", "subdomain": "${{ github.event.inputs.subdomain }}", "expire": "${{ github.event.inputs.expire }}"}'
           repo: hackthe6ix-landing-2021
           owner: hack-the-6ix
 
