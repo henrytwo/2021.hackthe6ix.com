@@ -11,6 +11,9 @@ on:
       subdomain:
         description: 'Subdomain to deploy to'
         required: true
+      dockerrepo:
+        description: 'Docker Repo to deploy images to'
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -39,4 +42,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           host: ${{ secrets.SSH_HOST }}
-          script: /scripts/create-preview.sh -t ${{ github.event.inputs.tag }} -e "${{ env.EXPIRY_DATE }}" -s ${{ github.event.inputs.subdomain }}
+          script: /scripts/create-preview.sh -t ${{ github.event.inputs.tag }} -e "${{ env.EXPIRY_DATE }}" -s ${{ github.event.inputs.subdomain }} -d {{ github.event.inputs.dockerrepo }}

@@ -18,6 +18,6 @@ jobs:
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           workflow_file_name: build-container.yml
-          inputs: '{ "tag": "2021-latest", "subdomain": "2021", "expire": "${{ env.EXPIRY_DATE }}" }'
+          inputs: '{ "tag": "2021-latest", "subdomain": "2021", "expire": "${{ env.EXPIRY_DATE }}", "dockerrepo": "hackthe6ix/landing-page" }'
           repo: hackthe6ix-landing-2021
           owner: hack-the-6ix
