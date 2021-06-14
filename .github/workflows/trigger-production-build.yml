@@ -10,10 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # We will now call build container with specific parameters
+      - name: Get expiry date
+        run: |
+          echo "EXPIRY_DATE=$(date -d "+100 days")" >> $GITHUB_ENV
+
       - uses: convictional/trigger-workflow-and-wait@v1.3.0
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           workflow_file_name: build-container.yml
-          inputs: '{ "tag": "2021-latest", "subdomain": "2021", "expire": "$(date -d "+100 years")" }'
+          inputs: '{ "tag": "2021-latest", "subdomain": "2021", "expire": "${{ env.EXPIRY_DATE }}" }'
           repo: hackthe6ix-landing-2021
           owner: hack-the-6ix
