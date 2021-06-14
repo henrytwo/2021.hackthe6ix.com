@@ -2,7 +2,7 @@ name: Build production container
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
       # We will now call build container with specific parameters
       - name: Get expiry date
         run: |
-          echo "EXPIRY_DATE=$(date -d "+100 days")" >> $GITHUB_ENV
+          echo "EXPIRY_DATE=$(date -d "+100 years")" >> $GITHUB_ENV
 
       - uses: convictional/trigger-workflow-and-wait@v1.3.0
         with:
