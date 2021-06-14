@@ -75,7 +75,7 @@ jobs:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           workflow_file_name: deploy-container.yml
           inputs: '{ "tag": "${{ github.event.inputs.tag }}", "subdomain": "${{ github.event.inputs.subdomain }}", "expire": "${{ github.event.inputs.expire }}", "dockerrepo": "${{ github.event.inputs.dockerrepo }}" }'
-          repo: hackthe6ix-landing-2021
+          repo: ${{ github.event.repository.name }}
           owner: hack-the-6ix
 
       # Print preview link

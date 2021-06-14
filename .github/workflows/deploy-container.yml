@@ -24,7 +24,7 @@ jobs:
       - name: Precheck
         run: curl --silent -f -lSL https://hub.docker.com/v2/repositories/hackthe6ix/${REPO}/tags/${TAG} > /dev/null
         env:
-          REPO: ${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}
+          REPO: ${{ github.event.inputs.dockerrepo }}
           TAG: ${{ github.event.inputs.tag }}
 
       # Setup expiry date

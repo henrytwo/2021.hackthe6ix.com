@@ -15,8 +15,8 @@ jobs:
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           workflow_file_name: build-container.yml
-          inputs: '{ "tag": "${{ github.sha }}", "subdomain": "${{ github.sha }}", "dockerrepo": "hackthe6ix/preview-landing-page" }'
-          repo: hackthe6ix-landing-2021
+          inputs: '{ "tag": "${{ github.sha }}", "subdomain": "${{ github.sha }}", "dockerrepo": "${{ secrets.DOCKERHUB_PREVIEW_REPOSITORY }}" }'
+          repo: ${{ github.event.repository.name }}
           owner: hack-the-6ix
 
 
