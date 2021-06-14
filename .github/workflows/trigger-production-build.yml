@@ -12,6 +12,8 @@ jobs:
       # We will now call build container with specific parameters
       - uses: convictional/trigger-workflow-and-wait@v1.3.0
         with:
+          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           workflow_file_name: build-container.yml
           inputs: '{ "tag": "2021-latest", "subdomain": "2021" }'
-
+          repo: hackthe6ix-landing-2021
+          owner: hack-the-6ix
