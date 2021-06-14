@@ -42,4 +42,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           host: ${{ secrets.SSH_HOST }}
-          script: /scripts/create-preview.sh -t ${{ github.event.inputs.tag }} -e "${{ env.EXPIRY_DATE }}" -s ${{ github.event.inputs.subdomain }} -d {{ github.event.inputs.dockerrepo }}
+          script: /scripts/create-preview.sh -t ${{ github.event.inputs.tag }} -e "${{ env.EXPIRY_DATE }}" -s ${{ github.event.inputs.subdomain }} -d ${{ github.event.inputs.dockerrepo }}
