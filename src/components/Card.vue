@@ -1,21 +1,21 @@
 <template>
   <component
-    :style='offset !== undefined ? `--offset: ${offset * 0.25}rem` : undefined'
-    :class='[
+    :style="offset !== undefined ? `--offset: ${offset * 0.25}rem` : undefined"
+    :class="[
       boxed && `card--${vertical}-${horizontal}`,
       color && `card--${color}`,
-      "card",
-    ]'
-    :is='as'
+      'card',
+    ]"
+    :is="as"
   >
-    <slot/>
+    <slot />
     <div
-      :class='[
+      :class="[
         backdropColor && `card__back--${backdropColor}`,
         `card__back--${vertical}-${horizontal}`,
-        "card__back"
-      ]'
-      v-if='offset'
+        'card__back',
+      ]"
+      v-if="offset"
     />
   </component>
 </template>
@@ -49,22 +49,20 @@ export default {
   },
   computed: {
     vertical() {
-      return [
-        placements.TOP_RIGHT,
-        placements.TOP_LEFT,
-      ].includes(this.placement)
+      return [placements.TOP_RIGHT, placements.TOP_LEFT].includes(
+        this.placement,
+      )
         ? 'top'
         : 'bottom';
     },
     horizontal() {
-      return [
-        placements.TOP_RIGHT,
-        placements.BOTTOM_RIGHT,
-      ].includes(this.placement)
+      return [placements.TOP_RIGHT, placements.BOTTOM_RIGHT].includes(
+        this.placement,
+      )
         ? 'right'
         : 'left';
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -99,7 +97,7 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-  
+
     @each $tag, $_ in colors.$colors {
       &--#{$tag} {
         background-color: colors.css-color($tag);

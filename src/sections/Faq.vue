@@ -1,17 +1,37 @@
 <template>
-  <Section id='faq' class='faq' as='section'>
-      <Typography class='faq__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
-        Frequently Asked Questions
-        <Bubble class='faq__bubble'/>
-      </Typography>
-    <ul class='faq__items'>
-      <li class='faq__item' v-for='(question, index) in questions' :key='index'>
-        <button class='faq__item-header'>
-          <Typography type='heading3' as='h3'>
+  <Section id="faq" class="faq" as="section">
+    <Typography
+      class="faq__heading"
+      type="heading2"
+      color="light-yellow"
+      transform="uppercase"
+      as="h2"
+    >
+      Frequently Asked Questions
+      <Bubble class="faq__bubble" />
+    </Typography>
+    <ul class="faq__items">
+      <li class="faq__item" v-for="(question, index) in questions" :key="index">
+        <button
+          @click="$set(selected, index, !selected[index])"
+          class="faq__item-header"
+        >
+          <Typography type="heading3" as="h3">
             {{ question.label }}
+            <Caret
+              :class="[selected[index] && 'faq__caret--active', 'faq__caret']"
+            />
           </Typography>
         </button>
-        <Typography class='faq__item-body' type='paragraph' v-html='question.body' as='div'/>
+        <Typography
+          :class="[
+            selected[index] && 'faq__item-body--active',
+            'faq__item-body',
+          ]"
+          type="paragraph"
+          v-html="question.body"
+          as="div"
+        />
       </li>
     </ul>
   </Section>
@@ -21,6 +41,7 @@
 import Typography from '@/components/Typography';
 import Section from '@/components/Section';
 import Bubble from '@/assets/question-bubble.svg';
+import Caret from '@/assets/caret.svg';
 import marked from 'marked';
 
 export default {
@@ -29,6 +50,12 @@ export default {
     Typography,
     Section,
     Bubble,
+    Caret,
+  },
+  data() {
+    return {
+      selected: {},
+    };
   },
   computed: {
     questions() {
@@ -80,7 +107,9 @@ export default {
           virtual this year so you can team up with hackers regardless of their
           school, country, or timezone.
           
-For ideas, check out our submissions from last year here!`),
+For ideas, check out our submissions from last year
+<a href='https://hackthe6ix2020.devpost.com/project-gallery' target='_blank' rel='noopener noreferrer'>here</a>!
+`),
         },
         {
           label: 'What kind of workshops, talks, and activities will there be?',
@@ -143,10 +172,32 @@ For ideas, check out our submissions from last year here!`),
       background: none;
       border: none;
       padding: 0;
+      cursor: pointer;
     }
 
     &-body {
+      @include mixins.transition(max-height);
+      overflow: hidden;
+      max-height: 0px;
 
+      & a {
+        color: inherit;
+      }
+
+      &--active {
+        max-height: 80vh;
+      }
+    }
+  }
+
+  &__caret {
+    @include mixins.transition(transform);
+    margin-left: units.spacing(2);
+    margin-bottom: units.spacing(1);
+    display: inline;
+
+    &--active {
+      transform: rotate(180deg);
     }
   }
 }

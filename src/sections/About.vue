@@ -1,126 +1,121 @@
 <template>
-  <Section id='about' class='about' as='section'>
-    <div class='about__main'>
-      <div class='about__content'>
-        <Typography class='about__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
-          About us
-          <Bubble width='50' heigh='80' class='about__bubble'/>
-        </Typography>
-        <Typography class='about__text' type='paragraph' as='p'>
-          Hack the 6ix is the largest summer student-run, not-for-profit
-          hackathon now in its seventh iteration, based in Toronto. 
-        </Typography>
-        <Typography class='about__text' type='paragraph' as='p'>
-          We take pride in the diversity and talent of our hackers, who
-          help us become a key player in the Toronto tech ecosystem. We
-          provide an outlet for students to present their ideas of the future. 
-        </Typography>
-        <Button @click='openGallery'>
-          View Past Projects
-        </Button>
-      </div>
-      <div class='about__slides'>
-        <button
-          @click='currentSlide = (currentSlide || testimonials.length) - 1'
-          class='about__arrow'
+  <Section id="about" class="about" as="section">
+    <div class="about__main">
+      <div class="about__content">
+        <Typography
+          class="about__heading"
+          type="heading2"
+          color="light-yellow"
+          transform="uppercase"
+          as="h2"
         >
-          <LeftArrow/>
+          About us
+          <Bubble width="50" heigh="80" class="about__bubble" />
+        </Typography>
+        <Typography class="about__text" type="paragraph" as="p">
+          Hack the 6ix is the largest summer student-run, not-for-profit
+          hackathon now in its seventh iteration, based in Toronto.
+        </Typography>
+        <Typography class="about__text" type="paragraph" as="p">
+          We take pride in the diversity and talent of our hackers, who help us
+          become a key player in the Toronto tech ecosystem. We provide an
+          outlet for students to present their ideas of the future.
+        </Typography>
+        <Button @click="openGallery"> View Past Projects </Button>
+      </div>
+      <div class="about__slides">
+        <button
+          @click="currentSlide = (currentSlide || testimonials.length) - 1"
+          class="about__arrow"
+        >
+          <LeftArrow />
         </button>
-        <div class='about__window' ref='testimonials'>
+        <div class="about__testimonials" ref="items">
           <div
-            class='about__testimonals'
-            :style='{
-              "--card-offset": currentSlide,
-              "--card-width": `${width}px`,
-            }'
+            v-for="(data, index) in testimonials"
+            ref='card'
+            :class="[
+              index === currentSlide && 'about__testimonial--active',
+              `about__testimonial--${index}`,
+              'about__testimonial',
+            ]"
+            :key="index"
           >
-            <div
-              v-for='(data, index) in testimonials'
-              :class='[
-                index === currentSlide && "about__slide-card-container--selected",
-                "about__slide-card-container",
-              ]'
-              :key='index'
+            <Card
+              backdropColor="light-peach"
+              :placement="cardPlacement"
+              class="about__slide-card"
+              color="light-teal"
+              offset="4"
+              boxed
             >
-              <Card
-                backdropColor='light-peach'
-                :placement='cardPlacement'
-                :class='[
-                  `about__slide-card--${index}`,
-                  "about__slide-card",
-                ]'
-                color='light-teal'
-                offset='4'
-                boxed
-              >
-                <CardHeader
-                  backgroundColor='teal'
-                  title='testimonials.ppt'
-                  :size='headerSize'
-                  color='dark-navy'
-                />
-                <div class='about__card'>
-                  <img class='about__card-image' :src='data.image'/>
-                  <div class='about__card-body'>
+              <CardHeader
+                backgroundColor="teal"
+                title="testimonials.ppt"
+                :size="headerSize"
+                color="dark-navy"
+              />
+              <div class="about__card">
+                <img class="about__card-image" :src="data.image" />
+                <div class="about__card-body">
+                  <div class="about__card-content-frame">
+                    <Quotation class="about__quote" />
                     <Typography
-                      class='about__card-content'
-                      v-html='data.content'
-                      color='black'
-                      type='small'
-                      as='div'
+                      class="about__card-content"
+                      v-html="data.content"
+                      color="black"
+                      type="small"
+                      as="div"
                     />
-                    <Typography type='heading4' color='black'>
-                      {{ data.title }}
-                    </Typography>
                   </div>
+                  <Typography type="heading4" color="black">
+                    {{ data.title }}
+                  </Typography>
                 </div>
-                <div class='about__dots'>
-                  <div
-                    v-for='(_, i) in testimonials'
-                    :class='[
-                      i === index && "about__dot--filled",
-                      "about__dot",
-                    ]'
-                    :key='i'
-                  />
-                </div>
-              </Card>
-            </div>
+              </div>
+              <div class="about__dots">
+                <div
+                  v-for="(_, i) in testimonials"
+                  :class="[i === index && 'about__dot--filled', 'about__dot']"
+                  :key="i"
+                />
+              </div>
+            </Card>
           </div>
         </div>
         <button
-          @click='currentSlide = (currentSlide + 1) % testimonials.length'
-          class='about__arrow'
+          @click="currentSlide = (currentSlide + 1) % testimonials.length"
+          class="about__arrow"
         >
-          <RightArrow/>
+          <RightArrow />
         </button>
       </div>
     </div>
-    <div class='about__stats'>
-      <Typography type='heading3' color='light-yellow' transform='uppercase'>
+    <div class="about__stats">
+      <Typography type="heading3" color="light-yellow" transform="uppercase">
         Last year we attracted:
       </Typography>
-      <ul class='about__stats-list'>
+      <ul class="about__stats-list">
         <Card
-          v-for='(stat, index) in stats'
-          :placement='statPlacement'
-          backdropColor='teal'
-          color='darker-navy'
-          class='about__stat'
-          offset='1.5'
-          :key='index'
-          as='li'
+          v-for="(stat, index) in stats"
+          :placement="statPlacement"
+          backdropColor="teal"
+          color="darker-navy"
+          class="about__stat"
+          offset="1.5"
+          :key="index"
+          as="li"
           boxed
         >
-          <Typography align='center' type='heading2' as='p'>
+          <Typography align="center" type="heading2" as="p">
             {{ stat.text }}
           </Typography>
           <Typography
-            align='center'
-            type='heading4'
-            as='p'
-            color='light-yellow'
-            transform='uppercase'
+            align="center"
+            type="heading4"
+            as="p"
+            color="light-yellow"
+            transform="uppercase"
           >
             {{ stat.label }}
           </Typography>
@@ -141,10 +136,12 @@ import Button from '@/components/Button';
 import Bubble from '@/assets/happy-face-bubble.svg';
 import RightArrow from '@/assets/right-arrow.svg';
 import LeftArrow from '@/assets/left-arrow.svg';
+import Quotation from '@/assets/quotation.svg';
 
 export default {
   name: 'About',
   components: {
+    Quotation,
     RightArrow,
     LeftArrow,
     Bubble,
@@ -158,26 +155,31 @@ export default {
   data() {
     return {
       currentSlide: 0,
-      width: 0,
     };
   },
   mounted() {
-    window.addEventListener('resize', this.setCardWidth, { passive: true });
-    this.setCardWidth();
+    window.addEventListener('resize', this.setScroll, { passive: true });
   },
-  destroyed() {
-    window.removeEventListener('resize', this.setCardWidth, { passive: true });
+  beforeDestroy() {
+    window.removeEventListener('resize', this.setScroll, { passive: true });
+  },
+  watch: {
+    currentSlide() {
+      this.setScroll(true);
+    },
   },
   methods: {
-    setCardWidth() {
-      this.width = this.$refs.testimonials.clientWidth;
+    setScroll(smooth) {
+      const target = this.$refs.card[this.currentSlide];
+      const parent = this.$refs.items;
+      parent.scrollTo({
+        left: target.offsetLeft - parent.offsetLeft,
+        behavior: smooth === true ? 'smooth' : undefined,
+      });
     },
     openGallery() {
-      window.open(
-        'https://hackthe6ix2020.devpost.com',
-        '_blank',
-      );
-    }
+      window.open('https://hackthe6ix2020.devpost.com', '_blank');
+    },
   },
   computed: {
     cardPlacement() {
@@ -199,33 +201,37 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
           all from the comfort of my own home! Working on our hackathon project remotely
           was definitely a unique experience and had its own set of challenges, but it was
           super rewarding and was an incredible learning opportunity.`),
-          title: 'Wilson Wang, Hacker',
+          title: 'Willson Wang, Hacker',
         },
         {
           image: require('@/assets/about/aiman.png'),
-          content: marked(`So honoured to chat about diversity & inclusion at @HackThe6ix today.
+          content:
+            marked(`So honoured to chat about diversity & inclusion at @HackThe6ix today.
           It's the most organized hackathon I've ever been to (from what feels like millions),
           and it's all virtual! Well-moderated, great questions, diverse backgrounds+views of
           the panelists. Kudos to the HT6 team 👏🏻`),
-          title: 'Aiman Aamir, Speaker',
+          title: 'Aaiman Aamir, Speaker',
         },
         {
           image: require('@/assets/about/samson.png'),
-          content: marked(`Thank you so much for this amazing opportunity, I had such an amazing
+          content:
+            marked(`Thank you so much for this amazing opportunity, I had such an amazing
           time this weekend. I really enjoyed my first hackathon and stepping out of my comfort
           zone and I am definitely looking to participate in more in the future. 😊`),
           title: 'Samson Hua, Hacker',
         },
         {
           image: require('@/assets/about/sam.png'),
-          content: marked(`It was so nice to guide students through their projects, whether it
+          content:
+            marked(`It was so nice to guide students through their projects, whether it
           was simply providing feedback on project ideas, or helping hackers deploy apps, connect
           their React apps to backends, and build API's for their projects, I had a great time.`),
           title: 'Sam Eskandar, Mentor',
         },
         {
           image: require('@/assets/about/aadar.png'),
-          content: marked(`It was great experience attending a virtual hackathon this weekend.
+          content:
+            marked(`It was great experience attending a virtual hackathon this weekend.
           Made new friends with my team. I’d like to thank Hack the 6ix for giving people the
           opportunity to learn new skills and develop something unique, even with the
           current COVID-19 restrictions.`),
@@ -295,31 +301,30 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     grid-template-columns: units.spacing(6) auto units.spacing(6);
     grid-gap: units.spacing(6);
     max-width: units.spacing(170);
-    margin: 0 auto;
+    margin: 0 auto auto;
     display: grid;
   }
 
-  &__window {
+  &__testimonials {
+    grid-template-columns: repeat(5, 100%);
+    max-width: units.spacing(180);
+    grid-gap: units.spacing(16);
     overflow: hidden;
+    display: grid;
   }
 
-  &__testimonals {
-    @include mixins.transition(transform, slow);
-    align-items: stretch;
-    display: flex;
-    transform:
-      translateX(calc(var(--card-width, 0) * var(--card-offset, 0) * -1))
-      translateX(calc(#{units.spacing(20)} * var(--card-offset, 0) * -1));
-  }
-
-  &__slide-card-container {
-    @include mixins.transition(opacity, slow);
-    margin-right: units.spacing(20);
-    min-width: var(--card-width, 0);
+  &__testimonial {
+    @include mixins.transition(opacity, snail);
     opacity: 0;
 
-    &--selected {
+    &--active {
       opacity: 1;
+    }
+
+    &--0 {
+      & .about__card-content {
+        font-size: units.spacing(3);
+      }
     }
   }
 
@@ -327,12 +332,6 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     height: calc(100% - #{units.spacing(4)});
     flex-direction: column;
     display: flex;
-
-    &--0 {
-      & .about__card-content {
-        font-size: units.spacing(3);
-      }
-    }
   }
 
   &__stats-list {
@@ -402,6 +401,7 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
 
   &__card-content {
     margin-bottom: units.spacing(3);
+    z-index: 1;
 
     & > p {
       &:first-child {
@@ -412,6 +412,11 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
         margin-bottom: 0;
       }
     }
+  }
+
+  &__card-content-frame {
+    display: flex;
+    position: relative;
   }
 
   &__dots {
@@ -429,6 +434,12 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
     &--filled {
       background-color: colors.css-color(black);
     }
+  }
+
+  &__quote {
+    inset: units.spacing(-2) auto auto units.spacing(-4);
+    position: absolute;
+    margin: auto;
   }
 }
 </style>

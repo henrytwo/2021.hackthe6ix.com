@@ -9,9 +9,9 @@ module.exports = function (api) {
   api.loadSource(({ addMetadata }) => {
     addMetadata('startDate', new Date(2021, 7, 20));
     addMetadata('endDate', new Date(2021, 7, 22));
-  })
+  });
 
   api.createPages(({ createPage }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
-  })
-}
+  });
+};

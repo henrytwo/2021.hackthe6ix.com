@@ -1,11 +1,13 @@
 <template>
-  <Section class='mail'>
-    <Typography type='heading3' color='light-yellow' as='h2'>
+  <Section class="mail" no_scrollspy>
+    <Typography type="heading3" color="light-yellow" as="h2">
       Interested? Get the latest updates in your inbox!
     </Typography>
-    <MailForm class="mail__form"/>
-    <div class='mail__top'>
-      <Button @click='toTop' leftIcon='arrow-up' type='ghost'>Back to Top</Button>
+    <MailForm class="mail__form" />
+    <div class="mail__top">
+      <Button @click="toTop" leftIcon="arrow-up" type="ghost"
+        >Back to Top</Button
+      >
     </div>
   </Section>
 </template>
@@ -21,18 +23,20 @@ export default {
   name: 'Mail',
   methods: {
     toTop() {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
   },
   components: {
     Typography,
     Section,
     Button,
     Input,
-    MailForm
+    MailForm,
   },
-}
+};
 </script>
 
 <style lang="scss">

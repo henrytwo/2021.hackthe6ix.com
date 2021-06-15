@@ -1,58 +1,37 @@
 <template>
-  <Section
-    :class='[
-      isTop || "nav--scrolled",
-      "nav",
-    ]'
-    as='nav'
-  >
-    <g-link to='/#top' class='nav__logo'>
-      <Icon width='24'/>
-      <Typography
-        type='heading3'
-        transform='uppercase'
-        color='yellow'
-      >
-        <Typography type='heading3' color='teal'>
-          HT6
-        </Typography> Digital
+  <Section :class="[isTop || 'nav--scrolled', 'nav']" as="nav">
+    <g-link to="/#top" class="nav__logo">
+      <Icon width="24" />
+      <Typography type="heading3" transform="uppercase" color="yellow">
+        <Typography type="heading3" color="teal"> HT6 </Typography> Digital
       </Typography>
     </g-link>
-    <Button @click='showMobile = true' class='nav__menu' type='ghost'>
-      <FontAwesomeIcon icon='bars'/>
+    <Button @click="showMobile = true" class="nav__menu" type="ghost">
+      <FontAwesomeIcon icon="bars" />
     </Button>
-    <ul
-      :class='[
-        showMobile && "nav__links--show",
-        "nav__links",
-      ]'
-    >
-      <li class='nav__header'>
-        <div class='nav__logo'>
-          <Icon width='24'/>
-          <Typography
-            type='heading3'
-            transform='uppercase'
-            color='yellow'
-          >
-            <Typography type='heading3' color='teal'>
-              HT6
-            </Typography> Digital
+    <ul :class="[showMobile && 'nav__links--show', 'nav__links']">
+      <li class="nav__header">
+        <div class="nav__logo">
+          <Icon width="24" />
+          <Typography type="heading3" transform="uppercase" color="yellow">
+            <Typography type="heading3" color="teal"> HT6 </Typography> Digital
           </Typography>
         </div>
-        <Button @click='showMobile = false' class='nav__menu' type='ghost'>
-          <FontAwesomeIcon icon='times'/>
+        <Button @click="showMobile = false" class="nav__menu" type="ghost">
+          <FontAwesomeIcon icon="times" />
         </Button>
       </li>
-      <li @click='onNavigate' v-for='(link, index) in links' :key='index'>
-        <g-link
-          exact-active-class='nav__link--active'
-          class='nav__link'
-          :to='link.to'
-          exact
+      <li v-for="(link, index) in links" :key="index">
+        <a
+          :class="[
+            link.to.slice(2) === current && 'nav__link--active',
+            'nav__link',
+          ]"
+          @click="onNavigate"
+          :href="link.to"
         >
           {{ link.label }}
-        </g-link>
+        </a>
       </li>
     </ul>
   </Section>
@@ -67,6 +46,7 @@ import Icon from '@/assets/icon.svg';
 
 export default {
   name: 'Navigation',
+  inject: ['current_scrollspy', 'get_scrollspy'],
   components: {
     FontAwesomeIcon,
     Typography,
@@ -91,17 +71,22 @@ export default {
     scrollHandler() {
       this.isTop = window.pageYOffset < 10;
     },
-    onNavigate() {
-      window.clearTimeout(this.timer);
-      localStorage.setItem('ignore-observer', true);
-
+    onNavigate(e) {
+      e.preventDefault();
+      const id = e.target.href.split('#')[1];
+      const top = document.getElementById(id).parentElement.offsetTop;
+      window.scrollTo({
+        behavior: 'smooth',
+        top,
+      });
+      history.replaceState(null, null, `#${id}`);
       this.showMobile = false;
-      this.timer = window.setTimeout(() => {
-        localStorage.removeItem('ignore-observer');
-      }, 1000);
-    }
+    },
   },
   computed: {
+    current() {
+      return this.current_scrollspy();
+    },
     links() {
       return [
         {
@@ -131,7 +116,7 @@ export default {
       ];
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -148,7 +133,7 @@ export default {
   top: 0;
 
   &--scrolled {
-    background: linear-gradient(90deg, #002C37 0%, #004D57 100%);
+    background: linear-gradient(90deg, #002c37 0%, #004d57 100%);
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
   }
 
@@ -192,7 +177,7 @@ export default {
         flex-direction: column;
         box-sizing: border-box;
         padding: units.spacing(2.5) units.spacing(6);
-        background: linear-gradient(90deg, #002C37 0%, #004D57 100%);
+        background: linear-gradient(90deg, #002c37 0%, #004d57 100%);
         display: flex;
         top: 0;
         right: 0;
@@ -218,7 +203,8 @@ export default {
     display: inline-block;
     color: inherit;
 
-    &--active, &:hover {
+    &--active,
+    &:hover {
       border-color: colors.css-color(teal);
       color: colors.css-color(teal);
     }

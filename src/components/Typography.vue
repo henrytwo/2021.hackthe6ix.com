@@ -1,17 +1,17 @@
 <template>
   <component
-    v-on='$listeners'
-    :class='[
+    v-on="$listeners"
+    :class="[
       transform && `text--transform--${transform}`,
       weight && `text--weight--${weight}`,
       color && `text--color--${color}`,
       align && `text--align--${align}`,
       `text--type--${type}`,
-      "text",
-    ]'
-    :is='as'
+      'text',
+    ]"
+    :is="as"
   >
-    <slot/>
+    <slot />
   </component>
 </template>
 
@@ -35,7 +35,7 @@ export default {
       default: () => 'white',
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -46,7 +46,7 @@ export default {
   font-family: units.$font;
   letter-spacing: units.spacing(0.25);
   margin: 0;
-  
+
   @each $type, $config in units.$font-config {
     &--type--#{$type} {
       @each $tag, $val in $config {

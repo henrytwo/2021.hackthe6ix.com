@@ -1,39 +1,47 @@
 <template>
-  <div class='input'>
+  <div class="input">
     <label
-      :class='[
-        success && "input__label--success",
-        error && "input__label--error",
-        "input__label",
-      ]'
-      v-show='showLabel'
-      :for='id'
+      :class="[
+        success && 'input__label--success',
+        error && 'input__label--error',
+        'input__label',
+      ]"
+      v-show="showLabel"
+      :for="id"
     >
       {{ label + (required ? '*' : '') }}
     </label>
     <component
-      :is='as'
-      :class='[
-        success && "input__el--success",
-        error && "input__el--error",
-        "input__el",
-      ]'
-      @input='event => {
-        $emit("input", event.target.value);
-      }'
-      :placeholder='placeholder'
-      :disabled='disabled'
-      :readonly='readOnly'
-      :required='required'
-      :value='value'
-      :name='name'
-      :type='type'
-      :id='id'
+      :is="as"
+      :class="[
+        success && 'input__el--success',
+        error && 'input__el--error',
+        'input__el',
+      ]"
+      @input="
+        (event) => {
+          $emit('input', event.target.value);
+        }
+      "
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readOnly"
+      :required="required"
+      :value="value"
+      :name="name"
+      :type="type"
+      :id="id"
     />
-    <span class='input__status input__status--error' v-if='typeof error === "string"'>
+    <span
+      class="input__status input__status--error"
+      v-if="typeof error === 'string'"
+    >
       {{ error }}
     </span>
-    <span class='input__status input__status--success' v-else-if='typeof success === "string"'>
+    <span
+      class="input__status input__status--success"
+      v-else-if="typeof success === 'string'"
+    >
       {{ success }}
     </span>
   </div>
@@ -76,8 +84,8 @@ export default {
       type: String,
       default: () => 'input',
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">

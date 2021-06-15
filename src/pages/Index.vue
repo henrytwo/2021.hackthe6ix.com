@@ -1,12 +1,12 @@
 <template>
   <Layout>
-    <Splash/>
-    <About/>
-    <Why/>
-    <Highlight/>
-    <PastSponsors/>
-    <PastSpeakers/>
-    <Faq/>
+    <Splash />
+    <About />
+    <Why />
+    <Highlight />
+    <PastSponsors />
+    <PastSpeakers />
+    <Faq />
   </Layout>
 </template>
 
@@ -31,7 +31,7 @@ export default {
     Faq,
   },
   metaInfo: {
-    title: 'Home'
-  }
-}
+    title: 'Home',
+  },
+};
 </script>
