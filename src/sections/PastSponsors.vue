@@ -154,15 +154,15 @@ export default {
     }
 
     &--gold {
-      max-height: units.spacing(15);
+      max-height: units.spacing(22);
     }
 
     &--silver {
-      max-height: units.spacing(12.5);
+      max-height: units.spacing(15);
     }
 
     &--bronze {
-      max-height: units.spacing(10);
+      max-height: units.spacing(7);
       margin: units.spacing(7) units.spacing(4);
     }
   }

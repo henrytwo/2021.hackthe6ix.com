@@ -212,10 +212,11 @@ export default {
   &__image {
     width: 100%;
     height: auto;
-    max-width: units.spacing(160);
+    max-width: units.spacing(140);
     margin: 0 auto;
 
     @include mixins.media(laptop) {
+      max-width: units.spacing(120);
       grid-row: 1;
       margin: 0;
     }
