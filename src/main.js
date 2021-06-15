@@ -15,9 +15,8 @@ export default function (Vue, { head, isClient }) {
   }
 
   Vue.use(VueGTag, {
-    config: { id: "G-P4G1YY4XT6" }
+    config: { id: 'G-P4G1YY4XT6' },
   });
-
 
   head.link.push({
     rel: `preconnect`,

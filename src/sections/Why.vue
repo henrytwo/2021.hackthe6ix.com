@@ -1,38 +1,61 @@
 <template>
-  <Section id='why' class='why' as='section'>
+  <Section id="why" class="why" as="section">
     <div class="why__content">
-      <Typography class='why__heading' type='heading2' color='light-yellow' transform='uppercase' as='h2'>
+      <Typography
+        class="why__heading"
+        type="heading2"
+        color="light-yellow"
+        transform="uppercase"
+        as="h2"
+      >
         Why get involved
-        <Bubble class='why__bubble'/>
+        <Bubble class="why__bubble" />
       </Typography>
     </div>
-      <div class='why__card-wrapper'>
-        <button class='why__arrow' @click='prevSlide'>
-          <LeftArrow/>
-        </button>
-        <div ref='frame' class="why__cards-frame">
-          <div ref='cards' class='why__cards'>
-            <Card class='why__card' v-for='(card, index) in cards' color='off-navy' :key='index'>
-              <CardHeader class='why__card-header' backgroundColor='dark-navy' size='small' />
-              <div class='why__card-body'>
-                <Typography type='heading3' as='h3'>
-                  {{ card.title }}
-                </Typography>
-                <Typography class='why__card-text' type='small' as='p'>
-                  {{ card.body }}
-                </Typography>
-                <component class='why__card-asset' v-if='card.asset' :is='card.asset' />
-                <Button class='why__card-action' v-else-if='card.action' @click='toGallery(card.action.to)'>
-                  {{ card.action.text }}
-                </Button>
-              </div>
-            </Card>
-          </div>
+    <div class="why__card-wrapper">
+      <button class="why__arrow" @click="prevSlide">
+        <LeftArrow />
+      </button>
+      <div ref="frame" class="why__cards-frame">
+        <div ref="cards" class="why__cards">
+          <Card
+            class="why__card"
+            v-for="(card, index) in cards"
+            color="off-navy"
+            :key="index"
+          >
+            <CardHeader
+              class="why__card-header"
+              backgroundColor="dark-navy"
+              size="small"
+            />
+            <div class="why__card-body">
+              <Typography type="heading3" as="h3">
+                {{ card.title }}
+              </Typography>
+              <Typography class="why__card-text" type="small" as="p">
+                {{ card.body }}
+              </Typography>
+              <component
+                class="why__card-asset"
+                v-if="card.asset"
+                :is="card.asset"
+              />
+              <Button
+                class="why__card-action"
+                v-else-if="card.action"
+                @click="toGallery(card.action.to)"
+              >
+                {{ card.action.text }}
+              </Button>
+            </div>
+          </Card>
         </div>
-        <button class='why__arrow' @click='nextSlide'>
-          <RightArrow/>
-        </button>
       </div>
+      <button class="why__arrow" @click="nextSlide">
+        <RightArrow />
+      </button>
+    </div>
   </Section>
 </template>
 
@@ -66,7 +89,7 @@ export default {
     Gears,
     Laptops,
     Bubble,
-    Button
+    Button,
   },
   mounted() {
     window.addEventListener('resize', this.resize, { passive: true });
@@ -85,12 +108,12 @@ export default {
       return [
         {
           title: 'Want to land your next internship?',
-          body: 'Hackathons are an amazing place to meet mentors and industry professionals in the tech community. A pandemic won\'t stop us from fostering important conversations.',
+          body: "Hackathons are an amazing place to meet mentors and industry professionals in the tech community. A pandemic won't stop us from fostering important conversations.",
           asset: 'Laptops',
         },
         {
           title: 'Looking to learn from experts?',
-          body: 'We value sharing knowledge and applying the things we learned. We\'ll host live workshops all weekend to give you the inspiration you need to get your project off the ground.',
+          body: "We value sharing knowledge and applying the things we learned. We'll host live workshops all weekend to give you the inspiration you need to get your project off the ground.",
           asset: 'Gears',
         },
         {
@@ -108,7 +131,7 @@ export default {
         },
         {
           title: 'Feeling stuck at home?',
-          body: 'Physical distancing is serious, but meeting new people doesn\'t have to stop. Get geared up in your pajamas and make tons of virtual memories.',
+          body: "Physical distancing is serious, but meeting new people doesn't have to stop. Get geared up in your pajamas and make tons of virtual memories.",
           asset: 'Camera',
         },
       ];
@@ -116,22 +139,23 @@ export default {
   },
   methods: {
     toGallery(to) {
-      window.open(to, "_blank");
+      window.open(to, '_blank');
     },
     handleLimit() {
-      if (window.matchMedia('(max-width: 768px)').matches) {
-        this.limit = 4;
-      } else if (window.matchMedia('(max-width: 1080px)').matches) {
+      if (window.matchMedia('(min-width: 1080px)').matches) {
         this.limit = 3;
+      } else if (window.matchMedia('(min-width: 768px)').matches) {
+        this.limit = 4;
       } else {
-        this.limit = 2;
+        this.limit = 5;
       }
     },
     prevSlide() {
-      this.curr = (Math.min(this.curr, this.limit) || 1) - 1;
+      this.curr = (Math.min(this.curr, this.limit) || this.limit) - 1;
     },
     nextSlide() {
-      this.curr = Math.min(this.curr + 1, this.limit);
+      const next = this.curr + 1;
+      this.curr = next >= this.limit ? 0 : next;
     },
     resize() {
       this.handleLimit();
@@ -150,10 +174,10 @@ export default {
     curr(newVal) {
       this.setScroll(newVal);
     },
-  }
+  },
 };
 </script>
- 
+
 <style lang="scss">
 @use '@/styles/mixins';
 @use '@/styles/units';
@@ -244,5 +268,5 @@ export default {
     margin: auto 0;
     border: none;
   }
-}  
+}
 </style>
