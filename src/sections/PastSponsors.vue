@@ -1,15 +1,8 @@
 <template>
   <Section class="past-sponsors" id="past-sponsors" as="section">
-    <Typography
-      class="past-sponsors__heading"
-      transform="uppercase"
-      color="black"
-      type="heading2"
-      as="h2"
-    >
+    <SectionHeader align='center' bubble='Star' class="past-sponsors__heading" color='black'>
       Past Sponsors
-      <Bubble width="50" heigh="80" class="past-sponsors__bubble" />
-    </Typography>
+    </SectionHeader>
     <div class="past-sponsors__groups">
       <ul
         v-for="[key, group] in Object.entries($static)"
@@ -35,16 +28,14 @@
 </template>
 
 <script>
-import Typography from '@/components/Typography';
+import SectionHeader from '@/components/SectionHeader';
 import Section from '@/components/Section';
-import Bubble from '@/assets/star-bubble.svg';
 
 export default {
   name: 'PastSponsors',
   components: {
-    Typography,
+    SectionHeader,
     Section,
-    Bubble,
   },
 };
 </script>
@@ -112,7 +103,8 @@ export default {
 
 .past-sponsors {
   background-color: colors.css-color(white);
-  padding: units.spacing(25) 0;
+  padding-bottom: units.spacing(25);
+  padding-top: units.spacing(25);
 
   &__bubble {
     margin-bottom: units.spacing(-2);
@@ -121,9 +113,6 @@ export default {
 
   &__heading {
     margin-bottom: units.spacing(8);
-    justify-content: center;
-    align-items: flex-end;
-    display: flex;
   }
 
   &__groups {

@@ -1,17 +1,8 @@
 <template>
   <Section id="why" class="why" as="section">
-    <div class="why__content">
-      <Typography
-        class="why__heading"
-        type="heading2"
-        color="light-yellow"
-        transform="uppercase"
-        as="h2"
-      >
-        Why get involved
-        <Bubble class="why__bubble" />
-      </Typography>
-    </div>
+    <SectionHeader class='why__heading' bubble='Grow' color='light-yellow'>
+      Why get involved
+    </SectionHeader>
     <div class="why__card-wrapper">
       <button class="why__arrow" @click="prevSlide">
         <LeftArrow />
@@ -44,7 +35,7 @@
               <Button
                 class="why__card-action"
                 v-else-if="card.action"
-                @click="toGallery(card.action.to)"
+                @click="to(card.action, card.action)"
               >
                 {{ card.action.text }}
               </Button>
@@ -60,6 +51,7 @@
 </template>
 
 <script>
+import SectionHeader from '@/components/SectionHeader';
 import Section from '@/components/Section';
 import Placeholder from '@/components/Placeholder';
 import Card from '@/components/Card';
@@ -71,12 +63,12 @@ import Camera from '@/assets/Why/home/memories.svg';
 import Prize from '@/assets/Why/reward/prize.svg';
 import Gears from '@/assets/Why/learn/gears.svg';
 import Laptops from '@/assets/Why/internship/laptops.svg';
-import Bubble from '@/assets/Why/grow-bubble.svg';
 import Button from '@/components/Button';
 
 export default {
   name: 'Why',
   components: {
+    SectionHeader,
     Section,
     Placeholder,
     Card,
@@ -88,7 +80,6 @@ export default {
     Prize,
     Gears,
     Laptops,
-    Bubble,
     Button,
   },
   mounted() {
@@ -125,6 +116,7 @@ export default {
           title: 'Need projects on your portfolio?',
           body: 'Complete a project worth showcasing within 48 hours from scratch and land your next job. Check out what our hackers created last year!',
           action: {
+            gtag: ['view-gallery', { section: 'why' }],
             text: '2020 Project Gallery',
             to: 'https://hackthe6ix2020.devpost.com',
           },
@@ -138,8 +130,11 @@ export default {
     },
   },
   methods: {
-    toGallery(to) {
-      window.open(to, '_blank');
+    to(action) {
+      if (action.gtag) {
+        this.$gtag.event(...action.gtag);
+      }
+      window.open(action.to, '_blank');
     },
     handleLimit() {
       if (window.matchMedia('(min-width: 1080px)').matches) {
@@ -193,8 +188,6 @@ export default {
 
   &__heading {
     margin-bottom: units.spacing(19);
-    display: flex;
-    align-items: flex-end;
   }
 
   &__bubble {

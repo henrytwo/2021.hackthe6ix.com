@@ -1,17 +1,8 @@
 <template>
   <Section class="past-speakers" id="past-speakers" as="section">
-    <div class="past-speakers__content">
-      <Typography
-        class="past-speakers__heading"
-        type="heading2"
-        color="light-yellow"
-        transform="uppercase"
-        as="h2"
-      >
-        Past Speakers
-        <Bubble class="past-speakers__bubble" />
-      </Typography>
-    </div>
+    <SectionHeader class="past-speakers__heading" color='light-yellow' align='center' bubble='Megaphone'>
+      Past Speakers
+    </SectionHeader>
     <div
       class="past-speakers__speakers"
       :style="{ '--card-offset': `-${offset}px` }"
@@ -62,17 +53,17 @@
 
 <script>
 import marked from 'marked';
+import SectionHeader from '@/components/SectionHeader';
 import Card, { placements } from '@/components/Card';
 import Typography from '@/components/Typography';
 import Section from '@/components/Section';
-import Bubble from '@/assets/past-speakers/megaphone-bubble.svg';
 
 export default {
   name: 'PastSpeakers',
   components: {
+    SectionHeader,
     Typography,
     Section,
-    Bubble,
     Card,
   },
   mounted() {
@@ -177,8 +168,6 @@ to deliver a unique and engaging experience to event attendees.
 
   &__heading {
     margin-bottom: units.spacing(18);
-    align-items: center;
-    display: flex;
   }
 
   &__bubble {

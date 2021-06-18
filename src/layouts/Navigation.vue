@@ -1,7 +1,7 @@
 <template>
   <Section :class="[isTop || 'nav--scrolled', 'nav']" as="nav">
     <g-link to="/#top" class="nav__logo">
-      <Icon width="24" />
+      <Icon class='nav__logo-svg'/>
       <Typography type="heading3" transform="uppercase" color="yellow">
         <Typography type="heading3" color="teal"> HT6 </Typography> Digital
       </Typography>
@@ -12,7 +12,7 @@
     <ul :class="[showMobile && 'nav__links--show', 'nav__links']">
       <li class="nav__header">
         <div class="nav__logo">
-          <Icon width="24" />
+          <Icon class='nav__logo-svg'/>
           <Typography type="heading3" transform="uppercase" color="yellow">
             <Typography type="heading3" color="teal"> HT6 </Typography> Digital
           </Typography>
@@ -132,6 +132,10 @@ export default {
   z-index: 100;
   top: 0;
 
+  @include mixins.media(laptop) {
+    padding: units.spacing(2.5) units.spacing(6);
+  }
+
   &--scrolled {
     background: linear-gradient(90deg, #002c37 0%, #004d57 100%);
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
@@ -149,6 +153,15 @@ export default {
     grid-gap: units.spacing(4);
     margin-right: auto;
     text-decoration: none;
+  }
+
+  &__logo-svg {
+    width: units.spacing(6);
+    height: auto;
+
+    @include mixins.media(laptop) {
+      margin-left: units.spacing(2);
+    }
   }
 
   &__menu {

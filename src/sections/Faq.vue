@@ -1,19 +1,16 @@
 <template>
   <Section id="faq" class="faq" as="section">
-    <Typography
+    <SectionHeader
       class="faq__heading"
-      type="heading2"
       color="light-yellow"
-      transform="uppercase"
-      as="h2"
+      bubble='Question'
     >
       Frequently Asked Questions
-      <Bubble class="faq__bubble" />
-    </Typography>
+    </SectionHeader>
     <ul class="faq__items">
       <li class="faq__item" v-for="(question, index) in questions" :key="index">
         <button
-          @click="$set(selected, index, !selected[index])"
+          @click="select(index)"
           class="faq__item-header"
         >
           <Typography type="heading3" as="h3">
@@ -39,24 +36,34 @@
 </template>
 
 <script>
+import SectionHeader from '@/components/SectionHeader';
 import Typography from '@/components/Typography';
 import Section from '@/components/Section';
-import Bubble from '@/assets/question-bubble.svg';
 import Caret from '@/assets/caret.svg';
 import marked from 'marked';
 
 export default {
   name: 'Faq',
   components: {
+    SectionHeader,
     Typography,
     Section,
-    Bubble,
     Caret,
   },
   data() {
     return {
       selected: {},
+      dirty: {},
     };
+  },
+  methods: {
+    select(index) {
+      if (!this.dirty[index]) {
+        this.$set(this.dirty, index, true);
+        this.$gtag.event('view-faq', { question: this.questions[index].label });
+      }
+      this.$set(this.selected, index, !this.selected[index]);
+    },
   },
   computed: {
     questions() {
