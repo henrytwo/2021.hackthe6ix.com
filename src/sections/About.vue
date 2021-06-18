@@ -2,16 +2,9 @@
   <Section id="about" class="about" as="section">
     <div class="about__main">
       <div class="about__content">
-        <Typography
-          class="about__heading"
-          type="heading2"
-          color="light-yellow"
-          transform="uppercase"
-          as="h2"
-        >
+        <SectionHeader class='about__heading' color="light-yellow" bubble='HappyFace'>
           About us
-          <Bubble width="50" heigh="80" class="about__bubble" />
-        </Typography>
+        </SectionHeader>
         <Typography class="about__text" type="paragraph" as="p">
           Hack the 6ix is the largest summer student-run, not-for-profit
           hackathon now in its seventh iteration, based in Toronto.
@@ -127,13 +120,13 @@
 
 <script>
 import marked from 'marked';
+import SectionHeader from '@/components/SectionHeader';
 import CardHeader, { sizes } from '@/components/CardHeader';
 import Card, { placements } from '@/components/Card';
 import Placeholder from '@/components/Placeholder';
 import Typography from '@/components/Typography';
 import Section from '@/components/Section';
 import Button from '@/components/Button';
-import Bubble from '@/assets/happy-face-bubble.svg';
 import RightArrow from '@/assets/right-arrow.svg';
 import LeftArrow from '@/assets/left-arrow.svg';
 import Quotation from '@/assets/quotation.svg';
@@ -141,10 +134,10 @@ import Quotation from '@/assets/quotation.svg';
 export default {
   name: 'About',
   components: {
+    SectionHeader,
     Quotation,
     RightArrow,
     LeftArrow,
-    Bubble,
     Placeholder,
     Typography,
     CardHeader,
@@ -155,6 +148,7 @@ export default {
   data() {
     return {
       currentSlide: 0,
+      dirty: {},
     };
   },
   mounted() {
@@ -170,14 +164,20 @@ export default {
   },
   methods: {
     setScroll(smooth) {
+      if (!this.dirty[this.currentSlide]) {
+        this.$set(this.dirty, this.currentSlide, true);
+        this.$gtag.event('view-testimonial', { person: this.testimonials[this.currentSlide].title });
+      }
       const target = this.$refs.card[this.currentSlide];
       const parent = this.$refs.items;
+
       parent.scrollTo({
         left: target.offsetLeft - parent.offsetLeft,
         behavior: smooth === true ? 'smooth' : undefined,
       });
     },
     openGallery() {
+      this.$gtag.event('view-devpost', { section: 'about' });
       window.open('https://hackthe6ix2020.devpost.com', '_blank');
     },
   },
@@ -289,8 +289,6 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
 
   &__heading {
     margin-bottom: units.spacing(8);
-    align-items: flex-end;
-    display: flex;
   }
 
   &__text {

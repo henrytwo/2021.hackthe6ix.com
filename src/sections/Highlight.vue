@@ -1,16 +1,9 @@
 <template>
   <Section id="spotlight" class="highlight" as="section">
+    <SectionHeader class="highlight__heading" bubble='Star' color="light-yellow" align='center'>
+      Sponsor Spotlight
+    </SectionHeader>
     <div class="highlight__content">
-      <Typography
-        class="highlight__heading"
-        type="heading2"
-        color="light-yellow"
-        transform="uppercase"
-        as="h2"
-      >
-        Sponsor Spotlight
-        <Bubble class="highlight__bubble" width="54" />
-      </Typography>
       <div class="highlight__slides">
         <button
           @click="currentSlide = (currentSlide || sponsors.length) - 1"
@@ -84,6 +77,7 @@
 </template>
 
 <script>
+import SectionHeader from '@/components/SectionHeader';
 import Section from '@/components/Section';
 import Typography from '@/components/Typography';
 import Card, { placements } from '@/components/Card';
@@ -91,17 +85,16 @@ import CardHeader, { sizes } from '@/components/CardHeader';
 import RightArrow from '@/assets/right-arrow.svg';
 import LeftArrow from '@/assets/left-arrow.svg';
 import Quotation from '@/assets/quotation.svg';
-import Bubble from '@/assets/star-bubble.svg';
 import marked from 'marked';
 
 export default {
   name: 'Highlight',
   components: {
+    SectionHeader,
     Section,
     Typography,
     Card,
     CardHeader,
-    Bubble,
     LeftArrow,
     RightArrow,
     Quotation,
@@ -115,6 +108,7 @@ export default {
   data() {
     return {
       currentSlide: 0,
+      dirty: {},
     };
   },
   watch: {
@@ -124,6 +118,11 @@ export default {
   },
   methods: {
     setScroll(smooth) {
+      if (!this.dirty(this.currentSlide)) {
+        this.$set(this.dirty, this.currentSlide, true);
+        this.$gtag.event('view-spotlight', { sponsor: this.sponsors[this.currentSlide].name });
+      }
+
       const target = this.$refs.card[this.currentSlide];
       const parent = this.$refs.sponsors;
       parent.scrollTo({
@@ -216,8 +215,6 @@ export default {
   padding-top: units.spacing(30);
 
   &__heading {
-    display: flex;
-    align-items: flex-end;
     margin-bottom: units.spacing(8);
   }
 
