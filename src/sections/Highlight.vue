@@ -9,7 +9,7 @@
         as="h2"
       >
         Sponsor Spotlight
-        <Bubble class="highlight__bubble" />
+        <Bubble class="highlight__bubble" width="54" />
       </Typography>
       <div class="highlight__slides">
         <button
@@ -19,10 +19,15 @@
           <LeftArrow />
         </button>
         <div class="highlight__sponsors" ref="sponsors">
-          <div :class="[
-            'highlight__sponsor',
-            index === currentSlide && 'highlight__sponsor--active',
-          ]" v-for="(data, index) in sponsors" :key="index" ref="card">
+          <div
+            :class="[
+              'highlight__sponsor',
+              index === currentSlide && 'highlight__sponsor--active',
+            ]"
+            v-for="(data, index) in sponsors"
+            :key="index"
+            ref="card"
+          >
             <Card
               backdropColor="light-peach"
               :placement="cardPlacement"
@@ -83,10 +88,10 @@ import Section from '@/components/Section';
 import Typography from '@/components/Typography';
 import Card, { placements } from '@/components/Card';
 import CardHeader, { sizes } from '@/components/CardHeader';
-import Bubble from '@/assets/highlight/star-bubble.svg';
 import RightArrow from '@/assets/right-arrow.svg';
 import LeftArrow from '@/assets/left-arrow.svg';
 import Quotation from '@/assets/quotation.svg';
+import Bubble from '@/assets/star-bubble.svg';
 import marked from 'marked';
 
 export default {
@@ -168,7 +173,7 @@ export default {
           can contribute to. Sync data, build bots and customize workflows. When AWS is overkill,
           use Autocode.`),
           link: `https://autocode.com/careers`,
-          name: 'Autocode'
+          name: 'Autocode',
         },
         {
           image: require('@/assets/highlight/capital-one.png'),
@@ -269,10 +274,16 @@ export default {
     flex-direction: column;
     align-items: center;
     display: flex;
+
+    @include mixins.media(tablet) {
+      padding: units.spacing(8) units.spacing(8) units.spacing(10);
+    }
   }
 
   &__image {
     height: units.spacing(15);
+    object-fit: contain;
+    max-width: 100%;
     margin: 0 auto;
     width: auto;
   }
