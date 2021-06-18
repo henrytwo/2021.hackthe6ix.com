@@ -83,11 +83,6 @@ export default {
       this.offset = Math.min(...this.$refs.label.map((el) => el.offsetHeight));
     },
   },
-  watch: {
-    offset(newval) {
-      console.log(newval);
-    },
-  },
   computed: {
     cardPlacement() {
       return placements.TOP_LEFT;

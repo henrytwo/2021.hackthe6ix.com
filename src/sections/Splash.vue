@@ -78,7 +78,6 @@ import FacebookIcon from '@/assets/facebook.svg';
 import InstagramIcon from '@/assets/instagram.svg';
 import LinkedInIcon from '@/assets/linkedin.svg';
 import TwitterIcon from '@/assets/twitter.svg';
-import Table from '@/assets/table.svg';
 import Typography from '@/components/Typography';
 import MailForm from '@/components/MailForm';
 import Section from '@/components/Section';
@@ -92,7 +91,6 @@ export default {
     InstagramIcon,
     LinkedInIcon,
     TwitterIcon,
-    Table,
     Typography,
     Section,
     Button,
