@@ -33,7 +33,7 @@
         <div class="about__testimonials" ref="items">
           <div
             v-for="(data, index) in testimonials"
-            ref='card'
+            ref="card"
             :class="[
               index === currentSlide && 'about__testimonial--active',
               `about__testimonial--${index}`,

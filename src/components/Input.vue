@@ -133,6 +133,7 @@ export default {
     resize: vertical;
     border: none;
     width: 100%;
+    margin: 0;
   }
 
   &__status {

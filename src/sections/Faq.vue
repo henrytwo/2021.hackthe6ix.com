@@ -20,6 +20,7 @@
             {{ question.label }}
             <Caret
               :class="[selected[index] && 'faq__caret--active', 'faq__caret']"
+              width="11"
             />
           </Typography>
         </button>
@@ -164,6 +165,7 @@ For ideas, check out our submissions from last year
   &__bubble {
     margin-bottom: units.spacing(-2);
     margin-left: units.spacing(4);
+    flex-shrink: 0;
   }
 
   &__item {
