@@ -118,7 +118,7 @@ export default {
   },
   methods: {
     setScroll(smooth) {
-      if (!this.dirty(this.currentSlide)) {
+      if (!this.dirty[this.currentSlide]) {
         this.$set(this.dirty, this.currentSlide, true);
         this.$gtag.event('view-spotlight', { sponsor: this.sponsors[this.currentSlide].name });
       }
