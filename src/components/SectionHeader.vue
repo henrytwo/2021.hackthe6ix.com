@@ -51,9 +51,9 @@ export default {
   }
 
   &__bubble {
-    width: units.spacing(12);
+    height: units.spacing(17.5);
     flex-shrink: 0;
-    height: auto;
+    width: auto;
 
     @include mixins.media(tablet) {
       width: units.spacing(10);

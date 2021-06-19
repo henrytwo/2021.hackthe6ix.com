@@ -32,7 +32,7 @@
       :type="type"
       :id="id"
     />
-    <span
+    <span 
       class="input__status input__status--error"
       v-if="typeof error === 'string'"
     >
