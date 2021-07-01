@@ -86,7 +86,7 @@ export default {
         {
           label: 'When do hacker applications open?',
           body: marked(`Hack the 6ix applications for the 2021 year are going
-          to be opening soon. Subscribe here if you’d like us to notify
+          to be opening soon. Subscribe <a href="#mail">here</a> if you’d like us to notify
           you when applications are out!`),
         },
         {
@@ -110,11 +110,11 @@ export default {
         },
         {
           label: 'What if I don’t have a team or idea?',
-          body: marked(`Don’t worry, you will have a chance to form or join a 
-          eam of up to 4 people before or during the hackathon. We’re going
+          body: marked(`Don’t worry, you will have a chance to form or join a
+          team of up to 4 people before or during the hackathon. We’re going
           virtual this year so you can team up with hackers regardless of their
           school, country, or timezone.
-          
+
 For ideas, check out our submissions from last year
 <a href='https://hackthe6ix2020.devpost.com/project-gallery' target='_blank' rel='noopener noreferrer'>here</a>!
 `),

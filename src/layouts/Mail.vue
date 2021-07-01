@@ -1,5 +1,5 @@
 <template>
-  <Section class="mail" no_scrollspy>
+  <Section class="mail" id="mail" no_scrollspy>
     <Typography type="heading3" color="light-yellow" as="h2">
       Interested? Get the latest updates in your inbox!
     </Typography>
