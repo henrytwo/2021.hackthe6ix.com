@@ -50,6 +50,17 @@ export default {
     Section,
     Caret,
   },
+  mounted() {
+    const links = this.$el.querySelectorAll('a');
+    links.forEach(link => {
+      if (!link.href) return;
+
+      const url = new URL(link.href);
+      if (url.origin === window.location.origin) {
+        link.addEventListener('click', this.scroll);
+      }
+    })
+  },
   data() {
     return {
       selected: {},
@@ -57,6 +68,12 @@ export default {
     };
   },
   methods: {
+    scroll(e) {
+      e.preventDefault();
+      const url = new URL(e.target.href);
+      const target = document.getElementById(url.hash.slice(1));
+      target.scrollIntoView();
+    },
     select(index) {
       if (!this.dirty[index]) {
         this.$set(this.dirty, index, true);
