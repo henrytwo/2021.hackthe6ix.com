@@ -33,10 +33,14 @@
         </span>
       </Typography>
       <div class="splash__form">
+        <a href="https://dash.hackthe6ix.com" target="_blank" class="splash__apply_a">
+          <Button class="splash__apply_button">
+            Apply Now
+          </Button>
+        </a>
         <Typography type="paragraph" as="p">
-          Applications aren't open yet. Subscribe to know when it does!
+          *Applications close on July 24 2021, 11:59 PM EDT
         </Typography>
-        <MailForm />
       </div>
       <ul class="splash__icons">
         <li v-for="(icon, index) in icons" :key="index">
@@ -224,8 +228,21 @@ export default {
     margin: units.spacing(4) 0 units.spacing(6);
   }
 
+  &__apply_a {
+    text-decoration: none;
+  }
+
+  &__apply_button {
+    margin-bottom: units.spacing(3);
+
+    @include mixins.media(phone) {
+      width: 100%;
+    }
+  }
+
   &__form {
     margin-top: units.spacing(9.5);
+    margin-bottom: units.spacing(9.5);
   }
 
   &__icons {

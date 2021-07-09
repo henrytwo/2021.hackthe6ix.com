@@ -21,6 +21,15 @@
           <FontAwesomeIcon icon="times" />
         </Button>
       </li>
+      <li>
+        <a
+            :class="['nav__link']"
+            href="https://dash.hackthe6ix.com"
+            target="_blank"
+        >
+          Apply Now
+        </a>
+      </li>
       <li v-for="(link, index) in links" :key="index">
         <a
           :class="[
