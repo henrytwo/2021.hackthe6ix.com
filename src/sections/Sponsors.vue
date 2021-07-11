@@ -136,6 +136,7 @@ export default {
     @include mixins.transition(transform);
     margin: units.spacing(7);
     width: auto;
+    height: 100vh;
     transform: scale(1);
 
     &:hover {
@@ -143,7 +144,7 @@ export default {
     }
 
     &--gold {
-      max-height: units.spacing(40);
+      max-height: units.spacing(25);
     }
 
     &--silver {
