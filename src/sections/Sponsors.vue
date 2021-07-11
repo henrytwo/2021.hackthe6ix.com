@@ -32,7 +32,7 @@ import SectionHeader from '@/components/SectionHeader';
 import Section from '@/components/Section';
 
 export default {
-  name: 'PastSponsors',
+  name: 'Sponsors',
   components: {
     SectionHeader,
     Section,
@@ -143,7 +143,7 @@ export default {
     }
 
     &--gold {
-      max-height: units.spacing(22);
+      max-height: units.spacing(40);
     }
 
     &--silver {
