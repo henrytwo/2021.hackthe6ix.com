@@ -103,7 +103,7 @@
             target="_blank"
             rel="noreferrer noopenner"
           >
-            Code of Conduct
+            MLH Code of Conduct
           </a>
         </Typography>
       </ul>
