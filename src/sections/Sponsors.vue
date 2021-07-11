@@ -1,7 +1,7 @@
 <template>
   <Section class="sponsors" id="sponsors" as="section">
     <SectionHeader align='center' bubble='Star' class="sponsors__heading" color='black'>
-      Sponsors
+      Past Sponsors
     </SectionHeader>
     <div class="sponsors__groups">
       <ul
