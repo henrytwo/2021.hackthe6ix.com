@@ -116,8 +116,8 @@ export default {
           to: '/#spotlight',
         },
         {
-          label: 'Past Sponsors',
-          to: '/#past-sponsors',
+          label: 'Sponsors',
+          to: '/#sponsors',
         },
         {
           label: 'Past Speakers',
