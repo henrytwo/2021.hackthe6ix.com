@@ -1,22 +1,22 @@
 <template>
-  <Section class="past-sponsors" id="past-sponsors" as="section">
-    <SectionHeader align='center' bubble='Star' class="past-sponsors__heading" color='black'>
+  <Section class="sponsors" id="sponsors" as="section">
+    <SectionHeader align='center' bubble='Star' class="sponsors__heading" color='black'>
       Past Sponsors
     </SectionHeader>
-    <div class="past-sponsors__groups">
+    <div class="sponsors__groups">
       <ul
         v-for="[key, group] in Object.entries($static)"
-        :class="[`past-sponsors__group--${key}`, 'past-sponsors__group']"
+        :class="[`sponsors__group--${key}`, 'sponsors__group']"
         :key="key"
       >
         <li v-for="(sponsor, index) in group.edges[0].node.logos" :key="index">
           <a
             :href="sponsor.description"
             target="_blank"
-            class="past-sponsors__item"
+            class="sponsors__item"
           >
             <img
-              :class="[`past-sponsors__image--${key}`, 'past-sponsors__image']"
+              :class="[`sponsors__image--${key}`, 'sponsors__image']"
               :src="`https:${sponsor.file.url}`"
               :alt="sponsor.title"
             />
@@ -32,7 +32,7 @@ import SectionHeader from '@/components/SectionHeader';
 import Section from '@/components/Section';
 
 export default {
-  name: 'PastSponsors',
+  name: 'Sponsors',
   components: {
     SectionHeader,
     Section,
@@ -101,7 +101,7 @@ export default {
 @use '@/styles/colors';
 @use '@/styles/units';
 
-.past-sponsors {
+.sponsors {
   background-color: colors.css-color(white);
   padding-bottom: units.spacing(25);
   padding-top: units.spacing(25);
@@ -136,6 +136,7 @@ export default {
     @include mixins.transition(transform);
     margin: units.spacing(7);
     width: auto;
+    height: 100vh;
     transform: scale(1);
 
     &:hover {
@@ -143,7 +144,7 @@ export default {
     }
 
     &--gold {
-      max-height: units.spacing(22);
+      max-height: units.spacing(25);
     }
 
     &--silver {

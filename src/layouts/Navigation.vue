@@ -44,8 +44,8 @@
       </li>
 
       <div class="nav__mlh-placeholder" />
-      <a id="mlh-trust-badge" class="nav__mlh" href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=black" target="_blank">
-        <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-black.svg" alt="Major League Hacking 2022 Hackathon Season" style="width:100%; max-width: 86px">
+      <a id="mlh-trust-badge" class="nav__mlh" href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=yellow" target="_blank">
+        <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-yellow.svg" alt="Major League Hacking 2022 Hackathon Season" style="width:100%; max-width: 86px">
       </a>
     </ul>
   </Section>
@@ -117,7 +117,7 @@ export default {
         },
         {
           label: 'Past Sponsors',
-          to: '/#past-sponsors',
+          to: '/#sponsors',
         },
         {
           label: 'Past Speakers',

@@ -33,11 +33,18 @@
         </span>
       </Typography>
       <div class="splash__form">
-        <a href="https://dash.hackthe6ix.com" target="_blank" class="splash__apply_a">
-          <Button class="splash__apply_button">
-            Apply Now
-          </Button>
-        </a>
+        <div class="splash__apply-buttons">
+          <a href="https://dash.hackthe6ix.com" target="_blank" class="splash__apply_a">
+            <Button class="splash__apply_button">
+              Register
+            </Button>
+          </a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfyMAwumWrVO6azkC2_PmaGRSDRjOCa8Z4h7ynljg8iZSP2QA/viewform" target="_blank" class="splash__apply_a">
+            <Button class="splash__apply_button">
+              Volunteer
+            </Button>
+          </a>
+        </div>
         <Typography type="paragraph" as="p">
           *Applications close on July 24 2021, 11:59 PM EDT
         </Typography>
@@ -237,6 +244,18 @@ export default {
 
     @include mixins.media(phone) {
       width: 100%;
+    }
+  }
+
+  &__apply-buttons {
+    display: flex;
+    justify-content: left;
+    grid-gap: units.spacing(3);
+
+    @include mixins.media(phone) {
+      display: grid;
+      grid-gap: units.spacing(1);
+      grid-template-columns: 1fr;
     }
   }
 
