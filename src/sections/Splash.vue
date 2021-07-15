@@ -36,12 +36,12 @@
         <div class="splash__apply-buttons">
           <a href="https://dash.hackthe6ix.com" target="_blank" class="splash__apply_a">
             <Button class="splash__apply_button">
-              Register
+              Apply as Hacker
             </Button>
           </a>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfyMAwumWrVO6azkC2_PmaGRSDRjOCa8Z4h7ynljg8iZSP2QA/viewform" target="_blank" class="splash__apply_a">
             <Button class="splash__apply_button">
-              Volunteer
+              Apply as Mentor
             </Button>
           </a>
         </div>
