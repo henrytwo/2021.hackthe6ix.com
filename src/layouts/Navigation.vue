@@ -21,6 +21,15 @@
           <FontAwesomeIcon icon="times" />
         </Button>
       </li>
+      <li>
+        <a
+            :class="['nav__link']"
+            href="https://dash.hackthe6ix.com"
+            target="_blank"
+        >
+          Apply Now
+        </a>
+      </li>
       <li v-for="(link, index) in links" :key="index">
         <a
           :class="[
@@ -33,6 +42,11 @@
           {{ link.label }}
         </a>
       </li>
+
+      <div class="nav__mlh-placeholder" />
+      <a id="mlh-trust-badge" class="nav__mlh" href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=yellow" target="_blank">
+        <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-yellow.svg" alt="Major League Hacking 2022 Hackathon Season" style="width:100%; max-width: 86px">
+      </a>
     </ul>
   </Section>
 </template>
@@ -103,7 +117,7 @@ export default {
         },
         {
           label: 'Past Sponsors',
-          to: '/#past-sponsors',
+          to: '/#sponsors',
         },
         {
           label: 'Past Speakers',
@@ -131,6 +145,25 @@ export default {
   position: sticky;
   z-index: 100;
   top: 0;
+
+  &__mlh {
+    display: block;
+    position: absolute;
+    top:  0;
+    right: 24px;
+
+    @include mixins.media(tablet) {
+      display: none;
+    }
+  }
+
+  &__mlh-placeholder {
+    width: 110px;
+
+    @include mixins.media(tablet) {
+      display: none;
+    }
+  }
 
   @include mixins.media(laptop) {
     padding: units.spacing(2.5) units.spacing(6);

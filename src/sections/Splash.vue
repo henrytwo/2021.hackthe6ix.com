@@ -33,10 +33,21 @@
         </span>
       </Typography>
       <div class="splash__form">
+        <div class="splash__apply-buttons">
+          <a href="https://dash.hackthe6ix.com" target="_blank" class="splash__apply_a">
+            <Button class="splash__apply_button">
+              Apply as Hacker
+            </Button>
+          </a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfyMAwumWrVO6azkC2_PmaGRSDRjOCa8Z4h7ynljg8iZSP2QA/viewform" target="_blank" class="splash__apply_a">
+            <Button class="splash__apply_button">
+              Apply as Mentor
+            </Button>
+          </a>
+        </div>
         <Typography type="paragraph" as="p">
-          Applications aren't open yet. Subscribe to know when it does!
+          *Applications close on July 24 2021, 11:59 PM EDT
         </Typography>
-        <MailForm />
       </div>
       <ul class="splash__icons">
         <li v-for="(icon, index) in icons" :key="index">
@@ -224,8 +235,33 @@ export default {
     margin: units.spacing(4) 0 units.spacing(6);
   }
 
+  &__apply_a {
+    text-decoration: none;
+  }
+
+  &__apply_button {
+    margin-bottom: units.spacing(3);
+
+    @include mixins.media(phone) {
+      width: 100%;
+    }
+  }
+
+  &__apply-buttons {
+    display: flex;
+    justify-content: left;
+    grid-gap: units.spacing(3);
+
+    @include mixins.media(phone) {
+      display: grid;
+      grid-gap: units.spacing(1);
+      grid-template-columns: 1fr;
+    }
+  }
+
   &__form {
     margin-top: units.spacing(9.5);
+    margin-bottom: units.spacing(9.5);
   }
 
   &__icons {

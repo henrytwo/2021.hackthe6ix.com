@@ -4,7 +4,7 @@
     <About />
     <Why />
     <Highlight />
-    <PastSponsors />
+    <Sponsors />
     <PastSpeakers />
     <Faq />
   </Layout>
@@ -15,7 +15,7 @@ import Splash from '@/sections/Splash';
 import About from '@/sections/About';
 import Why from '@/sections/Why';
 import Highlight from '@/sections/Highlight';
-import PastSponsors from '@/sections/PastSponsors';
+import Sponsors from '@/sections/Sponsors';
 import PastSpeakers from '@/sections/PastSpeakers';
 import Faq from '@/sections/Faq';
 
@@ -26,7 +26,7 @@ export default {
     About,
     Why,
     Highlight,
-    PastSponsors,
+    Sponsors,
     PastSpeakers,
     Faq,
   },
