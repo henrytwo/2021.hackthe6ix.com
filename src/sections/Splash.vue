@@ -46,7 +46,7 @@
           </a>
         </div>
         <Typography type="paragraph" as="p">
-          *Applications close on July 24 2021, 11:59 PM EDT
+          *Applications close on July 31 2021, 11:59 PM EDT
         </Typography>
       </div>
       <ul class="splash__icons">
