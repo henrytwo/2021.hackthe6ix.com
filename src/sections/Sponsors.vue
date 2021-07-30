@@ -1,7 +1,7 @@
 <template>
   <Section class="sponsors" id="sponsors" as="section">
     <SectionHeader align='center' bubble='Star' class="sponsors__heading" color='black'>
-      Past Sponsors
+      Sponsors
     </SectionHeader>
     <div class="sponsors__groups">
       <ul
@@ -144,11 +144,11 @@ export default {
     }
 
     &--gold {
-      max-height: units.spacing(25);
+      max-height: units.spacing(30);
     }
 
     &--silver {
-      max-height: units.spacing(15);
+      max-height: units.spacing(18);
     }
 
     &--bronze {
