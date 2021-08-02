@@ -1,18 +1,11 @@
 <template>
   <Section id="faq" class="faq" as="section">
-    <SectionHeader
-      class="faq__heading"
-      color="light-yellow"
-      bubble='Question'
-    >
+    <SectionHeader class="faq__heading" color="light-yellow" bubble="Question">
       Frequently Asked Questions
     </SectionHeader>
     <ul class="faq__items">
       <li class="faq__item" v-for="(question, index) in questions" :key="index">
-        <button
-          @click="select(index)"
-          class="faq__item-header"
-        >
+        <button @click="select(index)" class="faq__item-header">
           <Typography type="heading3" as="h3">
             {{ question.label }}
             <Caret
@@ -52,14 +45,14 @@ export default {
   },
   mounted() {
     const links = this.$el.querySelectorAll('a');
-    links.forEach(link => {
+    links.forEach((link) => {
       if (!link.href) return;
 
       const url = new URL(link.href);
       if (url.origin === window.location.origin) {
         link.addEventListener('click', this.scroll);
       }
-    })
+    });
   },
   data() {
     return {

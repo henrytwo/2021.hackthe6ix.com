@@ -1,6 +1,11 @@
 <template>
   <Section class="past-speakers" id="past-speakers" as="section">
-    <SectionHeader class="past-speakers__heading" color='light-yellow' align='center' bubble='Megaphone'>
+    <SectionHeader
+      class="past-speakers__heading"
+      color="light-yellow"
+      align="center"
+      bubble="Megaphone"
+    >
       Past Speakers
     </SectionHeader>
     <div

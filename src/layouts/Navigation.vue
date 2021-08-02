@@ -1,7 +1,7 @@
 <template>
   <Section :class="[isTop || 'nav--scrolled', 'nav']" as="nav">
     <g-link to="/#top" class="nav__logo">
-      <Icon class='nav__logo-svg'/>
+      <Icon class="nav__logo-svg" />
       <Typography type="heading3" transform="uppercase" color="yellow">
         <Typography type="heading3" color="teal"> HT6 </Typography> Digital
       </Typography>
@@ -12,7 +12,7 @@
     <ul :class="[showMobile && 'nav__links--show', 'nav__links']">
       <li class="nav__header">
         <div class="nav__logo">
-          <Icon class='nav__logo-svg'/>
+          <Icon class="nav__logo-svg" />
           <Typography type="heading3" transform="uppercase" color="yellow">
             <Typography type="heading3" color="teal"> HT6 </Typography> Digital
           </Typography>
@@ -23,11 +23,11 @@
       </li>
       <li>
         <a
-            :class="['nav__link']"
-            href="https://dash.hackthe6ix.com"
-            target="_blank"
+          :class="['nav__link']"
+          href="https://dash.hackthe6ix.com"
+          target="_blank"
         >
-          Apply Now
+          Dashboard
         </a>
       </li>
       <li v-for="(link, index) in links" :key="index">
@@ -44,8 +44,17 @@
       </li>
 
       <div class="nav__mlh-placeholder" />
-      <a id="mlh-trust-badge" class="nav__mlh" href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=yellow" target="_blank">
-        <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-yellow.svg" alt="Major League Hacking 2022 Hackathon Season" style="width:100%; max-width: 86px">
+      <a
+        id="mlh-trust-badge"
+        class="nav__mlh"
+        href="https://mlh.io/seasons/2022/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2022-season&utm_content=yellow"
+        target="_blank"
+      >
+        <img
+          src="https://s3.amazonaws.com/logged-assets/trust-badge/2022/mlh-trust-badge-2022-yellow.svg"
+          alt="Major League Hacking 2022 Hackathon Season"
+          style="width: 100%; max-width: 86px"
+        />
       </a>
     </ul>
   </Section>
@@ -149,7 +158,7 @@ export default {
   &__mlh {
     display: block;
     position: absolute;
-    top:  0;
+    top: 0;
     right: 24px;
 
     @include mixins.media(tablet) {
@@ -192,7 +201,7 @@ export default {
     width: units.spacing(6);
     height: auto;
 
-    @include mixins.media(laptop) {
+    @include mixins.media(nav) {
       margin-left: units.spacing(2);
     }
   }
@@ -204,7 +213,7 @@ export default {
     display: none;
     width: units.spacing(12);
 
-    @include mixins.media(laptop) {
+    @include mixins.media(nav) {
       display: flex;
     }
   }
@@ -215,7 +224,7 @@ export default {
     padding: 0;
     margin: 0;
 
-    @include mixins.media(laptop) {
+    @include mixins.media(nav) {
       display: none;
 
       &--show {
@@ -255,7 +264,7 @@ export default {
       color: colors.css-color(teal);
     }
 
-    @include mixins.media(laptop) {
+    @include mixins.media(nav) {
       padding: units.spacing(4);
       margin: 0;
     }
@@ -265,7 +274,7 @@ export default {
     display: none;
     margin-bottom: units.spacing(6);
 
-    @include mixins.media(laptop) {
+    @include mixins.media(nav) {
       display: flex;
     }
   }
