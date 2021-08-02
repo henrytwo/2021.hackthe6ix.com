@@ -1,9 +1,14 @@
 <template>
-  <div :class='["section-header", align && `section-header--${align}`]'>
-    <Typography class='section-header__text' type='heading2' transform="uppercase" :color='color'>
-      <slot/>
+  <div :class="['section-header', align && `section-header--${align}`]">
+    <Typography
+      class="section-header__text"
+      type="heading2"
+      transform="uppercase"
+      :color="color"
+    >
+      <slot />
     </Typography>
-    <component class='section-header__bubble' :is='bubble' />
+    <component class="section-header__bubble" :is="bubble" />
   </div>
 </template>
 
@@ -30,7 +35,7 @@ export default {
     color: String,
     align: String,
   },
-}
+};
 </script>
 
 <style lang="scss">
