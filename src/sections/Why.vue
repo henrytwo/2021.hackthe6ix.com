@@ -1,6 +1,6 @@
 <template>
   <Section id="why" class="why" as="section">
-    <SectionHeader class='why__heading' bubble='Grow' color='light-yellow'>
+    <SectionHeader class="why__heading" bubble="Grow" color="light-yellow">
       Why get involved
     </SectionHeader>
     <div class="why__card-wrapper">

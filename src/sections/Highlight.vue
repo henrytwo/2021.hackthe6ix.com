@@ -1,6 +1,11 @@
 <template>
   <Section id="spotlight" class="highlight" as="section">
-    <SectionHeader class="highlight__heading" bubble='Star' color="light-yellow" align='center'>
+    <SectionHeader
+      class="highlight__heading"
+      bubble="Star"
+      color="light-yellow"
+      align="center"
+    >
       Sponsor Spotlight
     </SectionHeader>
     <div class="highlight__content">
@@ -120,7 +125,9 @@ export default {
     setScroll(smooth) {
       if (!this.dirty[this.currentSlide]) {
         this.$set(this.dirty, this.currentSlide, true);
-        this.$gtag.event('view-spotlight', { sponsor: this.sponsors[this.currentSlide].name });
+        this.$gtag.event('view-spotlight', {
+          sponsor: this.sponsors[this.currentSlide].name,
+        });
       }
 
       const target = this.$refs.card[this.currentSlide];

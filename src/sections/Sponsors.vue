@@ -1,6 +1,11 @@
 <template>
   <Section class="sponsors" id="sponsors" as="section">
-    <SectionHeader align='center' bubble='Star' class="sponsors__heading" color='black'>
+    <SectionHeader
+      align="center"
+      bubble="Star"
+      class="sponsors__heading"
+      color="black"
+    >
       Sponsors
     </SectionHeader>
     <div class="sponsors__groups">
@@ -10,11 +15,7 @@
         :key="key"
       >
         <li v-for="(sponsor, index) in group.edges[0].node.logos" :key="index">
-          <a
-            :href="sponsor.description"
-            target="_blank"
-            class="sponsors__item"
-          >
+          <a :href="sponsor.description" target="_blank" class="sponsors__item">
             <img
               :class="[`sponsors__image--${key}`, 'sponsors__image']"
               :src="`https:${sponsor.file.url}`"

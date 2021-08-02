@@ -2,7 +2,11 @@
   <Section id="about" class="about" as="section">
     <div class="about__main">
       <div class="about__content">
-        <SectionHeader class='about__heading' color="light-yellow" bubble='HappyFace'>
+        <SectionHeader
+          class="about__heading"
+          color="light-yellow"
+          bubble="HappyFace"
+        >
           About us
         </SectionHeader>
         <Typography class="about__text" type="paragraph" as="p">
@@ -166,7 +170,9 @@ export default {
     setScroll(smooth) {
       if (!this.dirty[this.currentSlide]) {
         this.$set(this.dirty, this.currentSlide, true);
-        this.$gtag.event('view-testimonial', { person: this.testimonials[this.currentSlide].title });
+        this.$gtag.event('view-testimonial', {
+          person: this.testimonials[this.currentSlide].title,
+        });
       }
       const target = this.$refs.card[this.currentSlide];
       const parent = this.$refs.items;
