@@ -17,7 +17,7 @@
         <li v-for="(sponsor, index) in group.edges[0].node.logos" :key="index">
           <a :href="sponsor.description" target="_blank" class="sponsors__item">
             <img
-              :class="[`sponsors__image--${key}`, 'sponsors__image']"
+              :class="[`sponsors__image--${key}`, 'sponsors__image', `sponsors__image--${sponsor.title}`]"
               :src="`https:${sponsor.file.url}`"
               :alt="sponsor.title"
             />
@@ -207,6 +207,11 @@ export default {
       max-height: units.spacing(10);
       margin-left: units.spacing(4);
       margin-right: units.spacing(4);
+    }
+
+    /* Manual adjustments */
+    &--rotman {
+      max-height: units.spacing(15) !important;
     }
   }
 }
