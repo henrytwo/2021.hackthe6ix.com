@@ -14,7 +14,7 @@
         :class="[`sponsors__group--${key}`, 'sponsors__group']"
         :key="key"
       >
-        <li v-for="(sponsor, index) in group.edges[0].node.logos" :key="index" class="sponsors__tier">
+        <li v-for="(sponsor, index) in group.edges[0].node.logos" :key="index">
           <a :href="sponsor.description" target="_blank" class="sponsors__item">
             <img
               :class="[`sponsors__image--${key}`, 'sponsors__image']"
@@ -33,19 +33,21 @@
     >
       Partners
     </SectionHeader>
-    <ul
-        :class="[`sponsors__group--partner`, 'sponsors__group']"
-    >
-      <li v-for="(sponsor, index) in $static.partner.edges[0].node.logos" :key="index">
-        <a :href="sponsor.description" target="_blank" class="sponsors__item">
-          <img
-              :class="[`sponsors__image--partner`, 'sponsors__image']"
-              :src="`https:${sponsor.file.url}`"
-              :alt="sponsor.title"
-          />
-        </a>
-      </li>
-    </ul>
+    <div class="sponsors__groups">
+      <ul
+          :class="[`sponsors__group--partner`, 'sponsors__group']"
+      >
+        <li v-for="(sponsor, index) in $static.partner.edges[0].node.logos" :key="index">
+          <a :href="sponsor.description" target="_blank" class="sponsors__item">
+            <img
+                :class="[`sponsors__image--partner`, 'sponsors__image']"
+                :src="`https:${sponsor.file.url}`"
+                :alt="sponsor.title"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
   </Section>
 </template>
 
@@ -155,7 +157,7 @@ export default {
   }
 
   &__partner-heading {
-    margin-top: units.spacing(20);
+    margin-top: units.spacing(13);
   }
 
   &__groups {
@@ -168,10 +170,7 @@ export default {
     flex-wrap: wrap;
     display: flex;
     padding: 0;
-  }
-
-  &__tier {
-    margin: units.spacing(5) 0 units.spacing(5) 0;
+    margin: 0 0 units.spacing(14) 0;
   }
 
   &__item {
@@ -180,7 +179,7 @@ export default {
 
   &__image {
     @include mixins.transition(transform);
-    margin: units.spacing(3) units.spacing(7) units.spacing(7) units.spacing(6);
+    margin: units.spacing(4) units.spacing(7) units.spacing(4) units.spacing(7);
     width: auto;
     height: 100vh;
     transform: scale(1);
@@ -192,7 +191,8 @@ export default {
     }
 
     &--partner {
-      max-height: units.spacing(25);
+      max-height: units.spacing(28);
+      margin-top: -10px;
     }
 
     &--gold {
@@ -205,7 +205,8 @@ export default {
 
     &--bronze {
       max-height: units.spacing(10);
-      margin: units.spacing(7) units.spacing(4);
+      margin-left: units.spacing(4);
+      margin-right: units.spacing(4);
     }
   }
 }
