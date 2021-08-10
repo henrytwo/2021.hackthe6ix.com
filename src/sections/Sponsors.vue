@@ -126,7 +126,7 @@ export default {
     flex-wrap: wrap;
     display: flex;
     padding: 0;
-    margin: 0;
+    margin: units.spacing(2) 0 units.spacing(2) 0;
   }
 
   &__item {
@@ -140,6 +140,8 @@ export default {
     height: 100vh;
     transform: scale(1);
 
+    max-width: 98vw;
+
     &:hover {
       transform: scale(1.1);
     }
@@ -149,7 +151,7 @@ export default {
     }
 
     &--silver {
-      max-height: units.spacing(18);
+      max-height: units.spacing(15);
     }
 
     &--bronze {
