@@ -10,11 +10,11 @@
     </SectionHeader>
     <div class="sponsors__groups">
       <ul
-        v-for="[key, group] in Object.entries($static)"
+        v-for="[key, group] in Object.entries($static).filter(([k, g]) => k !== 'partner')"
         :class="[`sponsors__group--${key}`, 'sponsors__group']"
         :key="key"
       >
-        <li v-for="(sponsor, index) in group.edges[0].node.logos" :key="index">
+        <li v-for="(sponsor, index) in group.edges[0].node.logos" :key="index" class="sponsors__tier">
           <a :href="sponsor.description" target="_blank" class="sponsors__item">
             <img
               :class="[`sponsors__image--${key}`, 'sponsors__image']"
@@ -25,6 +25,27 @@
         </li>
       </ul>
     </div>
+    <SectionHeader
+        align="center"
+        bubble="Star"
+        class="sponsors__heading sponsors__partner-heading"
+        color="black"
+    >
+      Partners
+    </SectionHeader>
+    <ul
+        :class="[`sponsors__group--partner`, 'sponsors__group']"
+    >
+      <li v-for="(sponsor, index) in $static.partner.edges[0].node.logos" :key="index">
+        <a :href="sponsor.description" target="_blank" class="sponsors__item">
+          <img
+              :class="[`sponsors__image--partner`, 'sponsors__image']"
+              :src="`https:${sponsor.file.url}`"
+              :alt="sponsor.title"
+          />
+        </a>
+      </li>
+    </ul>
   </Section>
 </template>
 
@@ -43,6 +64,23 @@ export default {
 
 <static-query>
 {
+  partner: allContentfulSponsorCategory(filter:{
+    slug:{
+      eq: "partner-2021"
+    }
+  }) {
+    edges {
+      node {
+        logos {
+          title
+          description
+          file {
+            url
+          }
+        }
+      }
+    }
+  }
   gold: allContentfulSponsorCategory(filter:{
     slug:{
       eq: "gold-2021"
@@ -116,6 +154,10 @@ export default {
     margin-bottom: units.spacing(8);
   }
 
+  &__partner-heading {
+    margin-top: units.spacing(20);
+  }
+
   &__groups {
     margin-top: units.spacing(20);
   }
@@ -126,7 +168,10 @@ export default {
     flex-wrap: wrap;
     display: flex;
     padding: 0;
-    margin: units.spacing(2) 0 units.spacing(2) 0;
+  }
+
+  &__tier {
+    margin: units.spacing(5) 0 units.spacing(5) 0;
   }
 
   &__item {
@@ -135,19 +180,23 @@ export default {
 
   &__image {
     @include mixins.transition(transform);
-    margin: units.spacing(7);
+    margin: units.spacing(3) units.spacing(7) units.spacing(7) units.spacing(6);
     width: auto;
     height: 100vh;
     transform: scale(1);
 
-    max-width: 98vw;
+    max-width: 90vw;
 
     &:hover {
       transform: scale(1.1);
     }
 
+    &--partner {
+      max-height: units.spacing(25);
+    }
+
     &--gold {
-      max-height: units.spacing(30);
+      max-height: units.spacing(28);
     }
 
     &--silver {
@@ -155,7 +204,7 @@ export default {
     }
 
     &--bronze {
-      max-height: units.spacing(7);
+      max-height: units.spacing(10);
       margin: units.spacing(7) units.spacing(4);
     }
   }
