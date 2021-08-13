@@ -291,6 +291,9 @@ export default {
   &__dots {
     display: flex;
     justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
   }
 
   &__dot {
