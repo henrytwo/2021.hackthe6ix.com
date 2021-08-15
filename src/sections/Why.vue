@@ -121,7 +121,7 @@ export default {
         },
         {
           title: 'Want to be rewarded for your hard work?',
-          body: 'With $5,000 worth of prizes, there’s something for everyone.',
+          body: 'With over $6,000 worth of prizes, there’s something for everyone.',
           show: {
             text: 'Prizes List',
           },
@@ -294,7 +294,7 @@ export default {
     height: 100%;
     overflow: none;
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.9); 
+    background-color: rgba(0,0,0,0.9);
   }
 
   &__prizes {
