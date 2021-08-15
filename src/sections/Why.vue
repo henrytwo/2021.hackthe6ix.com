@@ -305,7 +305,7 @@ export default {
 
   &__close {
     position: absolute;
-    top: units.spacing(35);
+    top: units.spacing(45);
     right: units.spacing(5);
     color: #f1f1f1;
     font-size: 40px;
