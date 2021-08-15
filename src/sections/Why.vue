@@ -27,6 +27,13 @@
               <Typography class="why__card-text" type="small" as="p">
                 {{ card.body }}
               </Typography>
+              <Button
+                class="why__card-show"
+                v-if="card.show"
+                @click="show()"
+              >
+                {{ card.show.text }}
+              </Button>
               <component
                 class="why__card-asset"
                 v-if="card.asset"
@@ -46,6 +53,10 @@
       <button class="why__arrow" @click="nextSlide">
         <RightArrow />
       </button>
+    </div>
+    <div class="why__modal" v-show="isVisible">
+      <span class="why__close" @click="show()">&times;</span>
+      <img src="@/assets/Why/reward/prizes.png" class="why__prizes" />
     </div>
   </Section>
 </template>
@@ -92,6 +103,7 @@ export default {
     return {
       curr: 0,
       limit: 3,
+      isVisible: false,
     };
   },
   computed: {
@@ -109,7 +121,10 @@ export default {
         },
         {
           title: 'Want to be rewarded for your hard work?',
-          body: 'With $38,000 worth of prizes, there’s something for everyone.',
+          body: 'With over $6,000 worth of prizes, there’s something for everyone.',
+          show: {
+            text: 'Prizes List',
+          },
           asset: 'Prize',
         },
         {
@@ -135,6 +150,9 @@ export default {
         this.$gtag.event(...action.gtag);
       }
       window.open(action.to, '_blank');
+    },
+    show() {
+      this.isVisible= !this.isVisible;
     },
     handleLimit() {
       if (window.matchMedia('(min-width: 1080px)').matches) {
@@ -228,6 +246,10 @@ export default {
     &-action {
       margin: auto;
     }
+
+    &-show {
+      margin: auto;
+    }
   }
 
   &__card-wrapper {
@@ -260,6 +282,42 @@ export default {
     cursor: pointer;
     margin: auto 0;
     border: none;
+  }
+
+  &__modal {
+    position: fixed;
+    z-index: 1;
+    padding-top: units.spacing(60);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: none;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+  }
+
+  &__prizes {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__close {
+    position: absolute;
+    top: units.spacing(45);
+    right: units.spacing(5);
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  &__close:hover,
+  &__close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
   }
 }
 </style>
