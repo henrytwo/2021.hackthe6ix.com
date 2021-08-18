@@ -1,7 +1,7 @@
 <template>
   <component :is="as" class="section">
     <a class="section__anchor" ref="anchor" :id="id" />
-    <div :class="[as && `section__content--${as}`, 'section__content']">
+    <div :class="[as && `section__content--${as}`, 'section__content', fullWidth && 'section__content--full-width']">
       <slot />
     </div>
   </component>
@@ -19,6 +19,7 @@ export default {
       default: () => 'div',
       type: String,
     },
+    fullWidth: Boolean
   },
   mounted() {
     if (!this.no_scrollspy) {
@@ -55,6 +56,10 @@ $_spacing: 10;
 
     &--nav {
       max-width: units.$nav-width;
+    }
+
+    &--full-width {
+      max-width: 100vw;
     }
   }
 }

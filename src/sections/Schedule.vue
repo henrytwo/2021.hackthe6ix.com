@@ -1,16 +1,17 @@
 <template>
-  <Section class="schedule" id="schedule" as="section">
+  <Section class="schedule" id="schedule" as="section" :fullWidth="true">
     <SectionHeader
-      align="center"
-      bubble="Star"
-      class="schedule__heading"
-      color="black"
+        align="center"
+        bubble="Star"
+        class="schedule__heading"
+        color="black"
     >
       Schedule
     </SectionHeader>
 
-    <iframe src="https://dash.hackthe6ix.com/calendar" class="schedule__frame"/>
-
+    <div class="schedule__container">
+      <iframe src="https://dash.hackthe6ix.com/calendar" class="schedule__frame"/>
+    </div>
   </Section>
 </template>
 
@@ -34,19 +35,27 @@ export default {
 
 .schedule {
   background-color: colors.css-color(white);
-  padding-bottom: units.spacing(25);
-  padding-top: units.spacing(25);
-  padding-left: 0;
-  padding-right: 0;
-  max-width: 100vw;
+  padding: units.spacing(25) 0 units.spacing(25) 0;
 
-  width: 100%;
+  &__container {
+    margin-top: units.spacing(5);
+
+    width: 100%
+  }
 
   &__frame {
-    width: 100%;
+    width: calc(100% - 100px);
+    padding: 0 50px 0 50px;
     min-height: 548px;
     border: 0;
   }
 
+
+  @include mixins.media(laptop) {
+    &__frame {
+      width: calc(100% - 10px);
+      padding: 0 5px 0 5px;
+    }
+  }
 }
 </style>
