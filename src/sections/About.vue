@@ -277,6 +277,7 @@ Just a few words I would use to describe the past weekend I had at Hack the 6ix,
 .about {
   margin-top: units.spacing(44);
   padding-top: units.spacing(30);
+  padding-bottom: units.spacing(30);
 
   &__bubble {
     margin-bottom: units.spacing(-2);
