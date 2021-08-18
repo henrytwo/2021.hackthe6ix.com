@@ -117,6 +117,10 @@ export default {
           to: '/#about',
         },
         {
+          label: 'Schedule',
+          to: '/#schedule',
+        },
+        {
           label: 'Why Us?',
           to: '/#why',
         },
@@ -169,7 +173,7 @@ export default {
   &__mlh-placeholder {
     width: 110px;
 
-    @include mixins.media(tablet) {
+    @include mixins.media(laptop) {
       display: none;
     }
   }

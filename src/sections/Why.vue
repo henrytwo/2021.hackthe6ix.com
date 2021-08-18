@@ -197,7 +197,7 @@ export default {
 @use '@/styles/colors';
 
 .why {
-  margin-top: units.spacing(44);
+  margin-top: units.spacing(30);
   padding-top: units.spacing(30);
 
   &__content {
