@@ -121,7 +121,7 @@ export default {
         },
         {
           title: 'Want to be rewarded for your hard work?',
-          body: 'With over $6,000 worth of prizes, there’s something for everyone.',
+          body: 'With over $16,000 worth of prizes, there’s something for everyone.',
           show: {
             text: 'Prizes List',
           },
