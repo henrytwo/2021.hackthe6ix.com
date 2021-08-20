@@ -42,9 +42,6 @@
             <Button class="splash__apply_button"> Hacker Dashboard </Button>
           </a>
         </div>
-        <Typography type="paragraph" as="p">
-          *Applications close on July 31 2021, 11:59 PM EDT
-        </Typography>
       </div>
       <ul class="splash__icons">
         <li v-for="(icon, index) in icons" :key="index">
