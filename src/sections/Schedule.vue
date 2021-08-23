@@ -62,7 +62,7 @@ export default {
   &__frame {
     width: calc(100% - 100px);
     padding: 0 50px 0 50px;
-    min-height: 785px;
+    min-height: 830px;
     border: 0;
   }
 
