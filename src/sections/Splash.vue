@@ -33,6 +33,7 @@
         </span>
       </Typography>
       <div class="splash__form">
+        <!--
         <div class="splash__apply-buttons">
           <a
             href="https://dash.hackthe6ix.com"
@@ -42,6 +43,7 @@
             <Button class="splash__apply_button"> Hacker Dashboard </Button>
           </a>
         </div>
+        -->
       </div>
       <ul class="splash__icons">
         <li v-for="(icon, index) in icons" :key="index">
