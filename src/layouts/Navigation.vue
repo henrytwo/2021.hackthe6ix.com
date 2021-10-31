@@ -21,6 +21,7 @@
           <FontAwesomeIcon icon="times" />
         </Button>
       </li>
+      <!--
       <li>
         <a
           :class="['nav__link']"
@@ -30,6 +31,7 @@
           Dashboard
         </a>
       </li>
+      -->
       <li v-for="(link, index) in links" :key="index">
         <a
           :class="[
